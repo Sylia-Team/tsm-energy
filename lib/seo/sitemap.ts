@@ -41,6 +41,8 @@ export function getIndexableSitemapEntries(): SitemapEntry[] {
     ...realisationPages,
     { path: routes.zones, changeFrequency: "weekly", priority: 0.8 },
     ...zonePages,
+    { path: routes.entreprise, changeFrequency: "monthly", priority: 0.7 },
+    { path: routes.contact, changeFrequency: "yearly", priority: 0.5 },
     { path: routes.quote, changeFrequency: "yearly", priority: 0.5 },
   ];
 }

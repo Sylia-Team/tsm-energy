@@ -22,3 +22,21 @@ export function formatAddressLines(address: {
   lines.push(`${address.postalCode} ${address.city}`);
   return lines;
 }
+
+export function mapsSearchUrl(address: {
+  additional: string | null;
+  street: string;
+  postalCode: string;
+  city: string;
+}): string {
+  const query = [
+    address.additional,
+    address.street,
+    address.postalCode,
+    address.city,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}

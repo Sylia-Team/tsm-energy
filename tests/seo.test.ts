@@ -96,8 +96,9 @@ describe("sitemap", () => {
     expect(paths).toContain(routes.home);
     expect(paths).toContain(routes.quote);
     expect(paths).toContain(routes.service("plomberie"));
+    expect(paths).toContain(routes.entreprise);
+    expect(paths).toContain(routes.contact);
     expect(paths).not.toContain(routes.quoteConfirmation);
-    expect(paths).not.toContain(routes.entreprise);
     expect(paths).not.toContain(routes.privacy);
 
     const expectedCount =
@@ -108,6 +109,8 @@ describe("sitemap", () => {
       getRealisations().length +
       1 +
       getZones().length +
+      1 +
+      1 +
       1;
 
     expect(paths).toHaveLength(expectedCount);

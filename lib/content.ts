@@ -1,4 +1,6 @@
 import { certifications } from "@/content/certifications";
+import { contact } from "@/content/contact";
+import { entreprise } from "@/content/entreprise";
 import { home } from "@/content/home";
 import { quoteContent } from "@/content/quote";
 import { realisations } from "@/content/realisations";
@@ -21,6 +23,8 @@ import {
   type ZoneSlug,
 } from "@/types/content";
 import type { HomeContent } from "@/types/home";
+import type { ContactContent } from "@/types/contact";
+import type { EntrepriseContent } from "@/types/entreprise";
 import type { SiteConfig } from "@/types/site";
 
 export function isServiceSlug(value: string): value is ServiceSlug {
@@ -37,6 +41,14 @@ export function getSite(): SiteConfig {
 
 export function getHome(): HomeContent {
   return home;
+}
+
+export function getEntreprise(): EntrepriseContent {
+  return entreprise;
+}
+
+export function getContact(): ContactContent {
+  return contact;
 }
 
 export function getServicesListing() {

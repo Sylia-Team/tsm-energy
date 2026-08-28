@@ -56,6 +56,7 @@ components/
   realisations/  # RealisationCard, RealisationPage, PhotoGallery
   zones/         # ZonePage
   forms/         # QuoteWizard, étapes, ChoiceCards
+  contact/       # ContactDetails
   seo/           # JsonLd
   analytics/     # Liens trackés (client, minimal)
 ```
@@ -77,6 +78,8 @@ content/           # Source de vérité actuelle (fichiers TS)
   testimonials.ts
   certifications.ts
   home.ts
+  entreprise.ts
+  contact.ts
   quote.ts
   articles.ts      # à venir
   faq.ts           # à venir
