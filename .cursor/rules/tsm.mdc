@@ -1,0 +1,16 @@
+---
+description: Règles projet TSM — lire les docs avant toute modification importante
+alwaysApply: true
+---
+
+# TSM Énergies Services
+
+Avant une modification importante : lire `PROJECT.md`, `ARCHITECTURE.md`, `DESIGN_SYSTEM.md`, `SEO_RULES.md`, `CONTENT_RULES.md`, puis inspecter `components/`.
+
+- Server Components par défaut. Client Components seulement si interactif.
+- Données métier dans `content/` via `lib/content.ts`. Jamais hardcodées dans l’UI.
+- URLs uniquement via `lib/routes.ts`.
+- Pas de `any` sans justification. Pas de dépendance sans raison.
+- Ne jamais inventer certifications, avis, chantiers, chiffres. Utiliser `[INFORMATION À CONFIRMER]`.
+- Un H1 par page. Pas de pages SEO dupliquées service × ville.
+- Après une étape : `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`.
