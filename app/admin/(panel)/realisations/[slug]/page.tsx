@@ -7,6 +7,7 @@ import {
 } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { saveRealisationAction } from "../actions";
+import { ImageUploadField } from "../../_components/image-upload-field";
 import {
   SaveBar,
   SavedNotice,
@@ -23,10 +24,10 @@ export default async function AdminRealisationEditPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; error?: string }>;
 }) {
   const { slug } = await params;
-  const { saved } = await searchParams;
+  const { saved, error } = await searchParams;
 
   const realisation = getRealisationContent(slug);
 
@@ -62,7 +63,7 @@ export default async function AdminRealisationEditPage({
         </Link>
       </div>
 
-      <SavedNotice saved={saved === "1"} />
+      <SavedNotice saved={saved === "1"} imageError={error === "image"} />
 
       <form action={saveRealisationAction} className="mt-6 grid gap-6">
         <input type="hidden" name="originalSlug" value={realisation.slug} />
@@ -191,70 +192,30 @@ export default async function AdminRealisationEditPage({
         </SectionCard>
 
         <SectionCard title="Image principale">
-          <TextField
-            name="image.src"
-            label="URL"
-            defaultValue={realisation.image.src}
-          />
-          <TextField
-            name="image.alt"
-            label="Texte alternatif"
-            defaultValue={realisation.image.alt}
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              name="image.width"
-              label="Largeur"
-              type="number"
-              defaultValue={realisation.image.width}
-            />
-            <TextField
-              name="image.height"
-              label="Hauteur"
-              type="number"
-              defaultValue={realisation.image.height}
-            />
-          </div>
+          <ImageUploadField name="image" label="Photo" image={realisation.image} />
         </SectionCard>
 
-        {realisation.gallery.length > 0 ? (
-          <SectionCard title="Galerie">
-            {realisation.gallery.map((item, index) => (
-              <div
-                key={`${index}-${item.src}`}
-                className="grid gap-4 rounded-md border border-stone-200 p-4"
-              >
-                <p className="text-xs font-medium uppercase text-ink-muted">
-                  Photo {index + 1}
-                </p>
-                <TextField
-                  name={`gallery.${index}.src`}
-                  label="URL"
-                  defaultValue={item.src}
-                />
-                <TextField
-                  name={`gallery.${index}.alt`}
-                  label="Texte alternatif"
-                  defaultValue={item.alt}
-                />
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <TextField
-                    name={`gallery.${index}.width`}
-                    label="Largeur"
-                    type="number"
-                    defaultValue={item.width}
-                  />
-                  <TextField
-                    name={`gallery.${index}.height`}
-                    label="Hauteur"
-                    type="number"
-                    defaultValue={item.height}
-                  />
-                </div>
-              </div>
-            ))}
-          </SectionCard>
-        ) : null}
+        <SectionCard title="Galerie">
+          <input type="hidden" name="gallery.count" value={realisation.gallery.length} />
+          {realisation.gallery.map((item, index) => (
+            <div
+              key={`${index}-${item.src}`}
+              className="rounded-md border border-stone-200 p-4"
+            >
+              <ImageUploadField
+                name={`gallery.${index}`}
+                label={`Photo ${index + 1}`}
+                image={item}
+              />
+            </div>
+          ))}
+          <ImageUploadField
+            name="gallery.new"
+            label="Ajouter une photo"
+            image={{ src: "", alt: "", width: 0, height: 0 }}
+            allowRemove={false}
+          />
+        </SectionCard>
 
         <SaveBar />
       </form>

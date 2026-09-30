@@ -2,14 +2,26 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { entreprise } from "@/content/entreprise";
 import { writeOverride } from "@/lib/admin/content-store";
 import { getEntrepriseContent } from "@/lib/admin/content-read";
+import { MediaUploadError, resolveMediaImage } from "@/lib/admin/media-store";
 import { routes } from "@/lib/routes";
 import type { EntrepriseContent } from "@/types/entreprise";
-import { num, paragraphs, str } from "../_components/form-utils";
+import { paragraphs, str } from "../_components/form-utils";
 
 export async function saveEntrepriseAction(formData: FormData): Promise<void> {
   const current = getEntrepriseContent();
+
+  let image = current.image;
+  try {
+    image = await resolveMediaImage(formData, "image", current.image, entreprise.image);
+  } catch (error) {
+    if (error instanceof MediaUploadError) {
+      redirect(`${routes.adminEntreprise}?error=image`);
+    }
+    throw error;
+  }
 
   const next: EntrepriseContent = {
     eyebrow: str(formData, "eyebrow"),
@@ -17,12 +29,7 @@ export async function saveEntrepriseAction(formData: FormData): Promise<void> {
     description: str(formData, "description"),
     seoTitle: str(formData, "seoTitle"),
     seoDescription: str(formData, "seoDescription"),
-    image: {
-      src: str(formData, "image.src"),
-      alt: str(formData, "image.alt"),
-      width: num(formData, "image.width", current.image.width),
-      height: num(formData, "image.height", current.image.height),
-    },
+    image,
     storyTitle: str(formData, "storyTitle"),
     story: paragraphs(formData, "story"),
     methodTitle: str(formData, "methodTitle"),

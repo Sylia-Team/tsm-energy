@@ -2,12 +2,14 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { services } from "@/content/services";
 import { readOverride, writeOverride } from "@/lib/admin/content-store";
 import { getServiceContent } from "@/lib/admin/content-read";
+import { MediaUploadError, resolveMediaImage } from "@/lib/admin/media-store";
 import { isServiceSlug } from "@/lib/content";
 import { routes } from "@/lib/routes";
 import type { Service, ServiceSlug } from "@/types/content";
-import { num, paragraphs, str } from "../_components/form-utils";
+import { paragraphs, str } from "../_components/form-utils";
 
 type ServiceOverrides = Partial<Record<ServiceSlug, Service>>;
 
@@ -24,6 +26,24 @@ export async function saveServiceAction(formData: FormData): Promise<void> {
     redirect(routes.adminServices);
   }
 
+  const fallbackImage =
+    services.find((item) => item.slug === slug)?.hero.image ?? current.hero.image;
+
+  let heroImage = current.hero.image;
+  try {
+    heroImage = await resolveMediaImage(
+      formData,
+      "hero.image",
+      current.hero.image,
+      fallbackImage,
+    );
+  } catch (error) {
+    if (error instanceof MediaUploadError) {
+      redirect(`${routes.adminService(slug)}?error=image`);
+    }
+    throw error;
+  }
+
   const next: Service = {
     slug,
     title: str(formData, "title"),
@@ -36,12 +56,7 @@ export async function saveServiceAction(formData: FormData): Promise<void> {
       eyebrow: str(formData, "hero.eyebrow"),
       title: str(formData, "hero.title"),
       description: str(formData, "hero.description"),
-      image: {
-        src: str(formData, "hero.image.src"),
-        alt: str(formData, "hero.image.alt"),
-        width: num(formData, "hero.image.width", current.hero.image.width),
-        height: num(formData, "hero.image.height", current.hero.image.height),
-      },
+      image: heroImage,
     },
     needTitle: str(formData, "needTitle"),
     need: paragraphs(formData, "need"),

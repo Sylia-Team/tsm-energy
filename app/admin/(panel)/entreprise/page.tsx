@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getEntrepriseContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { saveEntrepriseAction } from "./actions";
+import { ImageUploadField } from "../_components/image-upload-field";
 import {
   SaveBar,
   SavedNotice,
@@ -13,10 +14,11 @@ import {
 export default async function AdminEntreprisePage({
   searchParams,
 }: {
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; error?: string }>;
 }) {
   const params = await searchParams;
   const saved = params.saved === "1";
+  const imageError = params.error === "image";
   const page = getEntrepriseContent();
 
   return (
@@ -41,7 +43,7 @@ export default async function AdminEntreprisePage({
         </Link>
       </div>
 
-      <SavedNotice saved={saved} />
+      <SavedNotice saved={saved} imageError={imageError} />
 
       <form action={saveEntrepriseAction} className="mt-6 grid gap-6">
         <SectionCard title="En-tête (héros)">
@@ -52,30 +54,7 @@ export default async function AdminEntreprisePage({
             label="Description"
             defaultValue={page.description}
           />
-          <TextField
-            name="image.src"
-            label="Image — URL"
-            defaultValue={page.image.src}
-          />
-          <TextField
-            name="image.alt"
-            label="Image — texte alternatif"
-            defaultValue={page.image.alt}
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              name="image.width"
-              label="Image — largeur"
-              type="number"
-              defaultValue={page.image.width}
-            />
-            <TextField
-              name="image.height"
-              label="Image — hauteur"
-              type="number"
-              defaultValue={page.image.height}
-            />
-          </div>
+          <ImageUploadField name="image" label="Photo" image={page.image} />
         </SectionCard>
 
         <SectionCard title="Référencement (SEO)">

@@ -15,11 +15,15 @@ export function RealisationCard({ realisation }: RealisationCardProps) {
         href={routes.realisation(realisation.slug)}
         className="relative block aspect-[4/3]"
       >
-        <CoverImage
-          src={realisation.image.src}
-          alt={realisation.image.alt}
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-        />
+        {realisation.image.src ? (
+          <CoverImage
+            src={realisation.image.src}
+            alt={realisation.image.alt}
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-forest/10" />
+        )}
       </Link>
       <div className="flex flex-1 flex-col p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">

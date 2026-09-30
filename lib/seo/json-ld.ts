@@ -85,7 +85,7 @@ export function creativeWorkJsonLd(
     name: realisation.name,
     description: realisation.seoDescription,
     url: absoluteUrl(`/realisations/${realisation.slug}`, base),
-    image: realisation.image.src,
+    ...(realisation.image.src ? { image: realisation.image.src } : {}),
     contentLocation: {
       "@type": "Place",
       name: realisation.city,

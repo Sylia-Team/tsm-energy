@@ -2,8 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { home } from "@/content/home";
 import { writeOverride } from "@/lib/admin/content-store";
 import { getHomeContent } from "@/lib/admin/content-read";
+import { MediaUploadError, resolveMediaImage } from "@/lib/admin/media-store";
 import { routes } from "@/lib/routes";
 import type { ValueProposition } from "@/types/content";
 import type { HomeContent } from "@/types/home";
@@ -20,11 +22,6 @@ function str(formData: FormData, key: string): string {
   return typeof value === "string" ? value.trim() : "";
 }
 
-function num(formData: FormData, key: string, fallback: number): number {
-  const value = Number(formData.get(key));
-  return Number.isFinite(value) && value > 0 ? value : fallback;
-}
-
 function icon(
   formData: FormData,
   key: string,
@@ -39,17 +36,34 @@ function icon(
 export async function saveHomeAction(formData: FormData): Promise<void> {
   const current = getHomeContent();
 
+  let heroImage = current.hero.image;
+  let aboutImage = current.about.image;
+  try {
+    heroImage = await resolveMediaImage(
+      formData,
+      "hero.image",
+      current.hero.image,
+      home.hero.image,
+    );
+    aboutImage = await resolveMediaImage(
+      formData,
+      "about.image",
+      current.about.image,
+      home.about.image,
+    );
+  } catch (error) {
+    if (error instanceof MediaUploadError) {
+      redirect(`${routes.adminHome}?error=image`);
+    }
+    throw error;
+  }
+
   const next: HomeContent = {
     hero: {
       eyebrow: str(formData, "hero.eyebrow"),
       title: str(formData, "hero.title"),
       description: str(formData, "hero.description"),
-      image: {
-        src: str(formData, "hero.image.src"),
-        alt: str(formData, "hero.image.alt"),
-        width: num(formData, "hero.image.width", current.hero.image.width),
-        height: num(formData, "hero.image.height", current.hero.image.height),
-      },
+      image: heroImage,
       primaryCta: str(formData, "hero.primaryCta"),
       secondaryCta: str(formData, "hero.secondaryCta"),
     },
@@ -77,12 +91,7 @@ export async function saveHomeAction(formData: FormData): Promise<void> {
         .split(/\n\s*\n/)
         .map((paragraph) => paragraph.trim())
         .filter(Boolean),
-      image: {
-        src: str(formData, "about.image.src"),
-        alt: str(formData, "about.image.alt"),
-        width: num(formData, "about.image.width", current.about.image.width),
-        height: num(formData, "about.image.height", current.about.image.height),
-      },
+      image: aboutImage,
       linkLabel: str(formData, "about.linkLabel"),
     },
     realisations: {

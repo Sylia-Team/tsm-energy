@@ -87,7 +87,21 @@ export function SaveBar({ label = "Enregistrer et publier" }: { label?: string }
   );
 }
 
-export function SavedNotice({ saved }: { saved: boolean }) {
+export function SavedNotice({
+  saved,
+  imageError = false,
+}: {
+  saved: boolean;
+  imageError?: boolean;
+}) {
+  if (imageError) {
+    return (
+      <p className="mt-4 rounded-md bg-red-50 px-4 py-2 text-sm text-red-700" role="alert">
+        Image refusée. Utilisez un JPEG, un PNG ou un WebP de 8 Mo maximum.
+      </p>
+    );
+  }
+
   if (!saved) {
     return null;
   }

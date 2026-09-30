@@ -2,14 +2,18 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { realisationsListing } from "@/content/realisations-listing";
+import { servicesListing } from "@/content/services-listing";
+import { zonesListing } from "@/content/zones-listing";
 import { writeOverride } from "@/lib/admin/content-store";
 import {
   getRealisationsListingContent,
   getServicesListingContent,
   getZonesListingContent,
 } from "@/lib/admin/content-read";
+import { MediaUploadError, resolveMediaImage } from "@/lib/admin/media-store";
 import { routes } from "@/lib/routes";
-import { num, paragraphs, str } from "../_components/form-utils";
+import { paragraphs, str } from "../_components/form-utils";
 import type { MediaImage } from "@/types/media";
 
 type BaseListing = {
@@ -24,7 +28,7 @@ type BaseListing = {
 function readBase(
   formData: FormData,
   prefix: string,
-  currentImage: MediaImage,
+  image: MediaImage,
 ): BaseListing {
   return {
     eyebrow: str(formData, `${prefix}.eyebrow`),
@@ -32,12 +36,7 @@ function readBase(
     description: str(formData, `${prefix}.description`),
     seoTitle: str(formData, `${prefix}.seoTitle`),
     seoDescription: str(formData, `${prefix}.seoDescription`),
-    image: {
-      src: str(formData, `${prefix}.image.src`),
-      alt: str(formData, `${prefix}.image.alt`),
-      width: num(formData, `${prefix}.image.width`, currentImage.width),
-      height: num(formData, `${prefix}.image.height`, currentImage.height),
-    },
+    image,
   };
 }
 
@@ -46,14 +45,43 @@ export async function saveListingsAction(formData: FormData): Promise<void> {
   const currentZones = getZonesListingContent();
   const currentRealisations = getRealisationsListingContent();
 
+  let servicesImage = currentServices.image;
+  let zonesImage = currentZones.image;
+  let realisationsImage = currentRealisations.image;
+  try {
+    servicesImage = await resolveMediaImage(
+      formData,
+      "services.image",
+      currentServices.image,
+      servicesListing.image,
+    );
+    zonesImage = await resolveMediaImage(
+      formData,
+      "zones.image",
+      currentZones.image,
+      zonesListing.image,
+    );
+    realisationsImage = await resolveMediaImage(
+      formData,
+      "realisations.image",
+      currentRealisations.image,
+      realisationsListing.image,
+    );
+  } catch (error) {
+    if (error instanceof MediaUploadError) {
+      redirect(`${routes.adminListings}?error=image`);
+    }
+    throw error;
+  }
+
   writeOverride("servicesListing", {
     ...currentServices,
-    ...readBase(formData, "services", currentServices.image),
+    ...readBase(formData, "services", servicesImage),
   });
 
   writeOverride("zonesListing", {
     ...currentZones,
-    ...readBase(formData, "zones", currentZones.image),
+    ...readBase(formData, "zones", zonesImage),
     introTitle: str(formData, "zones.introTitle"),
     intro: paragraphs(formData, "zones.intro"),
     surroundingTitle: str(formData, "zones.surroundingTitle"),
@@ -62,7 +90,7 @@ export async function saveListingsAction(formData: FormData): Promise<void> {
 
   writeOverride("realisationsListing", {
     ...currentRealisations,
-    ...readBase(formData, "realisations", currentRealisations.image),
+    ...readBase(formData, "realisations", realisationsImage),
   });
 
   revalidatePath(routes.services);

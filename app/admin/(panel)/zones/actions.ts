@@ -2,12 +2,14 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { zones } from "@/content/zones";
 import { readOverride, writeOverride } from "@/lib/admin/content-store";
 import { getZoneContent } from "@/lib/admin/content-read";
+import { MediaUploadError, resolveMediaImage } from "@/lib/admin/media-store";
 import { isZoneSlug } from "@/lib/content";
 import { routes } from "@/lib/routes";
 import type { Zone, ZoneSlug } from "@/types/content";
-import { num, paragraphs, str } from "../_components/form-utils";
+import { paragraphs, str } from "../_components/form-utils";
 
 type ZoneOverrides = Partial<Record<ZoneSlug, Zone>>;
 
@@ -24,6 +26,24 @@ export async function saveZoneAction(formData: FormData): Promise<void> {
     redirect(routes.adminZones);
   }
 
+  const fallbackImage =
+    zones.find((item) => item.slug === slug)?.hero.image ?? current.hero.image;
+
+  let heroImage = current.hero.image;
+  try {
+    heroImage = await resolveMediaImage(
+      formData,
+      "hero.image",
+      current.hero.image,
+      fallbackImage,
+    );
+  } catch (error) {
+    if (error instanceof MediaUploadError) {
+      redirect(`${routes.adminZone(slug)}?error=image`);
+    }
+    throw error;
+  }
+
   const next: Zone = {
     slug,
     name: str(formData, "name") || current.name,
@@ -35,12 +55,7 @@ export async function saveZoneAction(formData: FormData): Promise<void> {
       eyebrow: str(formData, "hero.eyebrow"),
       title: str(formData, "hero.title"),
       description: str(formData, "hero.description"),
-      image: {
-        src: str(formData, "hero.image.src"),
-        alt: str(formData, "hero.image.alt"),
-        width: num(formData, "hero.image.width", current.hero.image.width),
-        height: num(formData, "hero.image.height", current.hero.image.height),
-      },
+      image: heroImage,
     },
     introTitle: str(formData, "introTitle"),
     intro: paragraphs(formData, "intro"),

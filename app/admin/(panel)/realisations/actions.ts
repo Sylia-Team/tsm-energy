@@ -2,8 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { realisations as defaultRealisations } from "@/content/realisations";
 import { writeOverride } from "@/lib/admin/content-store";
 import { getRealisationsContent } from "@/lib/admin/content-read";
+import {
+  deleteManagedUpload,
+  MediaUploadError,
+  resolveGallery,
+  resolveMediaImage,
+} from "@/lib/admin/media-store";
 import { isServiceSlug, isZoneSlug } from "@/lib/content";
 import { routes } from "@/lib/routes";
 import {
@@ -11,7 +18,7 @@ import {
   type Realisation,
   type ServiceSlug,
 } from "@/types/content";
-import { lines, num, slugify, str } from "../_components/form-utils";
+import { lines, slugify, str } from "../_components/form-utils";
 
 function uniqueSlug(base: string, taken: string[]): string {
   const seed = slugify(base) || "chantier";
@@ -62,7 +69,15 @@ export async function addRealisationAction(): Promise<void> {
 
 export async function deleteRealisationAction(formData: FormData): Promise<void> {
   const slug = str(formData, "slug");
-  const list = getRealisationsContent().filter((item) => item.slug !== slug);
+  const current = getRealisationsContent();
+  const removed = current.find((item) => item.slug === slug);
+  if (removed) {
+    deleteManagedUpload(removed.image.src);
+    for (const photo of removed.gallery) {
+      deleteManagedUpload(photo.src);
+    }
+  }
+  const list = current.filter((item) => item.slug !== slug);
 
   writeOverride<Realisation[]>("realisations", list);
   revalidateRealisations(slug);
@@ -86,6 +101,26 @@ export async function saveRealisationAction(formData: FormData): Promise<void> {
   const slug = uniqueSlug(desiredSlug, otherSlugs);
 
   const zoneSlugValue = str(formData, "zoneSlug");
+  const fallback =
+    defaultRealisations.find((item) => item.slug === originalSlug) ?? null;
+
+  let image = current.image;
+  let gallery = current.gallery;
+  try {
+    image = await resolveMediaImage(
+      formData,
+      "image",
+      current.image,
+      fallback?.image ?? { src: "", alt: "", width: 0, height: 0 },
+    );
+    gallery = await resolveGallery(formData, current.gallery);
+  } catch (error) {
+    if (error instanceof MediaUploadError) {
+      redirect(`${routes.adminRealisation(originalSlug)}?error=image`);
+    }
+    throw error;
+  }
+
   const serviceSlugs = formData
     .getAll("serviceSlugs")
     .filter((value): value is string => typeof value === "string")
@@ -105,18 +140,8 @@ export async function saveRealisationAction(formData: FormData): Promise<void> {
     works: lines(formData, "works"),
     trades: lines(formData, "trades"),
     result: str(formData, "result"),
-    image: {
-      src: str(formData, "image.src"),
-      alt: str(formData, "image.alt"),
-      width: num(formData, "image.width", current.image.width),
-      height: num(formData, "image.height", current.image.height),
-    },
-    gallery: current.gallery.map((item, index) => ({
-      src: str(formData, `gallery.${index}.src`) || item.src,
-      alt: str(formData, `gallery.${index}.alt`) || item.alt,
-      width: num(formData, `gallery.${index}.width`, item.width),
-      height: num(formData, `gallery.${index}.height`, item.height),
-    })),
+    image,
+    gallery,
     featured: formData.get("featured") === "true",
   };
 

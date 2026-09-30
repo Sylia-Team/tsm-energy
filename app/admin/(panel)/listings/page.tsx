@@ -7,6 +7,7 @@ import {
 import { routes } from "@/lib/routes";
 import type { MediaImage } from "@/types/media";
 import { saveListingsAction } from "./actions";
+import { ImageUploadField } from "../_components/image-upload-field";
 import {
   SaveBar,
   SavedNotice,
@@ -52,30 +53,11 @@ function BaseFields({
         label="Description SEO"
         defaultValue={base.seoDescription}
       />
-      <TextField
-        name={`${prefix}.image.src`}
-        label="Image — URL"
-        defaultValue={base.image.src}
+      <ImageUploadField
+        name={`${prefix}.image`}
+        label="Photo"
+        image={base.image}
       />
-      <TextField
-        name={`${prefix}.image.alt`}
-        label="Image — texte alternatif"
-        defaultValue={base.image.alt}
-      />
-      <div className="grid gap-4 sm:grid-cols-2">
-        <TextField
-          name={`${prefix}.image.width`}
-          label="Image — largeur"
-          type="number"
-          defaultValue={base.image.width}
-        />
-        <TextField
-          name={`${prefix}.image.height`}
-          label="Image — hauteur"
-          type="number"
-          defaultValue={base.image.height}
-        />
-      </div>
     </>
   );
 }
@@ -83,9 +65,9 @@ function BaseFields({
 export default async function AdminListingsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; error?: string }>;
 }) {
-  const { saved } = await searchParams;
+  const { saved, error } = await searchParams;
   const services = getServicesListingContent();
   const zones = getZonesListingContent();
   const realisations = getRealisationsListingContent();
@@ -103,7 +85,7 @@ export default async function AdminListingsPage({
         </p>
       </div>
 
-      <SavedNotice saved={saved === "1"} />
+      <SavedNotice saved={saved === "1"} imageError={error === "image"} />
 
       <form action={saveListingsAction} className="mt-6 grid gap-6">
         <SectionCard title="Page « Services »">

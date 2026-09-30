@@ -4,6 +4,7 @@ import { getZoneContent } from "@/lib/admin/content-read";
 import { isZoneSlug } from "@/lib/content";
 import { routes } from "@/lib/routes";
 import { saveZoneAction } from "../actions";
+import { ImageUploadField } from "../../_components/image-upload-field";
 import {
   SaveBar,
   SavedNotice,
@@ -17,10 +18,10 @@ export default async function AdminZoneEditPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; error?: string }>;
 }) {
   const { slug } = await params;
-  const { saved } = await searchParams;
+  const { saved, error } = await searchParams;
 
   if (!isZoneSlug(slug)) {
     notFound();
@@ -57,7 +58,7 @@ export default async function AdminZoneEditPage({
         </Link>
       </div>
 
-      <SavedNotice saved={saved === "1"} />
+        <SavedNotice saved={saved === "1"} imageError={error === "image"} />
 
       <form action={saveZoneAction} className="mt-6 grid gap-6">
         <input type="hidden" name="slug" value={zone.slug} />
@@ -100,30 +101,7 @@ export default async function AdminZoneEditPage({
             label="Description"
             defaultValue={zone.hero.description}
           />
-          <TextField
-            name="hero.image.src"
-            label="Image — URL"
-            defaultValue={zone.hero.image.src}
-          />
-          <TextField
-            name="hero.image.alt"
-            label="Image — texte alternatif"
-            defaultValue={zone.hero.image.alt}
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              name="hero.image.width"
-              label="Image — largeur"
-              type="number"
-              defaultValue={zone.hero.image.width}
-            />
-            <TextField
-              name="hero.image.height"
-              label="Image — hauteur"
-              type="number"
-              defaultValue={zone.hero.image.height}
-            />
-          </div>
+          <ImageUploadField name="hero.image" label="Photo" image={zone.hero.image} />
         </SectionCard>
 
         <SectionCard title="Introduction locale">

@@ -31,12 +31,16 @@ export function Hero({
 }: HeroProps) {
   return (
     <section className="relative isolate min-h-[32rem] overflow-hidden lg:min-h-[38rem]">
-      <CoverImage
-        src={image.src}
-        alt={image.alt}
-        sizes="100vw"
-        priority
-      />
+      {image.src ? (
+        <CoverImage
+          src={image.src}
+          alt={image.alt}
+          sizes="100vw"
+          priority
+        />
+      ) : (
+        <div className="absolute inset-0 bg-forest" />
+      )}
       <div className="absolute inset-0 bg-forest/45" />
       <Container className="relative flex min-h-[32rem] flex-col justify-end py-16 lg:min-h-[38rem] lg:py-24">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-paper/75">

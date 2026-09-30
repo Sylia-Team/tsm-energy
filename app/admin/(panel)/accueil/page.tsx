@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getHomeContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { saveHomeAction } from "./actions";
+import { ImageUploadField } from "../_components/image-upload-field";
 import {
   SectionCard,
   TextAreaField,
@@ -11,10 +12,11 @@ import {
 export default async function AdminHomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; error?: string }>;
 }) {
   const params = await searchParams;
   const saved = params.saved === "1";
+  const imageError = params.error === "image";
   const home = getHomeContent();
 
   return (
@@ -39,6 +41,11 @@ export default async function AdminHomePage({
         </Link>
       </div>
 
+      {imageError ? (
+        <p className="mt-4 rounded-md bg-red-50 px-4 py-2 text-sm text-red-700" role="alert">
+          Image refusée. Utilisez un JPEG, un PNG ou un WebP de 8 Mo maximum.
+        </p>
+      ) : null}
       {saved ? (
         <p
           className="mt-4 rounded-md bg-green-50 px-4 py-2 text-sm text-green-700"
@@ -77,30 +84,11 @@ export default async function AdminHomePage({
               defaultValue={home.hero.secondaryCta}
             />
           </div>
-          <TextField
-            name="hero.image.src"
-            label="Image — URL"
-            defaultValue={home.hero.image.src}
+          <ImageUploadField
+            name="hero.image"
+            label="Photo du héros"
+            image={home.hero.image}
           />
-          <TextField
-            name="hero.image.alt"
-            label="Image — texte alternatif"
-            defaultValue={home.hero.image.alt}
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              name="hero.image.width"
-              label="Image — largeur"
-              type="number"
-              defaultValue={home.hero.image.width}
-            />
-            <TextField
-              name="hero.image.height"
-              label="Image — hauteur"
-              type="number"
-              defaultValue={home.hero.image.height}
-            />
-          </div>
         </SectionCard>
 
         <SectionCard title="Section « Pourquoi TSM »">
@@ -194,30 +182,11 @@ export default async function AdminHomePage({
             defaultValue={home.about.paragraphs.join("\n\n")}
             hint="Séparez chaque paragraphe par une ligne vide."
           />
-          <TextField
-            name="about.image.src"
-            label="Image — URL"
-            defaultValue={home.about.image.src}
+          <ImageUploadField
+            name="about.image"
+            label="Photo de la section"
+            image={home.about.image}
           />
-          <TextField
-            name="about.image.alt"
-            label="Image — texte alternatif"
-            defaultValue={home.about.image.alt}
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              name="about.image.width"
-              label="Image — largeur"
-              type="number"
-              defaultValue={home.about.image.width}
-            />
-            <TextField
-              name="about.image.height"
-              label="Image — hauteur"
-              type="number"
-              defaultValue={home.about.image.height}
-            />
-          </div>
           <TextField
             name="about.linkLabel"
             label="Libellé du lien"

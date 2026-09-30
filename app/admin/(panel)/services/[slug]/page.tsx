@@ -4,6 +4,7 @@ import { getServiceContent } from "@/lib/admin/content-read";
 import { isServiceSlug } from "@/lib/content";
 import { routes } from "@/lib/routes";
 import { saveServiceAction } from "../actions";
+import { ImageUploadField } from "../../_components/image-upload-field";
 import {
   SaveBar,
   SavedNotice,
@@ -17,10 +18,10 @@ export default async function AdminServiceEditPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; error?: string }>;
 }) {
   const { slug } = await params;
-  const { saved } = await searchParams;
+  const { saved, error } = await searchParams;
 
   if (!isServiceSlug(slug)) {
     notFound();
@@ -57,7 +58,7 @@ export default async function AdminServiceEditPage({
         </Link>
       </div>
 
-      <SavedNotice saved={saved === "1"} />
+        <SavedNotice saved={saved === "1"} imageError={error === "image"} />
 
       <form action={saveServiceAction} className="mt-6 grid gap-6">
         <input type="hidden" name="slug" value={service.slug} />
@@ -115,30 +116,11 @@ export default async function AdminServiceEditPage({
             label="Description"
             defaultValue={service.hero.description}
           />
-          <TextField
-            name="hero.image.src"
-            label="Image — URL"
-            defaultValue={service.hero.image.src}
+          <ImageUploadField
+            name="hero.image"
+            label="Photo"
+            image={service.hero.image}
           />
-          <TextField
-            name="hero.image.alt"
-            label="Image — texte alternatif"
-            defaultValue={service.hero.image.alt}
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <TextField
-              name="hero.image.width"
-              label="Image — largeur"
-              type="number"
-              defaultValue={service.hero.image.width}
-            />
-            <TextField
-              name="hero.image.height"
-              label="Image — hauteur"
-              type="number"
-              defaultValue={service.hero.image.height}
-            />
-          </div>
         </SectionCard>
 
         <SectionCard title="Le besoin">

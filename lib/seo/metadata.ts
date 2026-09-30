@@ -19,7 +19,7 @@ export function pageMetadata({
   index = true,
 }: PageMetadataInput): Metadata {
   const site = getSiteContent();
-  const images = image
+  const images = image?.src
     ? [
         {
           url: image.src,
