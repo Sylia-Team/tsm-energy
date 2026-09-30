@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getSite } from "@/lib/content";
+import { getSiteContent } from "@/lib/admin/content-read";
 import { absoluteUrl } from "@/lib/seo/url";
 import type { MediaImage } from "@/types/media";
 
@@ -18,7 +18,7 @@ export function pageMetadata({
   image,
   index = true,
 }: PageMetadataInput): Metadata {
-  const site = getSite();
+  const site = getSiteContent();
   const images = image
     ? [
         {

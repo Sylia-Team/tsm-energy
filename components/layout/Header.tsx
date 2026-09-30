@@ -5,11 +5,11 @@ import { Navigation } from "@/components/layout/Navigation";
 import { buttonClassName } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { IconPhone } from "@/components/ui/icons";
-import { getSite } from "@/lib/content";
+import { getSiteContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 
 export function Header() {
-  const site = getSite();
+  const site = getSiteContent();
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper">
@@ -52,7 +52,7 @@ export function Header() {
           >
             Demander un devis
           </TrackedLink>
-          <MobileNavigation />
+          <MobileNavigation phone={site.phone} phoneHref={site.phoneHref} />
         </div>
       </Container>
     </header>

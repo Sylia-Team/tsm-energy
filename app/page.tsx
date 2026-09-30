@@ -8,7 +8,7 @@ import { LocationCard } from "@/components/marketing/LocationCard";
 import { Section } from "@/components/marketing/Section";
 import { SectionTitle } from "@/components/marketing/SectionTitle";
 import { StatList } from "@/components/marketing/StatList";
-import { TestimonialCard } from "@/components/marketing/TestimonialCard";
+import { GoogleReviews } from "@/components/marketing/GoogleReviews";
 import { ValuePropCard } from "@/components/marketing/ValuePropCard";
 import { RealisationCard } from "@/components/realisations/RealisationCard";
 import { ServiceCard } from "@/components/services/ServiceCard";
@@ -16,33 +16,35 @@ import { Container } from "@/components/ui/container";
 import { CoverImage } from "@/components/ui/cover-image";
 import { IconArrow } from "@/components/ui/icons";
 import {
-  getCertifications,
-  getFeaturedRealisations,
-  getFeaturedServices,
-  getHome,
-  getSite,
-  getTestimonials,
-  getZones,
-} from "@/lib/content";
+  getCertificationsContent,
+  getFeaturedRealisationsContent,
+  getFeaturedServicesContent,
+  getHomeContent,
+  getSiteContent,
+  getZonesContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-const home = getHome();
-const site = getSite();
+export function generateMetadata(): Metadata {
+  const home = getHomeContent();
+  const site = getSiteContent();
 
-export const metadata: Metadata = pageMetadata({
-  title: "Rénovation et entreprise générale du bâtiment dans le Var",
-  description: site.description,
-  path: routes.home,
-  image: home.hero.image,
-});
+  return pageMetadata({
+    title: "Rénovation et entreprise générale du bâtiment dans le Var",
+    description: site.description,
+    path: routes.home,
+    image: home.hero.image,
+  });
+}
 
 export default function HomePage() {
-  const services = getFeaturedServices();
-  const realisations = getFeaturedRealisations();
-  const testimonials = getTestimonials();
-  const certifications = getCertifications();
-  const zones = getZones();
+  const home = getHomeContent();
+  const site = getSiteContent();
+  const services = getFeaturedServicesContent();
+  const realisations = getFeaturedRealisationsContent();
+  const certifications = getCertificationsContent();
+  const zones = getZonesContent();
 
   return (
     <>
@@ -208,14 +210,7 @@ export default function HomePage() {
             title={home.testimonials.title}
             description={home.testimonials.description}
           />
-          <div className="mt-12 grid gap-4 md:grid-cols-3 lg:gap-6">
-            {testimonials.map((testimonial) => (
-              <TestimonialCard
-                key={testimonial.id}
-                testimonial={testimonial}
-              />
-            ))}
-          </div>
+          <GoogleReviews />
           <p className="mt-8">
             <Link
               href={routes.avis}

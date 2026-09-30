@@ -6,22 +6,28 @@ import { LocationCard } from "@/components/marketing/LocationCard";
 import { Section } from "@/components/marketing/Section";
 import { SectionTitle } from "@/components/marketing/SectionTitle";
 import { Container } from "@/components/ui/container";
-import { getSite, getZones, getZonesListing } from "@/lib/content";
+import {
+  getSiteContent,
+  getZonesContent,
+  getZonesListingContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-const listing = getZonesListing();
-const site = getSite();
-
-export const metadata: Metadata = pageMetadata({
-  title: listing.seoTitle,
-  description: listing.seoDescription,
-  path: routes.zones,
-  image: listing.image,
-});
+export function generateMetadata(): Metadata {
+  const listing = getZonesListingContent();
+  return pageMetadata({
+    title: listing.seoTitle,
+    description: listing.seoDescription,
+    path: routes.zones,
+    image: listing.image,
+  });
+}
 
 export default function ZonesPage() {
-  const zones = getZones();
+  const listing = getZonesListingContent();
+  const site = getSiteContent();
+  const zones = getZonesContent();
 
   return (
     <>

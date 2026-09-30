@@ -7,8 +7,6 @@ import { QuoteProgress } from "@/components/forms/QuoteProgress";
 import { QuoteStepContact } from "@/components/forms/QuoteStepContact";
 import { QuoteStepDetails } from "@/components/forms/QuoteStepDetails";
 import { QuoteStepLocation } from "@/components/forms/QuoteStepLocation";
-import { QuoteStepPhotos } from "@/components/forms/QuoteStepPhotos";
-import { QuoteStepProject } from "@/components/forms/QuoteStepProject";
 import { QuoteStepSummary } from "@/components/forms/QuoteStepSummary";
 import { buttonClassName } from "@/components/ui/button";
 import { quoteContent } from "@/content/quote";
@@ -22,14 +20,6 @@ import {
 import type { QuoteDraft, QuoteFieldErrors } from "@/types/leads";
 
 const LAST_STEP = quoteContent.steps.length;
-
-function filesToMeta(files: File[]) {
-  return files.map((file) => ({
-    name: file.name,
-    type: file.type,
-    size: file.size,
-  }));
-}
 
 export function QuoteWizard() {
   const router = useRouter();
@@ -45,7 +35,6 @@ export function QuoteWizard() {
       source: from ?? initial.source,
     };
   });
-  const [files, setFiles] = useState<File[]>([]);
   const [errors, setErrors] = useState<QuoteFieldErrors>({});
   const [pending, startTransition] = useTransition();
 
@@ -59,7 +48,7 @@ export function QuoteWizard() {
   }
 
   function goNext() {
-    const stepErrors = validateQuoteStep(step, draft, filesToMeta(files));
+    const stepErrors = validateQuoteStep(step, draft);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
       return;
@@ -76,7 +65,7 @@ export function QuoteWizard() {
   }
 
   function onSubmit() {
-    const stepErrors = validateQuoteStep(6, draft, filesToMeta(files));
+    const stepErrors = validateQuoteStep(LAST_STEP, draft);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
       return;
@@ -98,9 +87,6 @@ export function QuoteWizard() {
     formData.set("honeypot", draft.honeypot);
     formData.set("startedAt", draft.startedAt);
     formData.set("source", draft.source);
-    for (const file of files) {
-      formData.append("photos", file);
-    }
 
     startTransition(async () => {
       const result = await submitQuoteAction(formData);
@@ -137,44 +123,29 @@ export function QuoteWizard() {
 
       <div className="mt-8">
         {step === 1 ? (
-          <QuoteStepProject
-            draft={draft}
-            errors={errors}
-            onChange={patchDraft}
-          />
-        ) : null}
-        {step === 2 ? (
           <QuoteStepLocation
             draft={draft}
             errors={errors}
             onChange={patchDraft}
           />
         ) : null}
-        {step === 3 ? (
+        {step === 2 ? (
           <QuoteStepDetails
             draft={draft}
             errors={errors}
             onChange={patchDraft}
           />
         ) : null}
-        {step === 4 ? (
-          <QuoteStepPhotos
-            files={files}
-            errors={errors}
-            onChange={setFiles}
-          />
-        ) : null}
-        {step === 5 ? (
+        {step === 3 ? (
           <QuoteStepContact
             draft={draft}
             errors={errors}
             onChange={patchDraft}
           />
         ) : null}
-        {step === 6 ? (
+        {step === 4 ? (
           <QuoteStepSummary
             draft={draft}
-            fileCount={files.length}
             errors={errors}
             onChange={patchDraft}
           />

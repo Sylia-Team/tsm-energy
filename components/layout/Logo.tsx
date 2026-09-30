@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSite } from "@/lib/content";
+import { getSiteContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
@@ -9,7 +9,7 @@ type LogoProps = {
 };
 
 export function Logo({ className, inverted = false }: LogoProps) {
-  const site = getSite();
+  const site = getSiteContent();
 
   return (
     <Link

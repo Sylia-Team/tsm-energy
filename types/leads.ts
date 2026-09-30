@@ -58,7 +58,7 @@ export type QuoteDraft = {
 };
 
 export type QuoteLead = {
-  projectType: ProjectType;
+  projectType: ProjectType | null;
   projectTypeOther: string | null;
   postalCode: string;
   city: string;

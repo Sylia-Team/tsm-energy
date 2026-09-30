@@ -4,7 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getHome, getSite } from "@/lib/content";
+import { getHomeContent, getSiteContent } from "@/lib/admin/content-read";
 import { localBusinessJsonLd } from "@/lib/seo/json-ld";
 import "./globals.css";
 
@@ -14,42 +14,46 @@ const archivo = Archivo({
   variable: "--font-archivo",
 });
 
-const site = getSite();
-const home = getHome();
-
 export const viewport: Viewport = {
   themeColor: "#24332E",
   width: "device-width",
   initialScale: 1,
 };
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} | Entreprise générale du bâtiment dans le Var`,
-    template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    siteName: site.name,
-    images: [
-      {
-        url: home.hero.image.src,
-        alt: home.hero.image.alt,
-        width: home.hero.image.width,
-        height: home.hero.image.height,
-      },
-    ],
-  },
-};
+export function generateMetadata(): Metadata {
+  const site = getSiteContent();
+  const home = getHomeContent();
+
+  return {
+    metadataBase: new URL(site.url),
+    title: {
+      default: `${site.name} | Entreprise générale du bâtiment dans le Var`,
+      template: `%s | ${site.name}`,
+    },
+    description: site.description,
+    openGraph: {
+      type: "website",
+      locale: "fr_FR",
+      siteName: site.name,
+      images: [
+        {
+          url: home.hero.image.src,
+          alt: home.hero.image.alt,
+          width: home.hero.image.width,
+          height: home.hero.image.height,
+        },
+      ],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const site = getSiteContent();
+
   return (
     <html lang="fr" className={archivo.variable} data-scroll-behavior="smooth">
       <body className="min-h-dvh bg-paper font-sans text-ink antialiased">

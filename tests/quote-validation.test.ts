@@ -40,37 +40,24 @@ describe("quote validation", () => {
     }
   });
 
-  it("exige un type de projet à l’étape 1", () => {
-    const errors = validateQuoteStep(1, validDraft({ projectType: "" }));
-    expect(errors.projectType).toBeDefined();
-  });
-
-  it("exige une précision si le type est autre", () => {
-    const errors = validateQuoteStep(
-      1,
-      validDraft({ projectType: "autre", projectTypeOther: "ab" }),
-    );
-    expect(errors.projectTypeOther).toBeDefined();
-  });
-
   it("refuse un code postal incomplet", () => {
-    const errors = validateQuoteStep(2, validDraft({ postalCode: "831" }));
+    const errors = validateQuoteStep(1, validDraft({ postalCode: "831" }));
     expect(errors.postalCode).toBeDefined();
   });
 
   it("refuse une description trop courte", () => {
-    const errors = validateQuoteStep(3, validDraft({ description: "Travaux" }));
+    const errors = validateQuoteStep(2, validDraft({ description: "Travaux" }));
     expect(errors.description).toBeDefined();
   });
 
   it("refuse un e-mail invalide", () => {
-    const errors = validateQuoteStep(5, validDraft({ email: "marie@" }));
+    const errors = validateQuoteStep(3, validDraft({ email: "marie@" }));
     expect(errors.email).toBeDefined();
   });
 
   it("refuse un téléphone invalide", () => {
     expect(isFrenchPhone("123")).toBe(false);
-    const errors = validateQuoteStep(5, validDraft({ phone: "123" }));
+    const errors = validateQuoteStep(3, validDraft({ phone: "123" }));
     expect(errors.phone).toBeDefined();
   });
 
@@ -79,9 +66,17 @@ describe("quote validation", () => {
     expect(isFrenchPhone("+33612345678")).toBe(true);
   });
 
-  it("exige le consentement à l’étape 6", () => {
-    const errors = validateQuoteStep(6, validDraft({ consent: false }));
+  it("exige le consentement à l’étape 4", () => {
+    const errors = validateQuoteStep(4, validDraft({ consent: false }));
     expect(errors.consent).toBeDefined();
+  });
+
+  it("accepte une demande sans type de projet", () => {
+    const result = validateQuote(validDraft({ projectType: "" }), []);
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.data.projectType).toBeNull();
+    }
   });
 
   it("refuse plus de 5 photos", () => {
@@ -90,8 +85,11 @@ describe("quote validation", () => {
       type: "image/jpeg",
       size: 1200,
     }));
-    const errors = validateQuoteStep(4, validDraft(), files);
-    expect(errors.attachments).toBeDefined();
+    const result = validateQuote(validDraft(), files);
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.errors.attachments).toBeDefined();
+    }
   });
 
   it("détecte le honeypot", () => {

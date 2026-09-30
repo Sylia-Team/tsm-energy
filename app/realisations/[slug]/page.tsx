@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { RealisationPage } from "@/components/realisations/RealisationPage";
 import {
-  getRealisation,
-  getRealisations,
-  getRelatedRealisations,
-  getServicesBySlugs,
-  getSite,
-  getZone,
-} from "@/lib/content";
+  getRealisationContent,
+  getRealisationsContent,
+  getRelatedRealisationsContent,
+  getServicesBySlugsContent,
+  getSiteContent,
+  getZoneContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -17,14 +17,16 @@ type RealisationRouteProps = {
 };
 
 export function generateStaticParams() {
-  return getRealisations().map((realisation) => ({ slug: realisation.slug }));
+  return getRealisationsContent().map((realisation) => ({
+    slug: realisation.slug,
+  }));
 }
 
 export async function generateMetadata({
   params,
 }: RealisationRouteProps): Promise<Metadata> {
   const { slug } = await params;
-  const realisation = getRealisation(slug);
+  const realisation = getRealisationContent(slug);
 
   if (!realisation) {
     return { title: "Réalisation introuvable" };
@@ -42,16 +44,16 @@ export default async function RealisationDetailPage({
   params,
 }: RealisationRouteProps) {
   const { slug } = await params;
-  const realisation = getRealisation(slug);
+  const realisation = getRealisationContent(slug);
 
   if (!realisation) {
     notFound();
   }
 
-  const site = getSite();
-  const services = getServicesBySlugs(realisation.serviceSlugs);
-  const zone = getZone(realisation.zoneSlug);
-  const related = getRelatedRealisations(realisation.slug);
+  const site = getSiteContent();
+  const services = getServicesBySlugsContent(realisation.serviceSlugs);
+  const zone = getZoneContent(realisation.zoneSlug);
+  const related = getRelatedRealisationsContent(realisation.slug);
 
   return (
     <RealisationPage

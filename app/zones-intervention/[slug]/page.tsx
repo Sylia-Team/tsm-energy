@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ZonePage } from "@/components/zones/ZonePage";
+import { getTestimonialsForZone } from "@/lib/content";
 import {
-  getRealisationsByZone,
-  getRelatedZones,
-  getServicesForZone,
-  getSite,
-  getTestimonialsForZone,
-  getZone,
-} from "@/lib/content";
+  getRealisationsByZoneContent,
+  getRelatedZonesContent,
+  getServicesForZoneContent,
+  getSiteContent,
+  getZoneContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { ZONE_SLUGS } from "@/types/content";
@@ -25,7 +25,7 @@ export async function generateMetadata({
   params,
 }: ZoneRouteProps): Promise<Metadata> {
   const { slug } = await params;
-  const zone = getZone(slug);
+  const zone = getZoneContent(slug);
 
   if (!zone) {
     return { title: "Zone introuvable" };
@@ -41,16 +41,16 @@ export async function generateMetadata({
 
 export default async function ZoneDetailPage({ params }: ZoneRouteProps) {
   const { slug } = await params;
-  const zone = getZone(slug);
+  const zone = getZoneContent(slug);
 
   if (!zone) {
     notFound();
   }
 
-  const site = getSite();
-  const realisations = getRealisationsByZone(zone.slug);
-  const services = getServicesForZone(zone.slug);
-  const relatedZones = getRelatedZones(zone.slug);
+  const site = getSiteContent();
+  const realisations = getRealisationsByZoneContent(zone.slug);
+  const services = getServicesForZoneContent(zone.slug);
+  const relatedZones = getRelatedZonesContent(zone.slug);
   const testimonials = getTestimonialsForZone(zone.slug);
 
   return (

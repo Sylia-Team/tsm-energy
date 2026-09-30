@@ -3,20 +3,23 @@ import { ContactDetails } from "@/components/contact/ContactDetails";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { CTASection } from "@/components/marketing/CTASection";
 import { Container } from "@/components/ui/container";
-import { getContact, getSite } from "@/lib/content";
+import { getContactContent, getSiteContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-const page = getContact();
-const site = getSite();
-
-export const metadata: Metadata = pageMetadata({
-  title: page.seoTitle,
-  description: page.seoDescription,
-  path: routes.contact,
-});
+export function generateMetadata(): Metadata {
+  const page = getContactContent();
+  return pageMetadata({
+    title: page.seoTitle,
+    description: page.seoDescription,
+    path: routes.contact,
+  });
+}
 
 export default function ContactPage() {
+  const page = getContactContent();
+  const site = getSiteContent();
+
   return (
     <>
       <Container className="py-16 lg:py-24">

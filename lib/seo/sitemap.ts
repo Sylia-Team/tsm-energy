@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
+import { getSite } from "@/lib/content";
 import {
-  getRealisations,
-  getServices,
-  getSite,
-  getZones,
-} from "@/lib/content";
+  getRealisationsContent,
+  getServicesContent,
+  getZonesContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { absoluteUrl, siteOrigin } from "@/lib/seo/url";
 
@@ -15,19 +15,19 @@ type SitemapEntry = {
 };
 
 export function getIndexableSitemapEntries(): SitemapEntry[] {
-  const servicePages = getServices().map((service) => ({
+  const servicePages = getServicesContent().map((service) => ({
     path: routes.service(service.slug),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
-  const realisationPages = getRealisations().map((realisation) => ({
+  const realisationPages = getRealisationsContent().map((realisation) => ({
     path: routes.realisation(realisation.slug),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
-  const zonePages = getZones().map((zone) => ({
+  const zonePages = getZonesContent().map((zone) => ({
     path: routes.zone(zone.slug),
     changeFrequency: "monthly" as const,
     priority: 0.7,

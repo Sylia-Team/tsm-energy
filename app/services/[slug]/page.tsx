@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServicePage } from "@/components/services/ServicePage";
 import {
-  getCertifications,
-  getRealisationsByService,
-  getRelatedServices,
-  getService,
-  getSite,
-} from "@/lib/content";
+  getCertificationsContent,
+  getRealisationsByServiceContent,
+  getRelatedServicesContent,
+  getServiceContent,
+  getSiteContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { SERVICE_SLUGS } from "@/types/content";
@@ -24,7 +24,7 @@ export async function generateMetadata({
   params,
 }: ServiceRouteProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = getService(slug);
+  const service = getServiceContent(slug);
 
   if (!service) {
     return { title: "Service introuvable" };
@@ -40,16 +40,16 @@ export async function generateMetadata({
 
 export default async function ServiceDetailPage({ params }: ServiceRouteProps) {
   const { slug } = await params;
-  const service = getService(slug);
+  const service = getServiceContent(slug);
 
   if (!service) {
     notFound();
   }
 
-  const site = getSite();
-  const realisations = getRealisationsByService(service.slug);
-  const relatedServices = getRelatedServices(service.slug);
-  const certifications = getCertifications();
+  const site = getSiteContent();
+  const realisations = getRealisationsByServiceContent(service.slug);
+  const relatedServices = getRelatedServicesContent(service.slug);
+  const certifications = getCertificationsContent();
 
   return (
     <ServicePage

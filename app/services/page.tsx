@@ -5,22 +5,28 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { Section } from "@/components/marketing/Section";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { Container } from "@/components/ui/container";
-import { getServices, getServicesListing, getSite } from "@/lib/content";
+import {
+  getServicesContent,
+  getServicesListingContent,
+  getSiteContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-const listing = getServicesListing();
-const site = getSite();
-
-export const metadata: Metadata = pageMetadata({
-  title: listing.seoTitle,
-  description: listing.seoDescription,
-  path: routes.services,
-  image: listing.image,
-});
+export function generateMetadata(): Metadata {
+  const listing = getServicesListingContent();
+  return pageMetadata({
+    title: listing.seoTitle,
+    description: listing.seoDescription,
+    path: routes.services,
+    image: listing.image,
+  });
+}
 
 export default function ServicesPage() {
-  const services = getServices();
+  const listing = getServicesListingContent();
+  const site = getSiteContent();
+  const services = getServicesContent();
 
   return (
     <>

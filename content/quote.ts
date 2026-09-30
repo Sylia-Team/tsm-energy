@@ -3,18 +3,16 @@ export const quoteContent = {
   eyebrow: "Devis",
   title: "Demander un devis dans le Var",
   description:
-    "Six étapes, deux minutes. Nous revenons vers vous pour convenir d’une visite. Le devis se fait après le rendez-vous, pas en ligne.",
+    "Quatre étapes, deux minutes. Nous revenons vers vous pour convenir d’une visite. Le devis se fait après le rendez-vous, pas en ligne.",
   seoTitle: "Demande de devis rénovation dans le Var",
   seoDescription:
     "Demandez un devis de rénovation, isolation, toiture ou extension dans le Var. TSM vous rappelle pour organiser une visite depuis Sanary-sur-Mer.",
   phoneLabel: "Préférer un appel ?",
   steps: [
-    { id: 1, title: "Type de projet" },
-    { id: 2, title: "Localisation" },
-    { id: 3, title: "Projet" },
-    { id: 4, title: "Photos" },
-    { id: 5, title: "Coordonnées" },
-    { id: 6, title: "Validation" },
+    { id: 1, title: "Localisation" },
+    { id: 2, title: "Projet" },
+    { id: 3, title: "Coordonnées" },
+    { id: 4, title: "Validation" },
   ],
   projectTypes: {
     renovation: "Rénovation",

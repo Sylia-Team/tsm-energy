@@ -3,15 +3,19 @@ import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Logo } from "@/components/layout/Logo";
 import { buttonClassName } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { getServices, getSite, getZones } from "@/lib/content";
+import {
+  getServicesContent,
+  getSiteContent,
+  getZonesContent,
+} from "@/lib/admin/content-read";
 import { legalNav } from "@/lib/navigation";
 import { routes } from "@/lib/routes";
 import { formatAddressLines } from "@/lib/utils";
 
 export function Footer() {
-  const site = getSite();
-  const services = getServices();
-  const zones = getZones();
+  const site = getSiteContent();
+  const services = getServicesContent();
+  const zones = getZonesContent();
   const addressLines = formatAddressLines(site.address);
   const year = new Date().getFullYear();
 

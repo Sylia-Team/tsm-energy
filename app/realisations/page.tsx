@@ -6,25 +6,27 @@ import { Section } from "@/components/marketing/Section";
 import { RealisationCard } from "@/components/realisations/RealisationCard";
 import { Container } from "@/components/ui/container";
 import {
-  getRealisations,
-  getRealisationsListing,
-  getSite,
-} from "@/lib/content";
+  getRealisationsContent,
+  getRealisationsListingContent,
+  getSiteContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-const listing = getRealisationsListing();
-const site = getSite();
-
-export const metadata: Metadata = pageMetadata({
-  title: listing.seoTitle,
-  description: listing.seoDescription,
-  path: routes.realisations,
-  image: listing.image,
-});
+export function generateMetadata(): Metadata {
+  const listing = getRealisationsListingContent();
+  return pageMetadata({
+    title: listing.seoTitle,
+    description: listing.seoDescription,
+    path: routes.realisations,
+    image: listing.image,
+  });
+}
 
 export default function RealisationsPage() {
-  const realisations = getRealisations();
+  const listing = getRealisationsListingContent();
+  const site = getSiteContent();
+  const realisations = getRealisationsContent();
 
   return (
     <>

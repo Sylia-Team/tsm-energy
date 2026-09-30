@@ -5,12 +5,12 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Container } from "@/components/ui/container";
 import { IconPhone } from "@/components/ui/icons";
-import { getQuoteContent, getSite } from "@/lib/content";
+import { getQuoteContent } from "@/lib/content";
+import { getSiteContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 const quote = getQuoteContent();
-const site = getSite();
 
 export const metadata: Metadata = pageMetadata({
   title: quote.seoTitle,
@@ -19,6 +19,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function QuotePage() {
+  const site = getSiteContent();
+
   return (
     <Container className="py-16 lg:py-24">
       <Breadcrumb

@@ -6,14 +6,13 @@ import type { QuoteDraft, QuoteFieldErrors } from "@/types/leads";
 
 type QuoteStepSummaryProps = {
   draft: QuoteDraft;
-  fileCount: number;
   errors: QuoteFieldErrors;
   onChange: (patch: Partial<QuoteDraft>) => void;
 };
 
-function projectLabel(draft: QuoteDraft): string {
+function projectLabel(draft: QuoteDraft): string | null {
   if (!isProjectType(draft.projectType)) {
-    return "—";
+    return null;
   }
   const label = quoteContent.projectTypes[draft.projectType];
   if (draft.projectType === "autre" && draft.projectTypeOther.trim()) {
@@ -24,19 +23,21 @@ function projectLabel(draft: QuoteDraft): string {
 
 export function QuoteStepSummary({
   draft,
-  fileCount,
   errors,
   onChange,
 }: QuoteStepSummaryProps) {
+  const project = projectLabel(draft);
   return (
     <div className="space-y-8">
       <dl className="grid gap-4 border border-line bg-paper-elevated p-6 sm:grid-cols-2">
-        <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            Projet
-          </dt>
-          <dd className="mt-2 text-forest">{projectLabel(draft)}</dd>
-        </div>
+        {project ? (
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+              Type de projet
+            </dt>
+            <dd className="mt-2 text-forest">{project}</dd>
+          </div>
+        ) : null}
         <div>
           <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
             Localisation
@@ -69,16 +70,6 @@ export function QuoteStepSummary({
           </dt>
           <dd className="mt-2 max-w-[65ch] leading-relaxed text-ink-muted">
             {draft.description}
-          </dd>
-        </div>
-        <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            Photos
-          </dt>
-          <dd className="mt-2 text-forest">
-            {fileCount === 0
-              ? "Aucune"
-              : `${fileCount} fichier${fileCount > 1 ? "s" : ""}`}
           </dd>
         </div>
         <div>

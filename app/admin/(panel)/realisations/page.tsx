@@ -1,0 +1,78 @@
+import Link from "next/link";
+import { getRealisationsContent } from "@/lib/admin/content-read";
+import { routes } from "@/lib/routes";
+import { addRealisationAction, deleteRealisationAction } from "./actions";
+
+export default function AdminRealisationsIndexPage() {
+  const realisations = getRealisationsContent();
+
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold text-forest">Réalisations</h1>
+          <p className="mt-1 text-sm text-ink-muted">
+            <Link href={routes.admin} className="underline underline-offset-4">
+              ← Retour
+            </Link>
+          </p>
+        </div>
+        <form action={addRealisationAction}>
+          <button
+            type="submit"
+            className="rounded-md bg-forest px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+          >
+            + Nouveau chantier
+          </button>
+        </form>
+      </div>
+
+      <div className="mt-6 grid gap-3">
+        {realisations.map((realisation) => (
+          <div
+            key={realisation.slug}
+            className="flex items-center justify-between gap-4 rounded-lg border border-stone-200 bg-white p-4"
+          >
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <h2 className="truncate font-semibold text-ink">
+                  {realisation.name}
+                </h2>
+                {realisation.featured ? (
+                  <span className="rounded-full bg-forest/10 px-2 py-0.5 text-xs font-medium text-forest">
+                    En avant
+                  </span>
+                ) : null}
+              </div>
+              <p className="mt-1 truncate text-sm text-ink-muted">
+                {realisation.city || "Ville non renseignée"} · /{realisation.slug}
+              </p>
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <Link
+                href={routes.adminRealisation(realisation.slug)}
+                className="rounded-md border border-stone-300 px-3 py-1.5 text-sm font-medium text-ink hover:border-forest"
+              >
+                Modifier
+              </Link>
+              <form action={deleteRealisationAction}>
+                <input type="hidden" name="slug" value={realisation.slug} />
+                <button
+                  type="submit"
+                  className="rounded-md border border-red-200 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50"
+                >
+                  Supprimer
+                </button>
+              </form>
+            </div>
+          </div>
+        ))}
+        {realisations.length === 0 ? (
+          <p className="rounded-lg border border-dashed border-stone-300 p-6 text-sm text-ink-muted">
+            Aucun chantier. Cliquez sur « Nouveau chantier » pour en créer un.
+          </p>
+        ) : null}
+      </div>
+    </div>
+  );
+}

@@ -96,22 +96,10 @@ export function validateAttachments(
 export function validateQuoteStep(
   step: number,
   draft: QuoteDraft,
-  attachments: QuoteAttachmentMeta[] = [],
 ): QuoteFieldErrors {
   const errors: QuoteFieldErrors = {};
 
   if (step === 1) {
-    if (!isProjectType(draft.projectType)) {
-      errors.projectType = "Choisissez un type de projet.";
-    } else if (draft.projectType === "autre") {
-      const other = draft.projectTypeOther.trim();
-      if (other.length < 3) {
-        errors.projectTypeOther = "Précisez le type de projet.";
-      }
-    }
-  }
-
-  if (step === 2) {
     if (!POSTAL_PATTERN.test(draft.postalCode.trim())) {
       errors.postalCode = "Indiquez un code postal à 5 chiffres.";
     }
@@ -120,7 +108,7 @@ export function validateQuoteStep(
     }
   }
 
-  if (step === 3) {
+  if (step === 2) {
     if (draft.description.trim().length < 20) {
       errors.description =
         "Décrivez le projet en quelques phrases (20 caractères minimum).";
@@ -136,14 +124,7 @@ export function validateQuoteStep(
     }
   }
 
-  if (step === 4) {
-    const attachmentError = validateAttachments(attachments);
-    if (attachmentError) {
-      errors.attachments = attachmentError;
-    }
-  }
-
-  if (step === 5) {
+  if (step === 3) {
     if (draft.firstName.trim().length < 2) {
       errors.firstName = "Indiquez votre prénom.";
     }
@@ -158,7 +139,7 @@ export function validateQuoteStep(
     }
   }
 
-  if (step === 6) {
+  if (step === 4) {
     if (!draft.consent) {
       errors.consent =
         "Le consentement est nécessaire pour que nous puissions vous recontacter.";
@@ -184,30 +165,34 @@ export function validateQuote(
   draft: QuoteDraft,
   attachments: QuoteAttachmentMeta[],
 ): QuoteValidationResult {
+  const attachmentError = validateAttachments(attachments);
   const errors: QuoteFieldErrors = {
-    ...validateQuoteStep(1, draft, attachments),
-    ...validateQuoteStep(2, draft, attachments),
-    ...validateQuoteStep(3, draft, attachments),
-    ...validateQuoteStep(4, draft, attachments),
-    ...validateQuoteStep(5, draft, attachments),
-    ...validateQuoteStep(6, draft, attachments),
+    ...validateQuoteStep(1, draft),
+    ...validateQuoteStep(2, draft),
+    ...validateQuoteStep(3, draft),
+    ...validateQuoteStep(4, draft),
+    ...(attachmentError ? { attachments: attachmentError } : {}),
   };
 
   if (Object.keys(errors).length > 0) {
     return { ok: false, errors };
   }
 
-  if (!isProjectType(draft.projectType) || !isTimeline(draft.timeline) || !isBudget(draft.budget)) {
+  if (!isTimeline(draft.timeline) || !isBudget(draft.budget)) {
     return {
       ok: false,
       errors: { form: "Le formulaire est incomplet." },
     };
   }
 
+  const projectType = isProjectType(draft.projectType)
+    ? draft.projectType
+    : null;
+
   const data: QuoteLead = {
-    projectType: draft.projectType,
+    projectType,
     projectTypeOther:
-      draft.projectType === "autre" ? draft.projectTypeOther.trim() : null,
+      projectType === "autre" ? draft.projectTypeOther.trim() : null,
     postalCode: draft.postalCode.trim(),
     city: draft.city.trim(),
     description: draft.description.trim(),

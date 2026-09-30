@@ -5,14 +5,17 @@ import Link from "next/link";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { buttonClassName } from "@/components/ui/button";
 import { IconClose, IconMenu, IconPhone } from "@/components/ui/icons";
-import { getSite } from "@/lib/content";
 import { headerNav } from "@/lib/navigation";
 import { routes } from "@/lib/routes";
 
-export function MobileNavigation() {
+type MobileNavigationProps = {
+  phone: string;
+  phoneHref: string;
+};
+
+export function MobileNavigation({ phone, phoneHref }: MobileNavigationProps) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
-  const site = getSite();
 
   useEffect(() => {
     if (!open) {
@@ -84,13 +87,13 @@ export function MobileNavigation() {
                 Demander un devis
               </TrackedLink>
               <TrackedLink
-                href={site.phoneHref}
+                href={phoneHref}
                 event="phone_click"
                 payload={{ location: "mobile_nav" }}
                 className={buttonClassName("secondary", "w-full")}
               >
                 <IconPhone className="h-4 w-4" />
-                Appeler {site.phone}
+                Appeler {phone}
               </TrackedLink>
             </div>
           </nav>

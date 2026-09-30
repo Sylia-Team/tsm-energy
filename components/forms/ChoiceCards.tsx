@@ -39,10 +39,10 @@ export function ChoiceCards({
               key={option.value}
               htmlFor={optionId}
               className={cn(
-                "flex min-h-11 cursor-pointer items-center border px-4 py-3 text-sm font-medium tracking-wide transition-colors duration-150",
+                "flex min-h-11 cursor-pointer items-center gap-2 border px-4 py-3 text-sm tracking-wide transition-colors duration-150",
                 selected
-                  ? "border-forest bg-paper-elevated text-forest"
-                  : "border-line bg-paper-elevated text-ink hover:border-forest",
+                  ? "border-forest bg-forest/5 font-semibold text-forest ring-1 ring-forest"
+                  : "border-line bg-paper-elevated font-medium text-ink hover:border-forest hover:bg-forest/5",
               )}
             >
               <input
@@ -55,6 +55,17 @@ export function ChoiceCards({
                 className="sr-only"
                 aria-describedby={errorId}
               />
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "flex h-4 w-4 shrink-0 items-center justify-center rounded-full border",
+                  selected ? "border-forest" : "border-line",
+                )}
+              >
+                {selected ? (
+                  <span className="h-2 w-2 rounded-full bg-forest" />
+                ) : null}
+              </span>
               {option.label}
             </label>
           );

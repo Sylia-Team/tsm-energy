@@ -10,29 +10,31 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { MethodSteps } from "@/components/services/MethodSteps";
 import { Container } from "@/components/ui/container";
 import {
-  getCertifications,
-  getEntreprise,
-  getHome,
-  getSite,
-  getZones,
-} from "@/lib/content";
+  getCertificationsContent,
+  getEntrepriseContent,
+  getHomeContent,
+  getSiteContent,
+  getZonesContent,
+} from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
-const page = getEntreprise();
-const site = getSite();
-const home = getHome();
-
-export const metadata: Metadata = pageMetadata({
-  title: page.seoTitle,
-  description: page.seoDescription,
-  path: routes.entreprise,
-  image: page.image,
-});
+export function generateMetadata(): Metadata {
+  const page = getEntrepriseContent();
+  return pageMetadata({
+    title: page.seoTitle,
+    description: page.seoDescription,
+    path: routes.entreprise,
+    image: page.image,
+  });
+}
 
 export default function EntreprisePage() {
-  const certifications = getCertifications();
-  const zones = getZones();
+  const page = getEntrepriseContent();
+  const site = getSiteContent();
+  const home = getHomeContent();
+  const certifications = getCertificationsContent();
+  const zones = getZonesContent();
 
   return (
     <>

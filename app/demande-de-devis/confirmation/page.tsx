@@ -3,12 +3,12 @@ import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { buttonClassName } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { IconPhone } from "@/components/ui/icons";
-import { getQuoteContent, getSite } from "@/lib/content";
+import { getQuoteContent } from "@/lib/content";
+import { getSiteContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 const quote = getQuoteContent();
-const site = getSite();
 
 export const metadata: Metadata = pageMetadata({
   title: quote.confirmationTitle,
@@ -18,6 +18,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function QuoteConfirmationPage() {
+  const site = getSiteContent();
+
   return (
     <Container className="py-16 lg:py-24">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
