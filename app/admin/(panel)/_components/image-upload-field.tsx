@@ -67,7 +67,7 @@ export function ImageUploadField({
           name={`${name}.file`}
           type="file"
           accept="image/jpeg,image/png,image/webp"
-          className="mt-1 block w-full text-sm"
+          className="mt-1 block w-full cursor-pointer rounded-md border border-dashed border-stone-300 bg-stone-50 p-3 text-sm text-ink-muted outline-none transition-colors hover:border-forest focus-visible:border-forest focus-visible:ring-1 focus-visible:ring-forest file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-forest file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-forest-deep"
           onChange={(event) => {
             const file = event.target.files?.[0];
             setRemoved(false);

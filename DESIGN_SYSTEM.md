@@ -4,7 +4,7 @@ Direction artistique : **entreprise générale du bâtiment**, sérieuse, premiu
 
 Ce n’est pas un template SaaS. Pas de gros dégradés, pas d’esthétique startup, pas d’animations décoratives.
 
-Références visuelles : photographie de chantier, pierre calcaire du Var, mer, outillage, typographie forte, beaucoup d’espace.
+Références visuelles : photographie de chantier, mer, Var, outillage, typographie forte, beaucoup d’espace.
 
 ## Couleurs
 
@@ -12,19 +12,21 @@ Tokens définis dans `app/globals.css` (`@theme`).
 
 | Token | Valeur | Usage |
 | --- | --- | --- |
-| `--color-ink` | `#171916` | Texte principal |
-| `--color-ink-muted` | `#5C6059` | Texte secondaire |
-| `--color-paper` | `#F4F0E8` | Fond de page (pierre chaude) |
-| `--color-paper-elevated` | `#FFFCF7` | Surfaces / cartes |
-| `--color-stone` | `#E4DDD2` | Bandes alternées, fonds secondaires |
-| `--color-line` | `#D5CEC3` | Bordures |
-| `--color-forest` | `#24332E` | Header top bar, footer, blocs sombres |
-| `--color-forest-deep` | `#1A2421` | Footer inférieur |
-| `--color-accent` | `#9A4A2C` | CTA (terre cuite / tuile) |
-| `--color-accent-hover` | `#7A3922` | Hover CTA |
+| `--color-ink` | `#1F2A33` | Texte principal |
+| `--color-ink-muted` | `#5A6772` | Texte secondaire |
+| `--color-paper` | `#F4F7F9` | Fond de page (gris-bleu clair) |
+| `--color-paper-elevated` | `#FFFFFF` | Surfaces / cartes |
+| `--color-stone` | `#E3EAEF` | Bandes alternées, fonds secondaires |
+| `--color-line` | `#CFD8DF` | Bordures |
+| `--color-forest` | `#0B2A4A` | Header top bar, footer, blocs sombres (marine du logo) |
+| `--color-forest-deep` | `#071C33` | Footer inférieur |
+| `--color-accent` | `#0A5A9E` | CTA (bleu du logo) |
+| `--color-accent-hover` | `#084A82` | Hover CTA |
 | `--color-accent-foreground` | `#FFFFFF` | Texte sur accent |
-| `--color-focus` | `#9A4A2C` | Outline `:focus-visible` |
+| `--color-focus` | `#0A5A9E` | Outline `:focus-visible` |
 | `--color-danger` | `#8A2F2A` | Messages d’erreur de formulaire |
+| `--color-brand-green` | `#8CC63F` | Vert du logo : filets, puces, accents sur fond sombre uniquement (contraste 2,05 sur blanc : jamais pour du texte sur fond clair) |
+| `--color-brand-teal` | `#0E6E6A` | Vert foncé : liens, badges, icônes sur fond clair |
 
 Contraste texte `ink` sur `paper` et texte clair sur `forest` / `accent` : viser WCAG AA.
 
