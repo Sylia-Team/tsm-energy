@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { getReviewsConfig } from "@/lib/admin/content-read";
+import { getAvisPageContent, getReviewsConfig } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { saveReviewsAction } from "./actions";
 import {
   SaveBar,
   SavedNotice,
   SectionCard,
+  TextAreaField,
   TextField,
 } from "../_components/fields";
 
@@ -17,13 +18,14 @@ export default async function AdminReviewsPage({
   const params = await searchParams;
   const saved = params.saved === "1";
   const config = getReviewsConfig();
+  const page = getAvisPageContent();
   const apiKeyConfigured = Boolean(process.env.GOOGLE_PLACES_API_KEY);
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-forest">Avis Google</h1>
+          <h1 className="text-2xl font-semibold text-navy">Avis clients</h1>
           <p className="mt-1 text-sm text-ink-muted">
             <Link href={routes.admin} className="underline underline-offset-4">
               ← Retour
@@ -31,9 +33,9 @@ export default async function AdminReviewsPage({
           </p>
         </div>
         <Link
-          href={routes.home}
+          href={routes.avis}
           target="_blank"
-          className="text-sm font-medium text-forest underline underline-offset-4"
+          className="text-sm font-medium text-navy underline underline-offset-4"
         >
           Voir la page
         </Link>
@@ -44,8 +46,8 @@ export default async function AdminReviewsPage({
       <div
         className={`mt-4 rounded-md px-4 py-3 text-sm ${
           apiKeyConfigured
-            ? "bg-green-50 text-green-700"
-            : "bg-amber-50 text-amber-800"
+            ? "bg-success/10 text-success"
+            : "bg-mist text-navy"
         }`}
       >
         {apiKeyConfigured ? (
@@ -67,7 +69,7 @@ export default async function AdminReviewsPage({
               name="enabled"
               value="true"
               defaultChecked={config.enabled}
-              className="h-4 w-4 rounded border-stone-300"
+              className="h-4 w-4 rounded border-line"
             />
             Activer l’affichage des avis Google
           </label>
@@ -98,6 +100,32 @@ export default async function AdminReviewsPage({
             Platform. En cas de désactivation ou d’absence d’avis, les avis
             manuels sont affichés automatiquement.
           </p>
+        </SectionCard>
+
+        <SectionCard title="Page « Avis clients »">
+          <TextField name="page.eyebrow" label="Sur-titre" defaultValue={page.eyebrow} />
+          <TextField name="page.title" label="Titre" defaultValue={page.title} />
+          <TextAreaField
+            name="page.description"
+            label="Introduction"
+            defaultValue={page.description}
+          />
+          <TextField name="page.seoTitle" label="Titre SEO" defaultValue={page.seoTitle} />
+          <TextAreaField
+            name="page.seoDescription"
+            label="Description SEO"
+            defaultValue={page.seoDescription}
+          />
+          <TextField
+            name="page.ctaTitle"
+            label="Appel à l’action : titre"
+            defaultValue={page.ctaTitle}
+          />
+          <TextAreaField
+            name="page.ctaDescription"
+            label="Appel à l’action : description"
+            defaultValue={page.ctaDescription}
+          />
         </SectionCard>
 
         <SaveBar />

@@ -8,7 +8,7 @@ export default function AdminServicesIndexPage() {
   return (
     <div>
       <div>
-        <h1 className="text-2xl font-semibold text-forest">Services</h1>
+        <h1 className="text-2xl font-semibold text-navy">Services</h1>
         <p className="mt-1 text-sm text-ink-muted">
           <Link href={routes.admin} className="underline underline-offset-4">
             ← Retour
@@ -26,12 +26,12 @@ export default function AdminServicesIndexPage() {
           <Link
             key={service.slug}
             href={routes.adminService(service.slug)}
-            className="block rounded-lg border border-stone-200 bg-white p-5 hover:border-forest"
+            className="block rounded-lg border border-line bg-paper-elevated p-5 hover:border-navy"
           >
             <div className="flex items-center justify-between gap-2">
               <h2 className="font-semibold text-ink">{service.title}</h2>
               {service.featured ? (
-                <span className="rounded-full bg-forest/10 px-2 py-0.5 text-xs font-medium text-forest">
+                <span className="rounded-full bg-navy/10 px-2 py-0.5 text-xs font-medium text-navy">
                   En avant
                 </span>
               ) : null}

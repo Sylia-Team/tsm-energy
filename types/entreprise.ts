@@ -1,6 +1,15 @@
 import type { MediaImage } from "@/types/media";
 import type { ServiceBlockItem } from "@/types/content";
 
+export type ManagerContent = {
+  eyebrow: string;
+  name: string;
+  role: string;
+  quote: string;
+  paragraphs: string[];
+  image: MediaImage;
+};
+
 export type EntrepriseContent = {
   eyebrow: string;
   title: string;
@@ -10,6 +19,8 @@ export type EntrepriseContent = {
   image: MediaImage;
   storyTitle: string;
   story: string[];
+  storyImage: MediaImage;
+  manager: ManagerContent;
   methodTitle: string;
   methodDescription: string;
   method: ServiceBlockItem[];

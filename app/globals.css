@@ -3,23 +3,33 @@
 @theme {
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
-  --color-ink: #171916;
-  --color-ink-muted: #5c6059;
-  --color-paper: #f4f0e8;
-  --color-paper-elevated: #fffcf7;
-  --color-stone: #e4ddd2;
-  --color-line: #d5cec3;
-  --color-forest: #24332e;
-  --color-forest-deep: #1a2421;
-  --color-accent: #9a4a2c;
-  --color-accent-hover: #7a3922;
+  --color-ink: #1f2a33;
+  --color-ink-muted: #5a6772;
+  --color-paper: #f4f7f9;
+  --color-paper-elevated: #ffffff;
+  --color-mist: #e3eaef;
+  --color-line: #cfd8df;
+  --color-navy: #0b2a4a;
+  --color-navy-deep: #071c33;
+  --color-accent: #0a5a9e;
+  --color-accent-hover: #084a82;
   --color-accent-foreground: #ffffff;
-  --color-focus: #9a4a2c;
+  --color-focus: #0a5a9e;
   --color-danger: #8a2f2a;
+  --color-success: #0e6e6a;
+  --color-brand-green: #8cc63f;
+  --color-brand-teal: #0e6e6a;
 
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 8px;
+}
+
+@utility font-display {
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
 }
 
 @layer base {
@@ -49,6 +59,16 @@
   :focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 3px;
+  }
+
+  /* Tailwind 4 ne met plus le curseur « main » sur les boutons. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
   }
 }
 

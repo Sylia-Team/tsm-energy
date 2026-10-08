@@ -25,7 +25,7 @@ export default function QuoteConfirmationPage() {
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
         Demande de devis
       </p>
-      <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-[-0.03em] text-forest lg:text-[3.5rem] lg:leading-[1.05]">
+      <h1 className="mt-3 max-w-3xl font-display text-4xl text-navy lg:text-[4rem]">
         {quote.confirmationTitle}
       </h1>
       <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-ink-muted lg:text-lg">

@@ -1,4 +1,5 @@
 import type { ServiceSlug, ZoneSlug } from "@/types/content";
+import type { LegalSlug } from "@/types/legal";
 
 export const routes = {
   home: "/",
@@ -10,8 +11,6 @@ export const routes = {
   zone: (slug: ZoneSlug) => `/zones-intervention/${slug}`,
   entreprise: "/entreprise",
   avis: "/avis-clients",
-  actualites: "/actualites",
-  article: (slug: string) => `/actualites/${slug}`,
   quote: "/demande-de-devis",
   quoteConfirmation: "/demande-de-devis/confirmation",
   contact: "/contact",
@@ -33,24 +32,32 @@ export const routes = {
   adminSite: "/admin/site",
   adminListings: "/admin/listings",
   adminCertifications: "/admin/certifications",
+  adminLegalPages: "/admin/pages-legales",
+  adminLegalPage: (slug: LegalSlug) => `/admin/pages-legales/${slug}`,
   apiCommunes: "/api/communes",
 } as const;
+
+export const legalPaths: Record<LegalSlug, string> = {
+  "mentions-legales": routes.legal,
+  "politique-confidentialite": routes.privacy,
+  cookies: routes.cookies,
+};
 
 export type AppPath =
   | (typeof routes)[keyof Omit<
       typeof routes,
       | "service"
       | "realisation"
-      | "article"
       | "zone"
       | "adminService"
       | "adminZone"
       | "adminRealisation"
+      | "adminLegalPage"
     >]
   | ReturnType<typeof routes.service>
   | ReturnType<typeof routes.realisation>
-  | ReturnType<typeof routes.article>
   | ReturnType<typeof routes.zone>
   | ReturnType<typeof routes.adminService>
   | ReturnType<typeof routes.adminZone>
-  | ReturnType<typeof routes.adminRealisation>;
+  | ReturnType<typeof routes.adminRealisation>
+  | ReturnType<typeof routes.adminLegalPage>;

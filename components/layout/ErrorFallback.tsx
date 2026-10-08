@@ -14,7 +14,7 @@ export function ErrorFallback({ retry }: ErrorFallbackProps) {
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
         Erreur
       </p>
-      <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-forest">
+      <h1 className="mt-4 font-display text-3xl lg:text-[2.75rem] text-navy">
         Une erreur s’est produite
       </h1>
       <p className="mx-auto mt-4 max-w-md text-ink-muted">

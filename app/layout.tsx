@@ -10,12 +10,13 @@ import "./globals.css";
 
 const archivo = Archivo({
   subsets: ["latin", "latin-ext"],
+  axes: ["wdth"],
   display: "swap",
   variable: "--font-archivo",
 });
 
 export const viewport: Viewport = {
-  themeColor: "#24332E",
+  themeColor: "#0A5A9E",
   width: "device-width",
   initialScale: 1,
 };

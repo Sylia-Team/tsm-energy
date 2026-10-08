@@ -9,6 +9,7 @@ type PageMetadataInput = {
   path: string;
   image?: MediaImage;
   index?: boolean;
+  follow?: boolean;
 };
 
 export function pageMetadata({
@@ -17,6 +18,7 @@ export function pageMetadata({
   path,
   image,
   index = true,
+  follow = false,
 }: PageMetadataInput): Metadata {
   const site = getSiteContent();
   const images = image?.src
@@ -34,7 +36,7 @@ export function pageMetadata({
     title,
     description,
     alternates: { canonical: path },
-    robots: index ? undefined : { index: false, follow: false },
+    robots: index ? undefined : { index: false, follow },
     openGraph: {
       type: "website",
       locale: "fr_FR",

@@ -17,7 +17,7 @@ import {
 } from "../../_components/fields";
 
 const selectClass =
-  "mt-1 w-full rounded-md border border-stone-300 px-3 py-2 text-sm outline-none focus:border-forest focus:ring-1 focus:ring-forest";
+  "mt-1 w-full rounded-md border border-line px-3 py-2 text-sm outline-none focus:border-accent focus:ring-1 focus:ring-accent";
 
 export default async function AdminRealisationEditPage({
   params,
@@ -42,7 +42,7 @@ export default async function AdminRealisationEditPage({
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-forest">
+          <h1 className="text-2xl font-semibold text-navy">
             Chantier · {realisation.name}
           </h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -57,7 +57,7 @@ export default async function AdminRealisationEditPage({
         <Link
           href={routes.realisation(realisation.slug)}
           target="_blank"
-          className="text-sm font-medium text-forest underline underline-offset-4"
+          className="text-sm font-medium text-navy underline underline-offset-4"
         >
           Voir la page
         </Link>
@@ -75,7 +75,7 @@ export default async function AdminRealisationEditPage({
               name="featured"
               value="true"
               defaultChecked={realisation.featured}
-              className="h-4 w-4 rounded border-stone-300"
+              className="h-4 w-4 rounded border-line"
             />
             Mettre ce chantier en avant (accueil)
           </label>
@@ -137,7 +137,7 @@ export default async function AdminRealisationEditPage({
                     defaultChecked={realisation.serviceSlugs.includes(
                       service.slug,
                     )}
-                    className="h-4 w-4 rounded border-stone-300"
+                    className="h-4 w-4 rounded border-line"
                   />
                   {service.shortTitle}
                 </label>
@@ -200,7 +200,7 @@ export default async function AdminRealisationEditPage({
           {realisation.gallery.map((item, index) => (
             <div
               key={`${index}-${item.src}`}
-              className="rounded-md border border-stone-200 p-4"
+              className="rounded-md border border-line p-4"
             >
               <ImageUploadField
                 name={`gallery.${index}`}

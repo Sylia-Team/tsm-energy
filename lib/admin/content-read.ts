@@ -18,6 +18,10 @@ import { servicesListing } from "@/content/services-listing";
 import { zonesListing } from "@/content/zones-listing";
 import { realisationsListing } from "@/content/realisations-listing";
 import { site } from "@/content/site";
+import { avisPage } from "@/content/avis-page";
+import { legalPages } from "@/content/legal";
+import type { AvisPageContent } from "@/types/avis";
+import type { LegalPageContent, LegalSlug } from "@/types/legal";
 import type { HomeContent } from "@/types/home";
 import type { EntrepriseContent } from "@/types/entreprise";
 import type { ContactContent } from "@/types/contact";
@@ -58,6 +62,17 @@ export function getReviewsConfig(): ReviewsConfig {
 
 export function getSiteContent(): SiteConfig {
   return deepMerge(site, readOverride<SiteConfig>("site"));
+}
+
+export function getAvisPageContent(): AvisPageContent {
+  return deepMerge(avisPage, readOverride<AvisPageContent>("avisPage"));
+}
+
+type LegalOverrides = Partial<Record<LegalSlug, LegalPageContent>>;
+
+export function getLegalPageContent(slug: LegalSlug): LegalPageContent {
+  const overrides = readOverride<LegalOverrides>("legalPages") ?? {};
+  return deepMerge(legalPages[slug], overrides[slug]);
 }
 
 export function getServicesListingContent(): ServicesListing {

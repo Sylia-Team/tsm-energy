@@ -23,7 +23,7 @@ export default async function AdminContactPage({
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-forest">Page « Contact »</h1>
+          <h1 className="text-2xl font-semibold text-navy">Page « Contact »</h1>
           <p className="mt-1 text-sm text-ink-muted">
             <Link href={routes.admin} className="underline underline-offset-4">
               ← Retour
@@ -33,7 +33,7 @@ export default async function AdminContactPage({
         <Link
           href={routes.contact}
           target="_blank"
-          className="text-sm font-medium text-forest underline underline-offset-4"
+          className="text-sm font-medium text-navy underline underline-offset-4"
         >
           Voir la page
         </Link>

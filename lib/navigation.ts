@@ -20,7 +20,6 @@ export const footerNav: NavItem[] = [
   { href: routes.zones, label: "Zones d’intervention" },
   { href: routes.entreprise, label: "L’entreprise" },
   { href: routes.avis, label: "Avis clients" },
-  { href: routes.actualites, label: "Actualités" },
   { href: routes.quote, label: "Demande de devis" },
   { href: routes.contact, label: "Contact" },
 ];

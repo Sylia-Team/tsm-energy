@@ -19,7 +19,9 @@ export type ContentKey =
   | "servicesListing"
   | "realisationsListing"
   | "zonesListing"
-  | "quote";
+  | "quote"
+  | "avisPage"
+  | "legalPages";
 
 type DeepPartial<T> = T extends (infer U)[]
   ? U[]

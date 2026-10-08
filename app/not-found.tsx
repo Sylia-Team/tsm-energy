@@ -15,7 +15,7 @@ export default function NotFoundPage() {
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
         Erreur 404
       </p>
-      <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-forest">
+      <h1 className="mt-4 font-display text-3xl lg:text-[2.75rem] text-navy">
         Page introuvable
       </h1>
       <p className="mx-auto mt-4 max-w-md text-ink-muted">

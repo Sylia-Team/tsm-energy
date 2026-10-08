@@ -5,6 +5,8 @@ import { ContactCTA } from "@/components/marketing/ContactCTA";
 import { CTASection } from "@/components/marketing/CTASection";
 import { Hero } from "@/components/marketing/Hero";
 import { LocationCard } from "@/components/marketing/LocationCard";
+import { ManagerQuote } from "@/components/marketing/ManagerQuote";
+import { MediaSplit } from "@/components/marketing/MediaSplit";
 import { Section } from "@/components/marketing/Section";
 import { SectionTitle } from "@/components/marketing/SectionTitle";
 import { StatList } from "@/components/marketing/StatList";
@@ -13,10 +15,10 @@ import { ValuePropCard } from "@/components/marketing/ValuePropCard";
 import { RealisationCard } from "@/components/realisations/RealisationCard";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { Container } from "@/components/ui/container";
-import { CoverImage } from "@/components/ui/cover-image";
 import { IconArrow } from "@/components/ui/icons";
 import {
   getCertificationsContent,
+  getEntrepriseContent,
   getFeaturedRealisationsContent,
   getFeaturedServicesContent,
   getHomeContent,
@@ -45,6 +47,7 @@ export default function HomePage() {
   const realisations = getFeaturedRealisationsContent();
   const certifications = getCertificationsContent();
   const zones = getZonesContent();
+  const entreprise = getEntrepriseContent();
 
   return (
     <>
@@ -75,7 +78,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section tone="stone" id="services">
+      <Section tone="mist" id="services">
         <Container>
           <SectionTitle
             eyebrow={home.services.eyebrow}
@@ -90,7 +93,7 @@ export default function HomePage() {
           <p className="mt-8">
             <Link
               href={routes.services}
-              className="inline-flex items-center gap-2 text-sm font-medium text-forest"
+              className="inline-flex items-center gap-2 text-sm font-medium text-navy"
             >
               {home.services.allLabel}
               <IconArrow className="h-4 w-4" />
@@ -99,55 +102,49 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section id="entreprise">
+      <MediaSplit id="entreprise" image={home.about.image} side="right">
+        <SectionTitle eyebrow={home.about.eyebrow} title={home.about.title} />
+        <div className="mt-6 space-y-4">
+          {home.about.paragraphs.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="max-w-[65ch] leading-relaxed text-ink-muted"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+        <div className="mt-8">
+          <Link
+            href={routes.entreprise}
+            className="inline-flex items-center gap-2 text-sm font-medium text-navy"
+          >
+            {home.about.linkLabel}
+            <IconArrow className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="mt-8">
+          <ContactCTA
+            quoteLabel={home.hero.primaryCta}
+            phoneLabel={home.hero.secondaryCta}
+            phone={site.phone}
+            phoneHref={site.phoneHref}
+            location="home_about"
+          />
+        </div>
+      </MediaSplit>
+
+      <Section>
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <SectionTitle
-                eyebrow={home.about.eyebrow}
-                title={home.about.title}
-              />
-              <div className="mt-6 space-y-4">
-                {home.about.paragraphs.map((paragraph) => (
-                  <p
-                    key={paragraph}
-                    className="max-w-[65ch] leading-relaxed text-ink-muted"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-              <div className="mt-8">
-                <Link
-                  href={routes.entreprise}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-forest"
-                >
-                  {home.about.linkLabel}
-                  <IconArrow className="h-4 w-4" />
-                </Link>
-              </div>
-              <div className="mt-8">
-                <ContactCTA
-                  quoteLabel={home.hero.primaryCta}
-                  phoneLabel={home.hero.secondaryCta}
-                  phone={site.phone}
-                  phoneHref={site.phoneHref}
-                  location="home_about"
-                />
-              </div>
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-              <CoverImage
-                src={home.about.image.src}
-                alt={home.about.image.alt}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-          </div>
+          <ManagerQuote
+            manager={entreprise.manager}
+            href={routes.entreprise}
+            linkLabel="Découvrir l’entreprise"
+          />
         </Container>
       </Section>
 
-      <Section tone="stone" id="realisations">
+      <Section tone="mist" id="realisations">
         <Container>
           <SectionTitle
             eyebrow={home.realisations.eyebrow}
@@ -165,7 +162,7 @@ export default function HomePage() {
           <p className="mt-8">
             <Link
               href={routes.realisations}
-              className="inline-flex items-center gap-2 text-sm font-medium text-forest"
+              className="inline-flex items-center gap-2 text-sm font-medium text-navy"
             >
               {home.realisations.allLabel}
               <IconArrow className="h-4 w-4" />
@@ -174,7 +171,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section tone="forest">
+      <Section tone="navy">
         <Container>
           <SectionTitle
             eyebrow={home.stats.eyebrow}
@@ -203,7 +200,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section tone="stone" id="avis">
+      <Section tone="mist" id="avis">
         <Container>
           <SectionTitle
             eyebrow={home.testimonials.eyebrow}
@@ -214,7 +211,7 @@ export default function HomePage() {
           <p className="mt-8">
             <Link
               href={routes.avis}
-              className="inline-flex items-center gap-2 text-sm font-medium text-forest"
+              className="inline-flex items-center gap-2 text-sm font-medium text-navy"
             >
               {home.testimonials.allLabel}
               <IconArrow className="h-4 w-4" />
@@ -238,7 +235,7 @@ export default function HomePage() {
           <p className="mt-8">
             <Link
               href={routes.zones}
-              className="inline-flex items-center gap-2 text-sm font-medium text-forest"
+              className="inline-flex items-center gap-2 text-sm font-medium text-navy"
             >
               {home.zones.allLabel}
               <IconArrow className="h-4 w-4" />

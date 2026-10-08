@@ -25,7 +25,7 @@ export default async function AdminCertificationsPage({
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-forest">
+          <h1 className="text-2xl font-semibold text-navy">
             Certifications & garanties
           </h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -37,14 +37,14 @@ export default async function AdminCertificationsPage({
         <form action={addCertificationAction}>
           <button
             type="submit"
-            className="rounded-md bg-forest px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+            className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:bg-accent-hover"
           >
             + Ajouter
           </button>
         </form>
       </div>
 
-      <p className="mt-3 rounded-md bg-amber-50 px-4 py-2 text-sm text-amber-800">
+      <p className="mt-3 rounded-md bg-mist px-4 py-2 text-sm text-navy">
         N’indiquez que des qualifications réellement détenues. Ne pas inventer de
         label.
       </p>
@@ -57,7 +57,7 @@ export default async function AdminCertificationsPage({
         {certifications.map((certification, index) => (
           <div
             key={certification.id}
-            className="rounded-lg border border-stone-200 bg-white p-6"
+            className="rounded-lg border border-line bg-paper-elevated p-6"
           >
             <div className="mb-3 flex items-center justify-between">
               <p className="text-xs font-medium uppercase text-ink-muted">
@@ -68,7 +68,7 @@ export default async function AdminCertificationsPage({
                 formAction={deleteCertificationAction}
                 name="id"
                 value={certification.id}
-                className="rounded-md border border-red-200 px-3 py-1 text-xs font-medium text-red-600 hover:bg-red-50"
+                className="rounded-md border border-danger/30 px-3 py-1 text-xs font-medium text-danger hover:bg-danger/10"
               >
                 Supprimer
               </button>
@@ -94,7 +94,7 @@ export default async function AdminCertificationsPage({
         ))}
 
         {certifications.length === 0 ? (
-          <p className="rounded-lg border border-dashed border-stone-300 p-6 text-sm text-ink-muted">
+          <p className="rounded-lg border border-dashed border-line p-6 text-sm text-ink-muted">
             Aucune certification. Cliquez sur « Ajouter ».
           </p>
         ) : null}

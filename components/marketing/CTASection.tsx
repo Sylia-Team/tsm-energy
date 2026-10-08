@@ -24,9 +24,9 @@ export function CTASection({
   location,
 }: CTASectionProps) {
   return (
-    <section className="bg-forest py-16 text-paper lg:py-24">
+    <section className="bg-navy py-16 text-paper lg:py-24">
       <Container className="max-w-3xl">
-        <h2 className="text-3xl font-bold tracking-[-0.02em] lg:text-4xl">
+        <h2 className="font-display text-3xl lg:text-[2.75rem]">
           {title}
         </h2>
         <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-paper/75 lg:text-lg">

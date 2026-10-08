@@ -24,7 +24,7 @@ export function ReviewCard({ review }: { review: GoogleReview }) {
         « {review.text} »
       </blockquote>
       <figcaption className="mt-6 border-t border-line pt-4">
-        <p className="font-semibold text-forest">{review.author}</p>
+        <p className="font-semibold text-navy">{review.author}</p>
         {review.relativeTime ? (
           <p className="mt-1 text-sm text-ink-muted">
             {review.relativeTime} · Avis Google

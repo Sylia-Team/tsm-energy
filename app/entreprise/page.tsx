@@ -3,6 +3,7 @@ import { CTASection } from "@/components/marketing/CTASection";
 import { CertificationCard } from "@/components/marketing/CertificationCard";
 import { Hero } from "@/components/marketing/Hero";
 import { LocationCard } from "@/components/marketing/LocationCard";
+import { MediaSplit } from "@/components/marketing/MediaSplit";
 import { Section } from "@/components/marketing/Section";
 import { SectionTitle } from "@/components/marketing/SectionTitle";
 import { ValuePropCard } from "@/components/marketing/ValuePropCard";
@@ -58,22 +59,39 @@ export default function EntreprisePage() {
           ]}
         />
       </Container>
+      <MediaSplit image={page.storyImage}>
+        <SectionTitle title={page.storyTitle} />
+        <div className="mt-6 space-y-4">
+          {page.story.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="max-w-[65ch] leading-relaxed text-ink-muted"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </MediaSplit>
+      <MediaSplit image={page.manager.image} side="right" tone="mist">
+        <SectionTitle eyebrow={page.manager.eyebrow} title={page.manager.name} />
+        <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-ink-muted">
+          {page.manager.role}
+        </p>
+        <blockquote className="mt-8 border-l-4 border-brand-green pl-5 text-xl font-semibold leading-snug text-navy lg:text-2xl">
+          « {page.manager.quote} »
+        </blockquote>
+        <div className="mt-8 space-y-4">
+          {page.manager.paragraphs.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="max-w-[65ch] leading-relaxed text-ink-muted"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </MediaSplit>
       <Section>
-        <Container>
-          <SectionTitle title={page.storyTitle} />
-          <div className="mt-6 space-y-4">
-            {page.story.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="max-w-[65ch] leading-relaxed text-ink-muted"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="stone">
         <Container>
           <SectionTitle
             eyebrow={home.value.eyebrow}
@@ -87,7 +105,7 @@ export default function EntreprisePage() {
           </div>
         </Container>
       </Section>
-      <Section>
+      <Section tone="mist">
         <Container>
           <SectionTitle
             title={page.methodTitle}
@@ -98,7 +116,7 @@ export default function EntreprisePage() {
           </div>
         </Container>
       </Section>
-      <Section tone="stone">
+      <Section>
         <Container>
           <SectionTitle
             eyebrow={page.certificationsEyebrow}
@@ -115,7 +133,7 @@ export default function EntreprisePage() {
           </div>
         </Container>
       </Section>
-      <Section>
+      <Section tone="mist">
         <Container>
           <SectionTitle
             eyebrow={page.zonesEyebrow}

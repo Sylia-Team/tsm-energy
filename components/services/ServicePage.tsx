@@ -5,6 +5,7 @@ import { CertificationCard } from "@/components/marketing/CertificationCard";
 import { CTASection } from "@/components/marketing/CTASection";
 import { FaqList } from "@/components/marketing/FaqList";
 import { Hero } from "@/components/marketing/Hero";
+import { MediaSplit } from "@/components/marketing/MediaSplit";
 import { Section } from "@/components/marketing/Section";
 import { SectionTitle } from "@/components/marketing/SectionTitle";
 import { RealisationCard } from "@/components/realisations/RealisationCard";
@@ -59,23 +60,21 @@ export function ServicePage({
         />
       </Container>
 
-      <Section>
-        <Container>
-          <SectionTitle eyebrow="Le besoin" title={service.needTitle} />
-          <div className="mt-6 space-y-4">
-            {service.need.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="max-w-[65ch] leading-relaxed text-ink-muted"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      <MediaSplit image={realisations[0]?.image ?? service.hero.image}>
+        <SectionTitle eyebrow="Le besoin" title={service.needTitle} />
+        <div className="mt-6 space-y-4">
+          {service.need.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="max-w-[65ch] leading-relaxed text-ink-muted"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </MediaSplit>
 
-      <Section tone="stone">
+      <Section tone="mist">
         <Container>
           <SectionTitle
             eyebrow="Prestations"
@@ -97,7 +96,7 @@ export function ServicePage({
       </Section>
 
       {realisations.length > 0 ? (
-        <Section tone="stone">
+        <Section tone="mist">
           <Container>
             <SectionTitle
               eyebrow="Chantiers"
@@ -134,7 +133,7 @@ export function ServicePage({
         </Container>
       </Section>
 
-      <Section tone="stone">
+      <Section tone="mist">
         <Container>
           <SectionTitle eyebrow="Questions" title="FAQ" />
           <div className="mt-10">

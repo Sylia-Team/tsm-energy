@@ -25,7 +25,7 @@ export default async function AdminEntreprisePage({
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-forest">
+          <h1 className="text-2xl font-semibold text-navy">
             Page « L’entreprise »
           </h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -37,7 +37,7 @@ export default async function AdminEntreprisePage({
         <Link
           href={routes.entreprise}
           target="_blank"
-          className="text-sm font-medium text-forest underline underline-offset-4"
+          className="text-sm font-medium text-navy underline underline-offset-4"
         >
           Voir la page
         </Link>
@@ -83,6 +83,47 @@ export default async function AdminEntreprisePage({
             defaultValue={page.story.join("\n\n")}
             hint="Séparez chaque paragraphe par une ligne vide."
           />
+          <ImageUploadField
+            name="storyImage"
+            label="Photo de la section"
+            image={page.storyImage}
+          />
+        </SectionCard>
+
+        <SectionCard title="Le mot du gérant">
+          <TextField
+            name="manager.eyebrow"
+            label="Sur-titre"
+            defaultValue={page.manager.eyebrow}
+          />
+          <TextField
+            name="manager.name"
+            label="Nom"
+            defaultValue={page.manager.name}
+          />
+          <TextField
+            name="manager.role"
+            label="Fonction"
+            defaultValue={page.manager.role}
+          />
+          <TextAreaField
+            name="manager.quote"
+            label="Citation"
+            defaultValue={page.manager.quote}
+            hint="Affichée aussi sur la page d’accueil."
+          />
+          <TextAreaField
+            name="manager.paragraphs"
+            label="Présentation"
+            rows={6}
+            defaultValue={page.manager.paragraphs.join("\n\n")}
+            hint="Séparez chaque paragraphe par une ligne vide."
+          />
+          <ImageUploadField
+            name="manager.image"
+            label="Portrait"
+            image={page.manager.image}
+          />
         </SectionCard>
 
         <SectionCard title="Méthode / déroulé de chantier">
@@ -99,7 +140,7 @@ export default async function AdminEntreprisePage({
           {page.method.map((item, index) => (
             <div
               key={`${index}-${item.title}`}
-              className="grid gap-4 rounded-md border border-stone-200 p-4"
+              className="grid gap-4 rounded-md border border-line p-4"
             >
               <p className="text-xs font-medium uppercase text-ink-muted">
                 Étape {index + 1}

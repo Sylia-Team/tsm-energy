@@ -10,7 +10,7 @@ type RealisationCardProps = {
 
 export function RealisationCard({ realisation }: RealisationCardProps) {
   return (
-    <article className="flex h-full flex-col overflow-hidden border border-line bg-paper-elevated transition-colors duration-150 hover:border-forest">
+    <article className="flex h-full flex-col overflow-hidden border border-line bg-paper-elevated transition-colors duration-150 hover:border-navy">
       <Link
         href={routes.realisation(realisation.slug)}
         className="relative block aspect-[4/3]"
@@ -22,14 +22,14 @@ export function RealisationCard({ realisation }: RealisationCardProps) {
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           />
         ) : (
-          <div className="absolute inset-0 bg-forest/10" />
+          <div className="absolute inset-0 bg-navy/10" />
         )}
       </Link>
       <div className="flex flex-1 flex-col p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
           {realisation.city}
         </p>
-        <h3 className="mt-2 text-xl font-semibold tracking-[-0.01em] text-forest">
+        <h3 className="mt-2 text-xl font-semibold tracking-[-0.01em] text-navy">
           <Link href={routes.realisation(realisation.slug)}>
             {realisation.name}
           </Link>
@@ -39,7 +39,7 @@ export function RealisationCard({ realisation }: RealisationCardProps) {
         </p>
         <Link
           href={routes.realisation(realisation.slug)}
-          className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-forest"
+          className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-navy"
         >
           Voir la réalisation
           <IconArrow className="h-4 w-4" />

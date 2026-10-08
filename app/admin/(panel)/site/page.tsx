@@ -21,7 +21,7 @@ export default async function AdminSitePage({
   return (
     <div>
       <div>
-        <h1 className="text-2xl font-semibold text-forest">
+        <h1 className="text-2xl font-semibold text-navy">
           Configuration du site
         </h1>
         <p className="mt-1 text-sm text-ink-muted">

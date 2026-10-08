@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getSiteContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
@@ -8,6 +9,11 @@ type LogoProps = {
   inverted?: boolean;
 };
 
+/**
+ * Logo PNG transparent + mention « Énergies Services » en texte (TSM seul
+ * n'est pas distinctif). Les bleus du logo manquent de contraste sur fond
+ * sombre : en mode `inverted`, le logo est rendu en blanc monochrome.
+ */
 export function Logo({ className, inverted = false }: LogoProps) {
   const site = getSiteContent();
 
@@ -15,21 +21,28 @@ export function Logo({ className, inverted = false }: LogoProps) {
     <Link
       href={routes.home}
       className={cn(
-        "group flex flex-col leading-none",
-        inverted ? "text-paper" : "text-forest",
+        "inline-flex items-center gap-3",
         className,
       )}
     >
-      <span className="font-extrabold tracking-[-0.04em] text-[1.35rem] sm:text-[1.5rem]">
-        {site.shortName}
-      </span>
+      <Image
+        src="/logo-tsm-v2.png"
+        alt=""
+        width={345}
+        height={218}
+        priority={!inverted}
+        sizes="76px"
+        className={cn("h-12 w-auto", inverted && "brightness-0 invert")}
+      />
       <span
+        aria-hidden="true"
         className={cn(
-          "mt-0.5 text-[0.65rem] font-medium uppercase tracking-[0.18em]",
-          inverted ? "text-paper/75" : "text-ink-muted",
+          "flex flex-col border-l pl-3 text-[0.7rem] font-semibold uppercase leading-tight tracking-[0.18em]",
+          inverted ? "border-paper/30 text-paper" : "border-line text-navy",
         )}
       >
-        Énergies Services
+        <span>Énergies</span>
+        <span>Services</span>
       </span>
       <span className="sr-only">{site.name} — Accueil</span>
     </Link>
