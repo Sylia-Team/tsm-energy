@@ -105,7 +105,7 @@ export function QuoteWizard() {
   return (
     <div className="relative border border-line bg-paper-elevated p-6 lg:p-10">
       <QuoteProgress current={step} />
-      <h2 className="mt-8 text-2xl font-semibold tracking-[-0.01em] text-forest lg:text-3xl">
+      <h2 className="mt-8 text-2xl font-semibold tracking-[-0.01em] text-navy lg:text-3xl">
         Étape {step} — {currentTitle}
       </h2>
 

@@ -14,7 +14,7 @@ export function Navigation({ className }: NavigationProps) {
           <li key={item.href}>
             <Link
               href={item.href}
-              className="text-[0.8125rem] font-medium uppercase tracking-[0.12em] text-forest transition-colors duration-150 hover:text-accent"
+              className="text-[0.8125rem] font-medium uppercase tracking-[0.12em] text-navy transition-colors duration-150 hover:text-accent"
             >
               {item.label}
             </Link>

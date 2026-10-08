@@ -27,12 +27,12 @@ export function Breadcrumb({ items, currentPath, className }: BreadcrumbProps) {
           return (
             <li key={`${item.label}-${index}`} className="flex items-center gap-2">
               {item.href && !isLast ? (
-                <Link href={item.href} className="hover:text-forest">
+                <Link href={item.href} className="hover:text-navy">
                   {item.label}
                 </Link>
               ) : (
                 <span
-                  className={isLast ? "text-forest" : undefined}
+                  className={isLast ? "text-navy" : undefined}
                   aria-current={isLast ? "page" : undefined}
                 >
                   {item.label}

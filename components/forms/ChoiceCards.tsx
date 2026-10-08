@@ -26,7 +26,7 @@ export function ChoiceCards({
 
   return (
     <fieldset>
-      <legend className="text-sm font-medium tracking-wide text-forest">
+      <legend className="text-sm font-medium tracking-wide text-navy">
         {legend}
       </legend>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -41,8 +41,8 @@ export function ChoiceCards({
               className={cn(
                 "flex min-h-11 cursor-pointer items-center gap-2 border px-4 py-3 text-sm tracking-wide transition-colors duration-150",
                 selected
-                  ? "border-forest bg-forest/5 font-semibold text-forest ring-1 ring-forest"
-                  : "border-line bg-paper-elevated font-medium text-ink hover:border-forest hover:bg-forest/5",
+                  ? "border-navy bg-navy/5 font-semibold text-navy ring-1 ring-navy"
+                  : "border-line bg-paper-elevated font-medium text-ink hover:border-navy hover:bg-navy/5",
               )}
             >
               <input
@@ -59,11 +59,11 @@ export function ChoiceCards({
                 aria-hidden="true"
                 className={cn(
                   "flex h-4 w-4 shrink-0 items-center justify-center rounded-full border",
-                  selected ? "border-forest" : "border-line",
+                  selected ? "border-navy" : "border-line",
                 )}
               >
                 {selected ? (
-                  <span className="h-2 w-2 rounded-full bg-forest" />
+                  <span className="h-2 w-2 rounded-full bg-navy" />
                 ) : null}
               </span>
               {option.label}

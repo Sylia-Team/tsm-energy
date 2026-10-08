@@ -23,11 +23,10 @@ app/                         # App Router — routes et layouts
   realisations/              # /realisations et /realisations/[slug]
   zones-intervention/        # /zones-intervention et /zones-intervention/[slug]
   entreprise/
-  avis-clients/
-  actualites/                # /actualites et /actualites/[slug]
+  avis-clients/              # avis Google (repli : témoignages) + en-tête éditable
   demande-de-devis/          # /demande-de-devis et /demande-de-devis/confirmation
   contact/
-  mentions-legales/
+  mentions-legales/          # pages légales : components/legal/LegalPage, noindex/follow, hors sitemap
   politique-confidentialite/
   cookies/
   sitemap.ts                 # pages indexables
@@ -51,7 +50,8 @@ Rendu :
 components/
   ui/            # Primitives (bouton, conteneur) — pas de données métier
   layout/        # Header, Footer, Navigation, MobileNavigation, ErrorFallback
-  marketing/     # Hero, SectionTitle, CTASection, cartes
+  marketing/     # Hero, PageHeader, SectionTitle, MediaSplit, ManagerQuote, CTASection, cartes
+  legal/         # LegalPage (rendu texte simple, sans HTML)
   services/      # ServiceCard, ServicePage, MethodSteps, OfferingList
   realisations/  # RealisationCard, RealisationPage, PhotoGallery
   zones/         # ZonePage
@@ -81,7 +81,8 @@ content/           # Source de vérité actuelle (fichiers TS)
   entreprise.ts
   contact.ts
   quote.ts
-  articles.ts      # à venir
+  avis-page.ts     # en-tête de /avis-clients
+  legal.ts         # mentions légales, confidentialité, cookies
   faq.ts           # à venir
 
 lib/
@@ -162,7 +163,9 @@ Espace d'édition du contenu éditorial sans toucher au code.
 - **Images** : l’admin n’accepte plus d’URL. Un fichier JPEG, PNG ou WebP (8 Mo max.) est écrit dans `public/uploads/` (`lib/admin/media-store.ts`), avec remplacement ou suppression. Seuls les fichiers créés par l’admin sont effacés du disque. Supprimer une photo rétablit l’image par défaut du contenu lorsqu’elle existe. Même contrainte disque que les overrides JSON.
 - **Authentification** : mot de passe unique (`ADMIN_PASSWORD`) → cookie de session signé HMAC (`ADMIN_SESSION_SECRET`), vérifié par `proxy.ts` (ex-`middleware`, Next 16) sur `/admin/*` (sauf `/admin/login`). Voir `lib/admin/auth.ts`.
 - **Contrainte hébergement** : nécessite un système de fichiers **accessible en écriture** (`next start` / VPS). Pour un hébergement serverless en lecture seule (Vercel), remplacer l'implémentation de `content-store.ts` par une base de données (Postgres) ou un CMS headless — le reste (types, UI, `get*()`) est inchangé.
-- **Portée actuelle** : accueil (`/admin/accueil`), entreprise (`/admin/entreprise`), contact (`/admin/contact`), avis Google (`/admin/avis`) , services (`/admin/services`), zones (`/admin/zones`), réalisations (`/admin/realisations`), configuration du site (`/admin/site`), listings (`/admin/listings`) et certifications (`/admin/certifications`). Le contenu du devis (`quote.ts`) reste non éditable pour l'instant.
+- **Portée actuelle** : accueil (`/admin/accueil`), entreprise (`/admin/entreprise`, dont « Le mot du gérant » repris sur l’accueil), contact (`/admin/contact`), avis clients (`/admin/avis` : configuration Google + en-tête de la page `/avis-clients`), pages légales (`/admin/pages-legales/[slug]`), services (`/admin/services`), zones (`/admin/zones`), réalisations (`/admin/realisations`), configuration du site (`/admin/site`), listings (`/admin/listings`) et certifications (`/admin/certifications`). Le contenu du devis (`quote.ts`) reste non éditable pour l'instant.
+- **Pages légales** : liste fixe (`LEGAL_SLUGS`, `types/legal.ts`), overrides par slug (clé `legalPages`). Le texte est saisi en format simple (`## ` = sous-titre, ligne vide = paragraphe) et rendu sans HTML (`lib/legal.ts`).
+- **Retour visuel** : après enregistrement, `SavedNotice` (client) affiche un message flottant puis retire `?saved=1` de l’URL ; `SaveBar` passe en « Enregistrement… » via `useFormStatus`. Les aperçus d’images externes passent par `/_next/image` (même origine, compatible CSP).
 - **Services / Zones** : listes **fixes** (unions `SERVICE_SLUGS` / `ZONE_SLUGS`, liées aux types) — pas d'ajout/suppression via l'admin. Overrides stockés **par slug** (`Record<Slug, …>`) et fusionnés par `getServicesContent()` / `getZonesContent()`.
 - **Réalisations** : slugs **libres** → l'admin permet **créer / modifier / supprimer**. L'override stocke la **collection entière** (`Realisation[]`), qui remplace les défauts dès la première modification (seed depuis `content/realisations.ts`). Les nouveaux slugs sont rendus en ISR (`dynamicParams`).
 - **Config site** : `getSiteContent()` (serveur) fusionne défauts + override. Les composants **serveur** (layout, Header, Footer, Logo, pages, metadata, JSON-LD) l'utilisent ; le composant **client** `MobileNavigation` reçoit `phone`/`phoneHref` en **props** depuis `Header` (pas d'accès `fs` côté client). `url` reste non éditable (utilitaires SEO bas niveau). `content/site.ts` et `getSite()` (client-safe) restent les valeurs par défaut.
@@ -186,5 +189,6 @@ Affichage des avis Google **sans widget tiers** (respect CSP `default-src 'self'
 - constantes de routes
 - JSON-LD, sitemap, pages indexables
 - en-têtes de sécurité
+- découpage du texte des pages légales
 
 Runner : **Vitest** (`npm test`).

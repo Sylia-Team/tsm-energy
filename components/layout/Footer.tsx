@@ -20,7 +20,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-forest text-paper">
+    <footer className="border-t-2 border-brand-green bg-navy text-paper">
       <Container className="py-16 lg:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="max-w-xs">
@@ -121,7 +121,7 @@ export function Footer() {
         </div>
       </Container>
 
-      <div className="bg-forest-deep">
+      <div className="bg-navy-deep">
         <Container className="flex flex-col gap-4 py-5 text-xs text-paper/55 md:flex-row md:items-center md:justify-between">
           <p>
             © {year} {site.legalName}. Tous droits réservés.

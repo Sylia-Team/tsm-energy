@@ -5,7 +5,18 @@ import type { MediaImage } from "@/types/media";
 
 const labelClass = "block text-sm font-medium text-ink";
 const inputClass =
-  "mt-1 w-full rounded-md border border-stone-300 px-3 py-2 text-sm outline-none focus:border-forest focus:ring-1 focus:ring-forest";
+  "mt-1 w-full rounded-md border border-line px-3 py-2 text-sm outline-none focus:border-accent focus:ring-1 focus:ring-accent";
+
+/**
+ * Les images externes (Unsplash) sont bloquées par la CSP (`img-src 'self'`) :
+ * on passe par l'optimiseur Next, servi depuis la même origine.
+ */
+function previewSrc(src: string): string {
+  if (src.startsWith("http")) {
+    return `/_next/image?url=${encodeURIComponent(src)}&w=640&q=75`;
+  }
+  return src;
+}
 
 type ImageUploadFieldProps = {
   name: string;
@@ -24,33 +35,24 @@ export function ImageUploadField({
   const [removed, setRemoved] = useState(false);
   const [localName, setLocalName] = useState("");
 
-  const canPreview =
-    Boolean(preview) &&
-    !removed &&
-    (preview.startsWith("/") || preview.startsWith("blob:"));
+  const canPreview = Boolean(preview) && !removed;
 
   return (
     <div className="grid gap-3">
       <p className={labelClass}>{label}</p>
 
       {canPreview ? (
-        // Aperçu local : les images déjà en ligne (Unsplash) sont bloquées par la CSP.
+        // `blob:` (fichier local) n'est pas optimisable : balise img simple.
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={preview}
+          src={previewSrc(preview)}
           alt=""
-          className="h-40 w-full rounded-md border border-stone-200 object-cover"
+          className="h-48 w-full rounded-md border border-line bg-mist object-cover"
         />
       ) : null}
 
-      {preview && !preview.startsWith("/") && !removed ? (
-        <p className="text-xs text-ink-muted">
-          Image actuelle externe. Envoyez un fichier pour la remplacer.
-        </p>
-      ) : null}
-
       {removed ? (
-        <p className="rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-800">
+        <p className="rounded-md bg-mist px-3 py-2 text-sm text-navy">
           La photo sera retirée à l’enregistrement. L’image d’origine du site
           est rétablie lorsqu’elle existe.
         </p>
@@ -67,7 +69,7 @@ export function ImageUploadField({
           name={`${name}.file`}
           type="file"
           accept="image/jpeg,image/png,image/webp"
-          className="mt-1 block w-full cursor-pointer rounded-md border border-dashed border-stone-300 bg-stone-50 p-3 text-sm text-ink-muted outline-none transition-colors hover:border-forest focus-visible:border-forest focus-visible:ring-1 focus-visible:ring-forest file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-forest file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-forest-deep"
+          className="mt-1 block w-full cursor-pointer rounded-md border border-dashed border-line bg-mist p-3 text-sm text-ink-muted outline-none transition-colors hover:border-navy focus-visible:border-accent focus-visible:ring-1 focus-visible:ring-accent file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-navy file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-navy-deep"
           onChange={(event) => {
             const file = event.target.files?.[0];
             setRemoved(false);
@@ -108,7 +110,7 @@ export function ImageUploadField({
             setLocalName("");
             setPreview(image.src);
           }}
-          className="justify-self-start rounded-md border border-red-200 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50"
+          className="justify-self-start rounded-md border border-danger/30 px-3 py-1.5 text-xs font-medium text-danger hover:bg-danger/10"
         >
           {removed ? "Annuler la suppression" : "Supprimer la photo"}
         </button>

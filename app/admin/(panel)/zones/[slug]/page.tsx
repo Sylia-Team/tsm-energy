@@ -37,7 +37,7 @@ export default async function AdminZoneEditPage({
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-forest">
+          <h1 className="text-2xl font-semibold text-navy">
             Commune · {zone.name}
           </h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -52,7 +52,7 @@ export default async function AdminZoneEditPage({
         <Link
           href={routes.zone(zone.slug)}
           target="_blank"
-          className="text-sm font-medium text-forest underline underline-offset-4"
+          className="text-sm font-medium text-navy underline underline-offset-4"
         >
           Voir la page
         </Link>

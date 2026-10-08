@@ -38,7 +38,7 @@ export function Logo({ className, inverted = false }: LogoProps) {
         aria-hidden="true"
         className={cn(
           "flex flex-col border-l pl-3 text-[0.7rem] font-semibold uppercase leading-tight tracking-[0.18em]",
-          inverted ? "border-paper/30 text-paper" : "border-line text-forest",
+          inverted ? "border-paper/30 text-paper" : "border-line text-navy",
         )}
       >
         <span>Énergies</span>

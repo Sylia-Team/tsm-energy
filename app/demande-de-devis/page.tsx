@@ -33,7 +33,7 @@ export default function QuotePage() {
       <p className="mt-10 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
         {quote.eyebrow}
       </p>
-      <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-[-0.03em] text-forest lg:text-[3.5rem] lg:leading-[1.05]">
+      <h1 className="mt-3 max-w-3xl font-display text-4xl text-navy lg:text-[4rem]">
         {quote.title}
       </h1>
       <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-ink-muted lg:text-lg">
@@ -44,7 +44,7 @@ export default function QuotePage() {
           href={site.phoneHref}
           event="phone_click"
           payload={{ location: "quote_intro" }}
-          className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-forest"
+          className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-navy"
         >
           <IconPhone className="h-4 w-4" />
           {quote.phoneLabel} {site.phone}

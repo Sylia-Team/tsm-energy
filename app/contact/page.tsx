@@ -33,7 +33,7 @@ export default function ContactPage() {
         <p className="mt-10 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
           {page.eyebrow}
         </p>
-        <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-[-0.03em] text-forest lg:text-[3.5rem] lg:leading-[1.05]">
+        <h1 className="mt-3 max-w-3xl font-display text-4xl text-navy lg:text-[4rem]">
           {page.title}
         </h1>
         <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-ink-muted lg:text-lg">

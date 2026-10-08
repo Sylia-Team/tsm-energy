@@ -16,19 +16,29 @@ Tokens définis dans `app/globals.css` (`@theme`).
 | `--color-ink-muted` | `#5A6772` | Texte secondaire |
 | `--color-paper` | `#F4F7F9` | Fond de page (gris-bleu clair) |
 | `--color-paper-elevated` | `#FFFFFF` | Surfaces / cartes |
-| `--color-stone` | `#E3EAEF` | Bandes alternées, fonds secondaires |
+| `--color-mist` | `#E3EAEF` | Bandes alternées, fonds secondaires |
 | `--color-line` | `#CFD8DF` | Bordures |
-| `--color-forest` | `#0B2A4A` | Header top bar, footer, blocs sombres (marine du logo) |
-| `--color-forest-deep` | `#071C33` | Footer inférieur |
+| `--color-navy` | `#0B2A4A` | Header top bar, footer, blocs sombres (marine du logo) |
+| `--color-navy-deep` | `#071C33` | Footer inférieur |
 | `--color-accent` | `#0A5A9E` | CTA (bleu du logo) |
 | `--color-accent-hover` | `#084A82` | Hover CTA |
 | `--color-accent-foreground` | `#FFFFFF` | Texte sur accent |
 | `--color-focus` | `#0A5A9E` | Outline `:focus-visible` |
 | `--color-danger` | `#8A2F2A` | Messages d’erreur de formulaire |
+| `--color-success` | `#0E6E6A` | Messages de confirmation (admin, formulaires) |
 | `--color-brand-green` | `#8CC63F` | Vert du logo : filets, puces, accents sur fond sombre uniquement (contraste 2,05 sur blanc : jamais pour du texte sur fond clair) |
 | `--color-brand-teal` | `#0E6E6A` | Vert foncé : liens, badges, icônes sur fond clair |
 
-Contraste texte `ink` sur `paper` et texte clair sur `forest` / `accent` : viser WCAG AA.
+### Usage du vert
+
+Le vert du logo (`brand-green`) est une **petite touche**, jamais une couleur de texte sur fond clair :
+
+- trait court devant les sur-titres (`SectionTitle`, `PageHeader`) ;
+- filet sous le H1 du hero ;
+- soulignement des numéros d’étape (`MethodSteps`), puces des prestations (`OfferingList`) ;
+- bordure haute du footer et de l’en-tête admin, contour du portrait du gérant.
+
+Contraste texte `ink` sur `paper` et texte clair sur `navy` / `accent` : viser WCAG AA.
 
 Ne pas introduire de couleur supplémentaire sans l’ajouter ici.
 
@@ -36,12 +46,14 @@ Ne pas introduire de couleur supplémentaire sans l’ajouter ici.
 
 ## Typographie
 
-Une seule famille pour limiter le CLS et le poids : **Archivo** via `next/font/google`.
+Une seule famille pour limiter le CLS et le poids : **Archivo** via `next/font/google`, chargée avec son axe de largeur (`axes: ["wdth"]`).
+
+Les titres H1 / H2 (et chiffres clés) utilisent l’utilitaire `font-display` (`app/globals.css`) : graisse 800, police élargie (`font-stretch: 112%`), tracking `-0.035em`, interligne `1.05`. C’est la signature typographique du site : ne pas l’appliquer au texte courant.
 
 | Rôle | Poids | Tracking | Usage |
 | --- | --- | --- | --- |
-| Display / H1 | 700–800 | `-0.03em` | Titres de page |
-| H2 | 700 | `-0.02em` | Titres de section |
+| Display / H1 | 800, élargie 112 % (`font-display`) | `-0.035em` | Titres de page |
+| H2 | 800, élargie 112 % (`font-display`) | `-0.035em` | Titres de section |
 | H3 | 600 | `-0.01em` | Sous-sections |
 | Body | 400 | `0` | Paragraphes |
 | UI / nav | 500 | `0.02em` | Navigation, boutons, labels |
@@ -55,8 +67,8 @@ Mobile-first.
 
 | Niveau | Mobile | Desktop (`lg`) |
 | --- | --- | --- |
-| H1 | `2.25rem` (36px) | `3.5rem` (56px) |
-| H2 | `1.75rem` (28px) | `2.25rem` (36px) |
+| H1 | `2.25rem` (36px) | `4rem` (64px) |
+| H2 | `1.875rem` (30px) | `2.75rem` (44px) |
 | H3 | `1.25rem` (20px) | `1.5rem` (24px) |
 | Eyebrow | `0.75rem` / uppercase / tracking large | identique |
 
@@ -96,10 +108,16 @@ Pas de `rounded-full` sur les CTA principaux (sauf pastilles téléphone mobile)
 Hauteur mini 44px (touch target).
 
 - **Primary** : fond `accent`, texte `accent-foreground`, hover `accent-hover`.
-- **Secondary** : fond transparent, bordure `forest`, texte `forest`. Sur fond sombre : bordure claire.
+- **Secondary** : fond transparent, bordure `navy`, texte `navy`. Sur fond sombre : bordure claire.
 - **Ghost** : texte seul, soulignement au hover.
 
 Un CTA principal visible au-dessus de la ligne de flottaison sur chaque page métier.
+
+## Photo plein cadre (`MediaSplit`)
+
+`components/marketing/MediaSplit.tsx` : la photo occupe une moitié de l’écran jusqu’au bord de la fenêtre, le texte l’autre moitié, aligné sur la grille `max-w-7xl`. Alterner `side="left"` / `side="right"` d’une section à l’autre. Sur mobile, photo au-dessus du texte (4/3).
+
+Utilisé sur : accueil (à propos), entreprise (histoire, gérant), services (le besoin), zones (introduction).
 
 ## Cards
 
@@ -107,7 +125,7 @@ Fond `paper-elevated`, bordure `line`, pas d’ombre portée lourde.
 
 Structure type : média 4/3 → eyebrow → titre → extrait → lien.
 
-Hover : bordure qui passe à `forest`, pas de translation agressive.
+Hover : bordure qui passe à `navy`, pas de translation agressive.
 
 ## Formulaires
 

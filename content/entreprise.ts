@@ -21,6 +21,29 @@ export const entreprise: EntrepriseContent = {
     "Nous travaillons maison par maison : visite, devis détaillé, coordination des corps d’état et suivi jusqu’à la réception. L’objectif n’est pas d’empiler les interventions, mais de livrer un chantier cohérent.",
     "Maçonnerie, isolation, toiture, plomberie, électricité, peinture, climatisation : les métiers avancent avec un interlocuteur dédié, sans vous faire porter le planning.",
   ],
+  storyImage: {
+    src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=75",
+    alt: "Plans et outils sur un chantier — photo d’illustration",
+    width: 1600,
+    height: 1067,
+  },
+  manager: {
+    eyebrow: "Le mot du gérant",
+    name: "[INFORMATION À CONFIRMER]",
+    role: "Gérant de TSM Énergies Services",
+    quote:
+      "[INFORMATION À CONFIRMER] — Citation courte du gérant sur sa façon de travailler.",
+    paragraphs: [
+      "[INFORMATION À CONFIRMER] — Présentation du gérant : parcours, métier d’origine, création ou reprise de l’entreprise.",
+      "[INFORMATION À CONFIRMER] — Ce à quoi il veille sur chaque chantier, et pourquoi les clients le rencontrent dès la première visite.",
+    ],
+    image: {
+      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1200&q=75",
+      alt: "Portrait du gérant — photo d’illustration",
+      width: 1200,
+      height: 1500,
+    },
+  },
   methodTitle: "Comment se déroule un chantier",
   methodDescription:
     "Le devis se fait après une visite sur place. Ensuite, un interlocuteur suit le projet jusqu’à la réception.",

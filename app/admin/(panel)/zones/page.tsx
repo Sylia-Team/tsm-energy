@@ -8,7 +8,7 @@ export default function AdminZonesIndexPage() {
   return (
     <div>
       <div>
-        <h1 className="text-2xl font-semibold text-forest">
+        <h1 className="text-2xl font-semibold text-navy">
           Zones d’intervention
         </h1>
         <p className="mt-1 text-sm text-ink-muted">
@@ -28,7 +28,7 @@ export default function AdminZonesIndexPage() {
           <Link
             key={zone.slug}
             href={routes.adminZone(zone.slug)}
-            className="block rounded-lg border border-stone-200 bg-white p-5 hover:border-forest"
+            className="block rounded-lg border border-line bg-paper-elevated p-5 hover:border-navy"
           >
             <h2 className="font-semibold text-ink">{zone.name}</h2>
             <p className="mt-2 line-clamp-2 text-sm text-ink-muted">

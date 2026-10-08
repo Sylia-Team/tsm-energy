@@ -66,7 +66,7 @@ export default function ZonesPage() {
           </div>
         </Container>
       </Section>
-      <Section tone="stone">
+      <Section tone="mist">
         <Container>
           <SectionTitle
             eyebrow="Communes"

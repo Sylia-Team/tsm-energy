@@ -14,8 +14,22 @@ export async function saveEntrepriseAction(formData: FormData): Promise<void> {
   const current = getEntrepriseContent();
 
   let image = current.image;
+  let storyImage = current.storyImage;
+  let managerImage = current.manager.image;
   try {
     image = await resolveMediaImage(formData, "image", current.image, entreprise.image);
+    storyImage = await resolveMediaImage(
+      formData,
+      "storyImage",
+      current.storyImage,
+      entreprise.storyImage,
+    );
+    managerImage = await resolveMediaImage(
+      formData,
+      "manager.image",
+      current.manager.image,
+      entreprise.manager.image,
+    );
   } catch (error) {
     if (error instanceof MediaUploadError) {
       redirect(`${routes.adminEntreprise}?error=image`);
@@ -32,6 +46,15 @@ export async function saveEntrepriseAction(formData: FormData): Promise<void> {
     image,
     storyTitle: str(formData, "storyTitle"),
     story: paragraphs(formData, "story"),
+    storyImage,
+    manager: {
+      eyebrow: str(formData, "manager.eyebrow"),
+      name: str(formData, "manager.name"),
+      role: str(formData, "manager.role"),
+      quote: str(formData, "manager.quote"),
+      paragraphs: paragraphs(formData, "manager.paragraphs"),
+      image: managerImage,
+    },
     methodTitle: str(formData, "methodTitle"),
     methodDescription: str(formData, "methodDescription"),
     method: current.method.map((item, index) => ({
@@ -51,6 +74,7 @@ export async function saveEntrepriseAction(formData: FormData): Promise<void> {
   writeOverride<EntrepriseContent>("entreprise", next);
 
   revalidatePath(routes.entreprise);
+  revalidatePath(routes.home);
   revalidatePath(routes.adminEntreprise);
 
   redirect(`${routes.adminEntreprise}?saved=1`);

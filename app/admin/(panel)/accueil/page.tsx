@@ -4,6 +4,8 @@ import { routes } from "@/lib/routes";
 import { saveHomeAction } from "./actions";
 import { ImageUploadField } from "../_components/image-upload-field";
 import {
+  SaveBar,
+  SavedNotice,
   SectionCard,
   TextAreaField,
   TextField,
@@ -23,7 +25,7 @@ export default async function AdminHomePage({
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-forest">
+          <h1 className="text-2xl font-semibold text-navy">
             Page d’accueil
           </h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -35,25 +37,13 @@ export default async function AdminHomePage({
         <Link
           href={routes.home}
           target="_blank"
-          className="text-sm font-medium text-forest underline underline-offset-4"
+          className="text-sm font-medium text-navy underline underline-offset-4"
         >
           Voir la page
         </Link>
       </div>
 
-      {imageError ? (
-        <p className="mt-4 rounded-md bg-red-50 px-4 py-2 text-sm text-red-700" role="alert">
-          Image refusée. Utilisez un JPEG, un PNG ou un WebP de 8 Mo maximum.
-        </p>
-      ) : null}
-      {saved ? (
-        <p
-          className="mt-4 rounded-md bg-green-50 px-4 py-2 text-sm text-green-700"
-          role="status"
-        >
-          Modifications enregistrées et publiées.
-        </p>
-      ) : null}
+      <SavedNotice saved={saved} imageError={imageError} />
 
       <form action={saveHomeAction} className="mt-6 grid gap-6">
         <SectionCard title="Héros">
@@ -110,7 +100,7 @@ export default async function AdminHomePage({
           {home.value.items.map((item, index) => (
             <div
               key={item.id}
-              className="rounded-md border border-stone-200 p-4"
+              className="rounded-md border border-line p-4"
             >
               <p className="mb-3 text-xs font-medium uppercase text-ink-muted">
                 Atout {index + 1}
@@ -231,7 +221,7 @@ export default async function AdminHomePage({
           {home.stats.items.map((item, index) => (
             <div
               key={item.id}
-              className="grid gap-4 rounded-md border border-stone-200 p-4 sm:grid-cols-2"
+              className="grid gap-4 rounded-md border border-line p-4 sm:grid-cols-2"
             >
               <input
                 type="hidden"
@@ -341,14 +331,7 @@ export default async function AdminHomePage({
           </div>
         </SectionCard>
 
-        <div className="sticky bottom-4 flex justify-end">
-          <button
-            type="submit"
-            className="rounded-md bg-forest px-6 py-2.5 text-sm font-semibold text-white shadow-lg hover:opacity-90"
-          >
-            Enregistrer et publier
-          </button>
-        </div>
+        <SaveBar />
       </form>
     </div>
   );

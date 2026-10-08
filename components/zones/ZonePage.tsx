@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { CTASection } from "@/components/marketing/CTASection";
 import { Hero } from "@/components/marketing/Hero";
 import { LocationCard } from "@/components/marketing/LocationCard";
+import { MediaSplit } from "@/components/marketing/MediaSplit";
 import { Section } from "@/components/marketing/Section";
 import { SectionTitle } from "@/components/marketing/SectionTitle";
 import { TestimonialCard } from "@/components/marketing/TestimonialCard";
@@ -61,27 +62,25 @@ export function ZonePage({
         />
       </Container>
 
-      <Section>
-        <Container>
-          <SectionTitle eyebrow="Commune" title={zone.introTitle} />
-          <div className="mt-6 space-y-4">
-            {zone.intro.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="max-w-[65ch] leading-relaxed text-ink-muted"
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <p className="mt-6 max-w-[65ch] leading-relaxed text-ink-muted">
-            {zone.surrounding}
-          </p>
-        </Container>
-      </Section>
+      <MediaSplit image={realisations[0]?.image ?? zone.hero.image} side="right">
+        <SectionTitle eyebrow="Commune" title={zone.introTitle} />
+        <div className="mt-6 space-y-4">
+          {zone.intro.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="max-w-[65ch] leading-relaxed text-ink-muted"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+        <p className="mt-6 max-w-[65ch] leading-relaxed text-ink-muted">
+          {zone.surrounding}
+        </p>
+      </MediaSplit>
 
       {realisations.length > 0 ? (
-        <Section tone="stone">
+        <Section tone="mist">
           <Container>
             <SectionTitle
               eyebrow="Chantiers"
@@ -118,7 +117,7 @@ export function ZonePage({
       ) : null}
 
       {testimonials.length > 0 ? (
-        <Section tone="stone">
+        <Section tone="mist">
           <Container>
             <SectionTitle
               eyebrow="Avis"

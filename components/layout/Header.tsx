@@ -13,7 +13,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper">
-      <div className="bg-forest text-paper">
+      <div className="bg-navy text-paper">
         <Container className="flex min-h-10 items-center justify-between gap-4 text-xs tracking-wide">
           <p className="hidden sm:block text-paper/80">
             Entreprise générale du bâtiment · {site.address.city} · {site.address.region}
@@ -39,7 +39,7 @@ export function Header() {
             href={site.phoneHref}
             event="phone_click"
             payload={{ location: "header_icon" }}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center text-forest lg:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center text-navy lg:hidden"
             aria-label={`Appeler le ${site.phone}`}
           >
             <IconPhone className="h-5 w-5" />

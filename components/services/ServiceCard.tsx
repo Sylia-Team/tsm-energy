@@ -9,8 +9,8 @@ type ServiceCardProps = {
 
 export function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <article className="flex h-full flex-col border border-line bg-paper-elevated p-6 transition-colors duration-150 hover:border-forest">
-      <h3 className="text-xl font-semibold tracking-[-0.01em] text-forest">
+    <article className="flex h-full flex-col border border-line bg-paper-elevated p-6 transition-colors duration-150 hover:border-navy">
+      <h3 className="text-xl font-semibold tracking-[-0.01em] text-navy">
         <Link href={routes.service(service.slug)} className="hover:text-accent">
           {service.title}
         </Link>
@@ -20,7 +20,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
       </p>
       <Link
         href={routes.service(service.slug)}
-        className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-forest"
+        className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-navy"
       >
         Voir le service
         <IconArrow className="h-4 w-4" />

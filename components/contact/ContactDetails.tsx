@@ -24,7 +24,7 @@ export function ContactDetails({ site, content }: ContactDetailsProps) {
     <ul className="grid gap-4 md:grid-cols-2 lg:gap-6">
       <li className="border border-line bg-paper-elevated p-6">
         <IconPhone className="h-5 w-5 text-accent" />
-        <h2 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-forest">
+        <h2 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-navy">
           {content.phoneLabel}
         </h2>
         <p className="mt-2">
@@ -32,7 +32,7 @@ export function ContactDetails({ site, content }: ContactDetailsProps) {
             href={site.phoneHref}
             event="phone_click"
             payload={{ location: "contact_details" }}
-            className="text-base font-medium text-forest hover:underline"
+            className="text-base font-medium text-navy hover:underline"
           >
             {site.phone}
           </TrackedLink>
@@ -42,7 +42,7 @@ export function ContactDetails({ site, content }: ContactDetailsProps) {
       {site.email ? (
         <li className="border border-line bg-paper-elevated p-6">
           <IconMail className="h-5 w-5 text-accent" />
-          <h2 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-forest">
+          <h2 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-navy">
             {content.emailLabel}
           </h2>
           <p className="mt-2">
@@ -50,7 +50,7 @@ export function ContactDetails({ site, content }: ContactDetailsProps) {
               href={`mailto:${site.email}`}
               event="email_click"
               payload={{ location: "contact_details" }}
-              className="text-base font-medium text-forest hover:underline"
+              className="text-base font-medium text-navy hover:underline"
             >
               {site.email}
             </TrackedLink>
@@ -60,7 +60,7 @@ export function ContactDetails({ site, content }: ContactDetailsProps) {
 
       <li className="border border-line bg-paper-elevated p-6">
         <IconPin className="h-5 w-5 text-accent" />
-        <h2 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-forest">
+        <h2 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-navy">
           {content.addressLabel}
         </h2>
         <address className="mt-2 not-italic text-base leading-relaxed text-ink-muted">
@@ -74,7 +74,7 @@ export function ContactDetails({ site, content }: ContactDetailsProps) {
           href={itineraryHref}
           rel="noreferrer"
           target="_blank"
-          className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-forest hover:underline"
+          className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-navy hover:underline"
         >
           {content.mapsLabel}
         </a>
@@ -83,7 +83,7 @@ export function ContactDetails({ site, content }: ContactDetailsProps) {
       {site.openingHours ? (
         <li className="border border-line bg-paper-elevated p-6">
           <IconClipboard className="h-5 w-5 text-accent" />
-          <h2 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-forest">
+          <h2 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-navy">
             {content.hoursLabel}
           </h2>
           <p className="mt-2 text-base leading-relaxed text-ink-muted">
@@ -93,7 +93,7 @@ export function ContactDetails({ site, content }: ContactDetailsProps) {
       ) : null}
 
       <li className="border border-line bg-paper-elevated p-6 md:col-span-2">
-        <h2 className="text-xl font-semibold tracking-[-0.01em] text-forest">
+        <h2 className="text-xl font-semibold tracking-[-0.01em] text-navy">
           {content.quoteLabel}
         </h2>
         <p className="mt-2 max-w-[65ch] text-base leading-relaxed text-ink-muted">

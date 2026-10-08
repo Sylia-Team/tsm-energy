@@ -12,8 +12,8 @@ export default async function AdminLoginPage({
 
   return (
     <div className="mx-auto flex min-h-screen max-w-md items-center px-6">
-      <div className="w-full rounded-lg border border-stone-200 bg-white p-8 shadow-sm">
-        <h1 className="text-xl font-semibold text-forest">
+      <div className="w-full rounded-lg border border-line bg-paper-elevated p-8 shadow-sm">
+        <h1 className="text-xl font-semibold text-navy">
           Administration TSM
         </h1>
         <p className="mt-2 text-sm text-ink-muted">
@@ -35,19 +35,19 @@ export default async function AdminLoginPage({
               type="password"
               autoComplete="current-password"
               required
-              className="mt-1 w-full rounded-md border border-stone-300 px-3 py-2 text-sm outline-none focus:border-forest focus:ring-1 focus:ring-forest"
+              className="mt-1 w-full rounded-md border border-line px-3 py-2 text-sm outline-none focus:border-accent focus:ring-1 focus:ring-accent"
             />
           </div>
 
           {hasError ? (
-            <p className="text-sm text-red-600" role="alert">
+            <p className="text-sm text-danger" role="alert">
               Mot de passe incorrect.
             </p>
           ) : null}
 
           <button
             type="submit"
-            className="w-full rounded-md bg-forest px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+            className="w-full rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:bg-accent-hover"
           >
             Se connecter
           </button>

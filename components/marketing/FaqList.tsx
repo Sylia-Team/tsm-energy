@@ -14,7 +14,7 @@ export function FaqList({ items }: FaqListProps) {
       {jsonLd ? <JsonLd data={jsonLd} /> : null}
       {items.map((item) => (
         <article key={item.question} className="py-6">
-          <h3 className="text-lg font-semibold tracking-[-0.01em] text-forest">
+          <h3 className="text-lg font-semibold tracking-[-0.01em] text-navy">
             {item.question}
           </h3>
           <p className="mt-2 max-w-[65ch] text-sm leading-relaxed text-ink-muted">

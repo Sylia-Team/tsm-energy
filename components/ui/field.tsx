@@ -27,7 +27,7 @@ export function Field({ id, label, error, hint, children }: FieldProps) {
 
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="block text-sm font-medium tracking-wide text-forest">
+      <label htmlFor={id} className="block text-sm font-medium tracking-wide text-navy">
         {label}
       </label>
       {control}

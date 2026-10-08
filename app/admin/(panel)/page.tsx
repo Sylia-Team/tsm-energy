@@ -45,9 +45,9 @@ const sections = [
   },
   {
     href: routes.adminReviews,
-    title: "Avis Google",
+    title: "Avis clients",
     description:
-      "Activer les avis Google (API Places), Place ID, note minimale et nombre affiché.",
+      "Page « Avis clients » et avis Google (API Places) : Place ID, note minimale, nombre affiché.",
     available: true,
   },
   {
@@ -70,12 +70,18 @@ const sections = [
     description: "Qualifications et assurances affichées sur le site.",
     available: true,
   },
+  {
+    href: routes.adminLegalPages,
+    title: "Pages légales",
+    description: "Mentions légales, politique de confidentialité et cookies.",
+    available: true,
+  },
 ];
 
 export default function AdminDashboardPage() {
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-forest">Contenu du site</h1>
+      <h1 className="text-2xl font-semibold text-navy">Contenu du site</h1>
       <p className="mt-2 text-ink-muted">
         Choisissez la section à modifier. Les changements sont publiés
         immédiatement après enregistrement.
@@ -87,8 +93,8 @@ export default function AdminDashboardPage() {
             <div
               className={`h-full rounded-lg border p-6 ${
                 section.available
-                  ? "border-stone-200 bg-white hover:border-forest"
-                  : "border-dashed border-stone-300 bg-stone-50 opacity-70"
+                  ? "border-line bg-paper-elevated hover:border-navy"
+                  : "border-dashed border-line bg-mist opacity-70"
               }`}
             >
               <h2 className="font-semibold text-ink">{section.title}</h2>

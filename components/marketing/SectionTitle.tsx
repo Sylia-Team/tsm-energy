@@ -25,17 +25,19 @@ export function SectionTitle({
       {eyebrow ? (
         <p
           className={cn(
-            "text-xs font-semibold uppercase tracking-[0.18em]",
+            "flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em]",
+            align === "center" && "justify-center",
             inverted ? "text-paper/70" : "text-accent",
           )}
         >
+          <span aria-hidden="true" className="h-0.5 w-8 shrink-0 bg-brand-green" />
           {eyebrow}
         </p>
       ) : null}
       <h2
         className={cn(
-          "mt-3 text-3xl font-bold tracking-[-0.02em] lg:text-4xl",
-          inverted ? "text-paper" : "text-forest",
+          "mt-3 font-display text-3xl lg:text-[2.75rem]",
+          inverted ? "text-paper" : "text-navy",
         )}
       >
         {title}

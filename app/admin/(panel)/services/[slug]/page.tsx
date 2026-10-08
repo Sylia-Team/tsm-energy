@@ -37,7 +37,7 @@ export default async function AdminServiceEditPage({
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-forest">
+          <h1 className="text-2xl font-semibold text-navy">
             Service · {service.title}
           </h1>
           <p className="mt-1 text-sm text-ink-muted">
@@ -52,7 +52,7 @@ export default async function AdminServiceEditPage({
         <Link
           href={routes.service(service.slug)}
           target="_blank"
-          className="text-sm font-medium text-forest underline underline-offset-4"
+          className="text-sm font-medium text-navy underline underline-offset-4"
         >
           Voir la page
         </Link>
@@ -70,7 +70,7 @@ export default async function AdminServiceEditPage({
               name="featured"
               value="true"
               defaultChecked={service.featured}
-              className="h-4 w-4 rounded border-stone-300"
+              className="h-4 w-4 rounded border-line"
             />
             Mettre ce service en avant (accueil)
           </label>
@@ -147,7 +147,7 @@ export default async function AdminServiceEditPage({
           {service.offerings.map((item, index) => (
             <div
               key={`${index}-${item.title}`}
-              className="grid gap-4 rounded-md border border-stone-200 p-4"
+              className="grid gap-4 rounded-md border border-line p-4"
             >
               <p className="text-xs font-medium uppercase text-ink-muted">
                 Prestation {index + 1}
@@ -175,7 +175,7 @@ export default async function AdminServiceEditPage({
           {service.method.map((item, index) => (
             <div
               key={`${index}-${item.title}`}
-              className="grid gap-4 rounded-md border border-stone-200 p-4"
+              className="grid gap-4 rounded-md border border-line p-4"
             >
               <p className="text-xs font-medium uppercase text-ink-muted">
                 Étape {index + 1}
@@ -198,7 +198,7 @@ export default async function AdminServiceEditPage({
           {service.faqs.map((item, index) => (
             <div
               key={`${index}-${item.question}`}
-              className="grid gap-4 rounded-md border border-stone-200 p-4"
+              className="grid gap-4 rounded-md border border-line p-4"
             >
               <p className="text-xs font-medium uppercase text-ink-muted">
                 Question {index + 1}

@@ -99,7 +99,10 @@ describe("sitemap", () => {
     expect(paths).toContain(routes.entreprise);
     expect(paths).toContain(routes.contact);
     expect(paths).not.toContain(routes.quoteConfirmation);
+    expect(paths).toContain(routes.avis);
     expect(paths).not.toContain(routes.privacy);
+    expect(paths).not.toContain(routes.legal);
+    expect(paths).not.toContain(routes.cookies);
 
     const expectedCount =
       1 +
@@ -109,6 +112,7 @@ describe("sitemap", () => {
       getRealisations().length +
       1 +
       getZones().length +
+      1 +
       1 +
       1 +
       1;
@@ -127,6 +131,18 @@ describe("pageMetadata", () => {
     });
 
     expect(metadata.robots).toEqual({ index: false, follow: false });
+  });
+
+  it("désindexe les pages légales en gardant le suivi des liens", () => {
+    const metadata = pageMetadata({
+      title: "Mentions légales",
+      description: "Mentions.",
+      path: routes.legal,
+      index: false,
+      follow: true,
+    });
+
+    expect(metadata.robots).toEqual({ index: false, follow: true });
   });
 });
 

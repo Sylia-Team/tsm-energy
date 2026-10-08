@@ -39,17 +39,18 @@ export function Hero({
           priority
         />
       ) : (
-        <div className="absolute inset-0 bg-forest" />
+        <div className="absolute inset-0 bg-navy" />
       )}
-      <div className="absolute inset-0 bg-forest/45" />
+      <div className="absolute inset-0 bg-navy/45" />
       <Container className="relative flex min-h-[32rem] flex-col justify-end py-16 lg:min-h-[38rem] lg:py-24">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-paper/75">
           {eyebrow}
         </p>
-        <h1 className="mt-4 max-w-4xl text-4xl font-extrabold tracking-[-0.03em] text-paper sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+        <h1 className="mt-4 max-w-4xl font-display text-4xl text-paper sm:text-5xl lg:text-[4rem]">
           {title}
         </h1>
-        <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-paper/85 lg:text-lg">
+        <span aria-hidden="true" className="mt-6 block h-1 w-16 bg-brand-green" />
+        <p className="mt-6 max-w-[65ch] text-base leading-relaxed text-paper/85 lg:text-lg">
           {description}
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">

@@ -7,9 +7,9 @@ export const buttonVariants = {
   primary:
     "bg-accent text-accent-foreground hover:bg-accent-hover",
   secondary:
-    "border border-forest bg-transparent text-forest hover:bg-forest hover:text-paper",
+    "border border-navy bg-transparent text-navy hover:bg-navy hover:text-paper",
   secondaryOnDark:
-    "border border-paper/40 bg-transparent text-paper hover:border-paper hover:bg-paper hover:text-forest",
+    "border border-paper/40 bg-transparent text-paper hover:border-paper hover:bg-paper hover:text-navy",
   ghost:
     "text-ink underline-offset-4 hover:underline",
 } as const;

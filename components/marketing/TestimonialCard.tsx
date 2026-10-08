@@ -11,7 +11,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
         « {testimonial.quote} »
       </blockquote>
       <figcaption className="mt-6 border-t border-line pt-4">
-        <p className="font-semibold text-forest">{testimonial.author}</p>
+        <p className="font-semibold text-navy">{testimonial.author}</p>
         <p className="mt-1 text-sm text-ink-muted">
           {testimonial.city} · {testimonial.project}
         </p>

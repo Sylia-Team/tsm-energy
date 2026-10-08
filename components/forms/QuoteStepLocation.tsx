@@ -92,8 +92,8 @@ export function QuoteStepLocation({
                   className={cn(
                     "min-h-11 border px-3 py-2 text-sm tracking-wide transition-colors duration-150",
                     selected
-                      ? "border-forest bg-forest/5 font-semibold text-forest ring-1 ring-forest"
-                      : "border-line bg-paper-elevated text-ink hover:border-forest hover:bg-forest/5",
+                      ? "border-navy bg-navy/5 font-semibold text-navy ring-1 ring-navy"
+                      : "border-line bg-paper-elevated text-ink hover:border-navy hover:bg-navy/5",
                   )}
                 >
                   {commune}

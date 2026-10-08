@@ -63,7 +63,7 @@ export function RealisationPage({
             {realisation.trades.map((trade) => (
               <li
                 key={trade}
-                className="border border-line bg-paper-elevated px-3 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-forest"
+                className="border border-line bg-paper-elevated px-3 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-navy"
               >
                 {trade}
               </li>
@@ -71,7 +71,7 @@ export function RealisationPage({
           </ul>
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:gap-12">
             <div>
-              <h2 className="text-3xl font-bold tracking-[-0.02em] text-forest lg:text-4xl">
+              <h2 className="font-display text-3xl text-navy lg:text-[2.75rem]">
                 Le contexte
               </h2>
               <p className="mt-4 max-w-[65ch] leading-relaxed text-ink-muted">
@@ -79,7 +79,7 @@ export function RealisationPage({
               </p>
             </div>
             <div>
-              <h2 className="text-3xl font-bold tracking-[-0.02em] text-forest lg:text-4xl">
+              <h2 className="font-display text-3xl text-navy lg:text-[2.75rem]">
                 La problématique
               </h2>
               <p className="mt-4 max-w-[65ch] leading-relaxed text-ink-muted">
@@ -90,7 +90,7 @@ export function RealisationPage({
         </Container>
       </Section>
 
-      <Section tone="stone">
+      <Section tone="mist">
         <Container>
           <SectionTitle
             eyebrow="Travaux"
@@ -105,7 +105,7 @@ export function RealisationPage({
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
                   {String(index + 1).padStart(2, "0")}
                 </p>
-                <p className="mt-3 text-base font-medium leading-relaxed text-forest">
+                <p className="mt-3 text-base font-medium leading-relaxed text-navy">
                   {work}
                 </p>
               </li>
@@ -124,7 +124,7 @@ export function RealisationPage({
       </Section>
 
       {realisation.gallery.length > 0 ? (
-        <Section tone="stone">
+        <Section tone="mist">
           <Container>
             <SectionTitle
               eyebrow="Photos"
@@ -156,7 +156,7 @@ export function RealisationPage({
       ) : null}
 
       {zone ? (
-        <Section tone="stone">
+        <Section tone="mist">
           <Container>
             <SectionTitle
               eyebrow="Secteur"

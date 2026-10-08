@@ -24,7 +24,7 @@ export function QuoteProgress({ current }: QuoteProgressProps) {
             <span
               className={cn(
                 "mt-2 hidden text-xs font-medium tracking-wide sm:block",
-                active ? "text-forest" : "text-ink-muted",
+                active ? "text-navy" : "text-ink-muted",
               )}
               aria-current={active ? "step" : undefined}
             >

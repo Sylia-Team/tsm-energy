@@ -41,7 +41,7 @@ export function MobileNavigation({ phone, phoneHref }: MobileNavigationProps) {
     <div className="lg:hidden">
       <button
         type="button"
-        className="inline-flex min-h-11 min-w-11 items-center justify-center text-forest"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center text-navy"
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((value) => !value)}
@@ -67,7 +67,7 @@ export function MobileNavigation({ phone, phoneHref }: MobileNavigationProps) {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block py-3 text-lg font-semibold text-forest"
+                    className="block py-3 text-lg font-semibold text-navy"
                     onClick={() => setOpen(false)}
                   >
                     {item.label}

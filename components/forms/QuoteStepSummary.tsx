@@ -35,14 +35,14 @@ export function QuoteStepSummary({
             <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
               Type de projet
             </dt>
-            <dd className="mt-2 text-forest">{project}</dd>
+            <dd className="mt-2 text-navy">{project}</dd>
           </div>
         ) : null}
         <div>
           <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
             Localisation
           </dt>
-          <dd className="mt-2 text-forest">
+          <dd className="mt-2 text-navy">
             {draft.postalCode} {draft.city}
           </dd>
         </div>
@@ -50,7 +50,7 @@ export function QuoteStepSummary({
           <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
             Délai
           </dt>
-          <dd className="mt-2 text-forest">
+          <dd className="mt-2 text-navy">
             {isTimeline(draft.timeline)
               ? quoteContent.timelines[draft.timeline]
               : "—"}
@@ -60,7 +60,7 @@ export function QuoteStepSummary({
           <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
             Budget
           </dt>
-          <dd className="mt-2 text-forest">
+          <dd className="mt-2 text-navy">
             {isBudget(draft.budget) ? quoteContent.budgets[draft.budget] : "—"}
           </dd>
         </div>
@@ -76,7 +76,7 @@ export function QuoteStepSummary({
           <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
             Contact
           </dt>
-          <dd className="mt-2 text-forest">
+          <dd className="mt-2 text-navy">
             {draft.firstName} {draft.lastName}
             <br />
             {draft.email}
