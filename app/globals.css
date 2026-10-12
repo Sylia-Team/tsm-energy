@@ -2,34 +2,35 @@
 
 @theme {
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
 
-  --color-ink: #1f2a33;
-  --color-ink-muted: #5a6772;
-  --color-paper: #f4f7f9;
-  --color-paper-elevated: #ffffff;
-  --color-mist: #e3eaef;
-  --color-line: #cfd8df;
+  --color-ink: #2b2723;
+  --color-ink-muted: #6e655c;
+  --color-paper: #f6f2eb;
+  --color-paper-elevated: #fbf9f5;
+  --color-mist: #ece5d9;
+  --color-line: #dcd2c3;
   --color-navy: #0b2a4a;
   --color-navy-deep: #071c33;
-  --color-accent: #0a5a9e;
-  --color-accent-hover: #084a82;
-  --color-accent-foreground: #ffffff;
-  --color-focus: #0a5a9e;
+  --color-accent: #0b2a4a;
+  --color-accent-hover: #071c33;
+  --color-accent-foreground: #f6f2eb;
+  --color-focus: #0b2a4a;
   --color-danger: #8a2f2a;
-  --color-success: #0e6e6a;
-  --color-brand-green: #8cc63f;
-  --color-brand-teal: #0e6e6a;
+  --color-success: #2f5d3a;
+  --color-brass: #86663b;
+  --color-brass-light: #c9ab7f;
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
 }
 
 @utility font-display {
-  font-weight: 800;
-  font-stretch: 112%;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
 }
 
 @layer base {
@@ -78,7 +79,6 @@
     left: 1rem;
     top: -3rem;
     z-index: 100;
-    border-radius: var(--radius-md);
     background-color: var(--color-accent);
     color: var(--color-accent-foreground);
     padding: 0.5rem 1rem;
@@ -88,5 +88,11 @@
 
   .skip-link:focus {
     top: 1rem;
+  }
+
+  /* Logo monochrome : le PNG transparent sert de masque, la couleur vient du texte. */
+  .logo-mask {
+    background-color: currentColor;
+    mask: url("/logo-tsm-v2.png") center / contain no-repeat;
   }
 }

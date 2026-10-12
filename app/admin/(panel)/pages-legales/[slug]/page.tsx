@@ -32,7 +32,7 @@ export default async function AdminLegalPageEditPage({
     <div>
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-navy">{page.title}</h1>
+          <h1 className="font-display text-4xl text-navy">{page.title}</h1>
           <p className="mt-1 text-sm text-ink-muted">
             <Link
               href={routes.adminLegalPages}

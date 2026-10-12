@@ -10,7 +10,7 @@ export default function AdminPanelLayout({
 }) {
   return (
     <>
-      <div className="border-b-2 border-brand-green bg-navy text-paper">
+      <div className="border-b-2 border-brass bg-navy text-paper">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
           <Link href={routes.admin} className="inline-flex items-center gap-3">
             <Image

@@ -81,7 +81,7 @@ const sections = [
 export default function AdminDashboardPage() {
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-navy">Contenu du site</h1>
+      <h1 className="font-display text-4xl text-navy">Contenu du site</h1>
       <p className="mt-2 text-ink-muted">
         Choisissez la section à modifier. Les changements sont publiés
         immédiatement après enregistrement.

@@ -1,4 +1,5 @@
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { cn } from "@/lib/utils";
 
 type PageHeaderProps = {
@@ -22,22 +23,17 @@ export function PageHeader({
   return (
     <div className={className}>
       <Breadcrumb currentPath={currentPath} items={breadcrumb} />
-      {eyebrow ? (
-        <p className="mt-10 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-          <span aria-hidden="true" className="h-0.5 w-8 shrink-0 bg-brand-green" />
-          {eyebrow}
-        </p>
-      ) : null}
+      {eyebrow ? <Eyebrow className="mt-14">{eyebrow}</Eyebrow> : null}
       <h1
         className={cn(
-          "max-w-3xl font-display text-4xl text-navy lg:text-[4rem]",
-          eyebrow ? "mt-3" : "mt-10",
+          "max-w-4xl font-display text-5xl text-navy lg:text-[4.5rem]",
+          eyebrow ? "mt-6" : "mt-14",
         )}
       >
         {title}
       </h1>
       {description ? (
-        <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-ink-muted lg:text-lg">
+        <p className="mt-8 max-w-[60ch] text-base leading-relaxed text-ink-muted lg:text-lg">
           {description}
         </p>
       ) : null}

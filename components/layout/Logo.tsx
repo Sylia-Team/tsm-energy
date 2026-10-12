@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getSiteContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
@@ -10,9 +9,9 @@ type LogoProps = {
 };
 
 /**
- * Logo PNG transparent + mention « Énergies Services » en texte (TSM seul
- * n'est pas distinctif). Les bleus du logo manquent de contraste sur fond
- * sombre : en mode `inverted`, le logo est rendu en blanc monochrome.
+ * Logo monochrome (couleur du texte courant) obtenu par masque CSS sur le PNG
+ * transparent, + mention « Énergies Services » en texte (TSM seul n'est pas
+ * distinctif). Les couleurs vives du logo ne sont pas utilisées dans le site.
  */
 export function Logo({ className, inverted = false }: LogoProps) {
   const site = getSiteContent();
@@ -22,23 +21,16 @@ export function Logo({ className, inverted = false }: LogoProps) {
       href={routes.home}
       className={cn(
         "inline-flex items-center gap-3",
+        inverted ? "text-paper" : "text-navy",
         className,
       )}
     >
-      <Image
-        src="/logo-tsm-v2.png"
-        alt=""
-        width={345}
-        height={218}
-        priority={!inverted}
-        sizes="76px"
-        className={cn("h-12 w-auto", inverted && "brightness-0 invert")}
-      />
+      <span aria-hidden="true" className="logo-mask block aspect-[345/218] h-11" />
       <span
         aria-hidden="true"
         className={cn(
           "flex flex-col border-l pl-3 text-[0.7rem] font-semibold uppercase leading-tight tracking-[0.18em]",
-          inverted ? "border-paper/30 text-paper" : "border-line text-navy",
+          inverted ? "border-paper/30" : "border-line",
         )}
       >
         <span>Énergies</span>

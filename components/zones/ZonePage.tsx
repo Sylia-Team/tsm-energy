@@ -51,7 +51,7 @@ export function ZonePage({
         ctaLocation={`zone_hero_${zone.slug}`}
       />
 
-      <Container className="pt-8">
+      <Container className="py-8">
         <Breadcrumb
           currentPath={routes.zone(zone.slug)}
           items={[

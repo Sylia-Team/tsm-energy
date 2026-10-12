@@ -68,7 +68,7 @@ export function SectionCard({
 }) {
   return (
     <section className="rounded-lg border border-line bg-paper-elevated p-6">
-      <h2 className="text-lg font-semibold text-navy">{title}</h2>
+      <h2 className="font-display text-2xl text-navy">{title}</h2>
       <div className="mt-4 grid gap-4">{children}</div>
     </section>
   );

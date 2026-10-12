@@ -13,7 +13,7 @@ export default async function AdminLoginPage({
   return (
     <div className="mx-auto flex min-h-screen max-w-md items-center px-6">
       <div className="w-full rounded-lg border border-line bg-paper-elevated p-8 shadow-sm">
-        <h1 className="text-xl font-semibold text-navy">
+        <h1 className="font-display text-3xl text-navy">
           Administration TSM
         </h1>
         <p className="mt-2 text-sm text-ink-muted">

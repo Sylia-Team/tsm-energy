@@ -75,7 +75,7 @@ export default async function AdminListingsPage({
   return (
     <div>
       <div>
-        <h1 className="text-2xl font-semibold text-navy">
+        <h1 className="font-display text-4xl text-navy">
           Pages d’index (listings)
         </h1>
         <p className="mt-1 text-sm text-ink-muted">

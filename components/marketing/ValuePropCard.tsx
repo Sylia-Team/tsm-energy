@@ -21,12 +21,12 @@ export function ValuePropCard({ item }: ValuePropCardProps) {
   const Icon = icons[item.icon];
 
   return (
-    <article className="border border-line bg-paper-elevated p-6">
-      <Icon className="h-6 w-6 text-accent" />
-      <h3 className="mt-4 text-xl font-semibold tracking-[-0.01em] text-navy">
+    <article className="border-t border-line pt-8">
+      <Icon className="h-6 w-6 text-brass" />
+      <h3 className="mt-5 font-display text-2xl text-navy lg:text-[1.75rem]">
         {item.title}
       </h3>
-      <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+      <p className="mt-4 text-sm leading-relaxed text-ink-muted">
         {item.description}
       </p>
     </article>

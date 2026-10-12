@@ -18,7 +18,7 @@ export function Breadcrumb({ items, currentPath, className }: BreadcrumbProps) {
   const jsonLd = breadcrumbListJsonLd(items, currentPath);
 
   return (
-    <nav aria-label="Fil d’Ariane" className={cn("text-sm", className)}>
+    <nav aria-label="Fil d’Ariane" className={cn("text-[0.7rem] uppercase tracking-[0.2em]", className)}>
       {jsonLd ? <JsonLd data={jsonLd} /> : null}
       <ol className="flex flex-wrap items-center gap-2 text-ink-muted">
         {items.map((item, index) => {

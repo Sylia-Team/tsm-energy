@@ -1,7 +1,6 @@
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { buttonClassName } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { IconPhone } from "@/components/ui/icons";
 import { routes } from "@/lib/routes";
 
 type CTASectionProps = {
@@ -24,20 +23,20 @@ export function CTASection({
   location,
 }: CTASectionProps) {
   return (
-    <section className="bg-navy py-16 text-paper lg:py-24">
-      <Container className="max-w-3xl">
-        <h2 className="font-display text-3xl lg:text-[2.75rem]">
+    <section className="bg-navy-deep py-28 text-paper lg:py-40">
+      <Container className="max-w-4xl text-center">
+        <h2 className="font-display text-4xl text-paper sm:text-5xl lg:text-[4rem]">
           {title}
         </h2>
-        <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-paper/75 lg:text-lg">
+        <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-paper/70">
           {description}
         </p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center gap-6">
           <TrackedLink
             href={routes.quote}
             event="cta_click"
             payload={{ location }}
-            className={buttonClassName("primary")}
+            className={buttonClassName("secondaryOnDark")}
           >
             {primaryLabel}
           </TrackedLink>
@@ -45,10 +44,9 @@ export function CTASection({
             href={phoneHref}
             event="phone_click"
             payload={{ location }}
-            className={buttonClassName("secondaryOnDark")}
+            className="text-sm text-paper/60 underline-offset-8 transition-colors hover:text-paper hover:underline"
           >
-            <IconPhone className="h-4 w-4" />
-            {secondaryLabel} {phone}
+            {secondaryLabel} · {phone}
           </TrackedLink>
         </div>
       </Container>

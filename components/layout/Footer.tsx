@@ -12,6 +12,9 @@ import { legalNav } from "@/lib/navigation";
 import { routes } from "@/lib/routes";
 import { formatAddressLines } from "@/lib/utils";
 
+const columnTitle = "text-[0.7rem] font-medium uppercase tracking-[0.3em] text-brass-light";
+const columnLink = "text-sm text-paper/70 transition-colors duration-300 hover:text-paper";
+
 export function Footer() {
   const site = getSiteContent();
   const services = getServicesContent();
@@ -20,12 +23,12 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t-2 border-brand-green bg-navy text-paper">
-      <Container className="py-16 lg:py-20">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-navy text-paper">
+      <Container className="py-20 lg:py-28">
+        <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:gap-12">
           <div className="max-w-xs">
             <Logo inverted />
-            <p className="mt-5 text-sm leading-relaxed text-paper/75">
+            <p className="mt-8 text-sm leading-relaxed text-paper/60">
               {site.tagline}. Rénovation, maçonnerie, isolation, toiture et
               extension de maison.
             </p>
@@ -33,23 +36,18 @@ export function Footer() {
               href={routes.quote}
               event="cta_click"
               payload={{ location: "footer" }}
-              className={buttonClassName("primary", "mt-6")}
+              className={buttonClassName("secondaryOnDark", "mt-10")}
             >
               Demander un devis
             </TrackedLink>
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-paper/55">
-              Services
-            </h2>
-            <ul className="mt-4 space-y-2.5">
+            <h2 className={columnTitle}>Services</h2>
+            <ul className="mt-6 space-y-3">
               {services.map((service) => (
                 <li key={service.slug}>
-                  <Link
-                    href={routes.service(service.slug)}
-                    className="text-sm text-paper/85 transition-colors duration-150 hover:text-paper"
-                  >
+                  <Link href={routes.service(service.slug)} className={columnLink}>
                     {service.shortTitle}
                   </Link>
                 </li>
@@ -58,16 +56,11 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-paper/55">
-              Zones d’intervention
-            </h2>
-            <ul className="mt-4 space-y-2.5">
+            <h2 className={columnTitle}>Zones d’intervention</h2>
+            <ul className="mt-6 space-y-3">
               {zones.map((zone) => (
                 <li key={zone.slug}>
-                  <Link
-                    href={routes.zone(zone.slug)}
-                    className="text-sm text-paper/85 transition-colors duration-150 hover:text-paper"
-                  >
+                  <Link href={routes.zone(zone.slug)} className={columnLink}>
                     {zone.name}
                   </Link>
                 </li>
@@ -75,29 +68,27 @@ export function Footer() {
             </ul>
             <Link
               href={routes.zones}
-              className="mt-4 inline-block text-sm font-medium text-paper underline-offset-4 hover:underline"
+              className="mt-6 inline-block text-sm text-paper underline-offset-8 hover:underline"
             >
               Voir les zones d’intervention
             </Link>
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-paper/55">
-              Contact
-            </h2>
-            <address className="mt-4 not-italic text-sm leading-relaxed text-paper/85">
+            <h2 className={columnTitle}>Contact</h2>
+            <address className="mt-6 not-italic text-sm leading-relaxed text-paper/70">
               {addressLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </address>
-            <p className="mt-4">
+            <p className="mt-6">
               <TrackedLink
                 href={site.phoneHref}
                 event="phone_click"
                 payload={{ location: "footer" }}
-                className="text-sm font-medium text-paper hover:underline"
+                className="font-display text-2xl lining-nums text-paper hover:text-brass-light"
               >
                 {site.phone}
               </TrackedLink>
@@ -108,28 +99,28 @@ export function Footer() {
                   href={`mailto:${site.email}`}
                   event="email_click"
                   payload={{ location: "footer" }}
-                  className="text-sm text-paper/85 hover:underline"
+                  className={columnLink}
                 >
                   {site.email}
                 </TrackedLink>
               </p>
             ) : null}
             {site.openingHours ? (
-              <p className="mt-4 text-sm text-paper/75">{site.openingHours}</p>
+              <p className="mt-6 text-sm text-paper/50">{site.openingHours}</p>
             ) : null}
           </div>
         </div>
       </Container>
 
-      <div className="bg-navy-deep">
-        <Container className="flex flex-col gap-4 py-5 text-xs text-paper/55 md:flex-row md:items-center md:justify-between">
+      <div className="border-t border-paper/10">
+        <Container className="flex flex-col gap-4 py-6 text-[0.7rem] uppercase tracking-[0.2em] text-paper/45 md:flex-row md:items-center md:justify-between">
           <p>
-            © {year} {site.legalName}. Tous droits réservés.
+            © {year} {site.legalName}
           </p>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          <ul className="flex flex-wrap gap-x-8 gap-y-2">
             {legalNav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="hover:text-paper">
+                <Link href={item.href} className="transition-colors hover:text-paper">
                   {item.label}
                 </Link>
               </li>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
+import { Archivo, Cormorant_Garamond } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -10,13 +10,20 @@ import "./globals.css";
 
 const archivo = Archivo({
   subsets: ["latin", "latin-ext"],
-  axes: ["wdth"],
   display: "swap",
   variable: "--font-archivo",
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin", "latin-ext"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-cormorant",
+});
+
 export const viewport: Viewport = {
-  themeColor: "#0A5A9E",
+  themeColor: "#0B2A4A",
   width: "device-width",
   initialScale: 1,
 };
@@ -56,7 +63,7 @@ export default function RootLayout({
   const site = getSiteContent();
 
   return (
-    <html lang="fr" className={archivo.variable} data-scroll-behavior="smooth">
+    <html lang="fr" className={`${archivo.variable} ${cormorant.variable}`} data-scroll-behavior="smooth">
       <body className="min-h-dvh bg-paper font-sans text-ink antialiased">
         <SkipLink />
         <JsonLd data={localBusinessJsonLd(site)} />

@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CertificationCard } from "@/components/marketing/CertificationCard";
-import { ContactCTA } from "@/components/marketing/ContactCTA";
+import { EditorialRealisations } from "@/components/home/EditorialRealisations";
+import { HomeIntro } from "@/components/home/HomeIntro";
+import { ServiceIndex } from "@/components/home/ServiceIndex";
+import { TrustBand } from "@/components/home/TrustBand";
 import { CTASection } from "@/components/marketing/CTASection";
 import { Hero } from "@/components/marketing/Hero";
-import { LocationCard } from "@/components/marketing/LocationCard";
 import { ManagerQuote } from "@/components/marketing/ManagerQuote";
 import { MediaSplit } from "@/components/marketing/MediaSplit";
-import { Section } from "@/components/marketing/Section";
-import { SectionTitle } from "@/components/marketing/SectionTitle";
-import { StatList } from "@/components/marketing/StatList";
-import { GoogleReviews } from "@/components/marketing/GoogleReviews";
-import { ValuePropCard } from "@/components/marketing/ValuePropCard";
-import { RealisationCard } from "@/components/realisations/RealisationCard";
-import { ServiceCard } from "@/components/services/ServiceCard";
-import { Container } from "@/components/ui/container";
+import { textLinkClassName } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { IconArrow } from "@/components/ui/icons";
 import {
   getCertificationsContent,
@@ -52,6 +47,7 @@ export default function HomePage() {
   return (
     <>
       <Hero
+        size="full"
         eyebrow={home.hero.eyebrow}
         title={home.hero.title}
         description={home.hero.description}
@@ -63,186 +59,66 @@ export default function HomePage() {
         ctaLocation="home_hero"
       />
 
-      <Section>
-        <Container>
-          <SectionTitle
-            eyebrow={home.value.eyebrow}
-            title={home.value.title}
-            description={home.value.description}
-          />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-            {home.value.items.map((item) => (
-              <ValuePropCard key={item.id} item={item} />
-            ))}
-          </div>
-        </Container>
-      </Section>
+      <HomeIntro
+        eyebrow={home.value.eyebrow}
+        title={home.value.title}
+        description={home.value.description}
+        items={home.value.items}
+      />
 
-      <Section tone="mist" id="services">
-        <Container>
-          <SectionTitle
-            eyebrow={home.services.eyebrow}
-            title={home.services.title}
-            description={home.services.description}
-          />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {services.map((service) => (
-              <ServiceCard key={service.slug} service={service} />
-            ))}
-          </div>
-          <p className="mt-8">
-            <Link
-              href={routes.services}
-              className="inline-flex items-center gap-2 text-sm font-medium text-navy"
-            >
-              {home.services.allLabel}
-              <IconArrow className="h-4 w-4" />
-            </Link>
-          </p>
-        </Container>
-      </Section>
+      <EditorialRealisations
+        eyebrow={home.realisations.eyebrow}
+        title={home.realisations.title}
+        allLabel={home.realisations.allLabel}
+        realisations={realisations}
+      />
 
-      <MediaSplit id="entreprise" image={home.about.image} side="right">
-        <SectionTitle eyebrow={home.about.eyebrow} title={home.about.title} />
-        <div className="mt-6 space-y-4">
+      <MediaSplit id="entreprise" image={home.about.image} side="left">
+        <Eyebrow>{home.about.eyebrow}</Eyebrow>
+        <h2 className="mt-6 font-display text-4xl text-navy lg:text-[3.25rem]">
+          {home.about.title}
+        </h2>
+        <div className="mt-8 space-y-5">
           {home.about.paragraphs.map((paragraph) => (
             <p
               key={paragraph}
-              className="max-w-[65ch] leading-relaxed text-ink-muted"
+              className="max-w-[60ch] leading-relaxed text-ink-muted"
             >
               {paragraph}
             </p>
           ))}
         </div>
-        <div className="mt-8">
-          <Link
-            href={routes.entreprise}
-            className="inline-flex items-center gap-2 text-sm font-medium text-navy"
-          >
-            {home.about.linkLabel}
-            <IconArrow className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="mt-8">
-          <ContactCTA
-            quoteLabel={home.hero.primaryCta}
-            phoneLabel={home.hero.secondaryCta}
-            phone={site.phone}
-            phoneHref={site.phoneHref}
-            location="home_about"
-          />
-        </div>
+        <Link
+          href={routes.entreprise}
+          className={`${textLinkClassName} mt-10`}
+        >
+          {home.about.linkLabel}
+          <IconArrow className="h-4 w-4" />
+        </Link>
       </MediaSplit>
 
-      <Section>
-        <Container>
-          <ManagerQuote
-            manager={entreprise.manager}
-            href={routes.entreprise}
-            linkLabel="Découvrir l’entreprise"
-          />
-        </Container>
-      </Section>
+      <ServiceIndex
+        eyebrow={home.services.eyebrow}
+        title={home.services.title}
+        description={home.services.description}
+        allLabel={home.services.allLabel}
+        services={services}
+      />
 
-      <Section tone="mist" id="realisations">
-        <Container>
-          <SectionTitle
-            eyebrow={home.realisations.eyebrow}
-            title={home.realisations.title}
-            description={home.realisations.description}
-          />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {realisations.map((realisation) => (
-              <RealisationCard
-                key={realisation.slug}
-                realisation={realisation}
-              />
-            ))}
-          </div>
-          <p className="mt-8">
-            <Link
-              href={routes.realisations}
-              className="inline-flex items-center gap-2 text-sm font-medium text-navy"
-            >
-              {home.realisations.allLabel}
-              <IconArrow className="h-4 w-4" />
-            </Link>
-          </p>
-        </Container>
-      </Section>
+      <div className="bg-mist">
+        <ManagerQuote
+          manager={entreprise.manager}
+          href={routes.entreprise}
+          linkLabel={home.about.linkLabel}
+        />
+      </div>
 
-      <Section tone="navy">
-        <Container>
-          <SectionTitle
-            eyebrow={home.stats.eyebrow}
-            title={home.stats.title}
-            inverted
-          />
-          <StatList items={home.stats.items} />
-        </Container>
-      </Section>
-
-      <Section id="garanties">
-        <Container>
-          <SectionTitle
-            eyebrow={home.certifications.eyebrow}
-            title={home.certifications.title}
-            description={home.certifications.description}
-          />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-            {certifications.map((certification) => (
-              <CertificationCard
-                key={certification.id}
-                certification={certification}
-              />
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section tone="mist" id="avis">
-        <Container>
-          <SectionTitle
-            eyebrow={home.testimonials.eyebrow}
-            title={home.testimonials.title}
-            description={home.testimonials.description}
-          />
-          <GoogleReviews />
-          <p className="mt-8">
-            <Link
-              href={routes.avis}
-              className="inline-flex items-center gap-2 text-sm font-medium text-navy"
-            >
-              {home.testimonials.allLabel}
-              <IconArrow className="h-4 w-4" />
-            </Link>
-          </p>
-        </Container>
-      </Section>
-
-      <Section id="zones">
-        <Container>
-          <SectionTitle
-            eyebrow={home.zones.eyebrow}
-            title={home.zones.title}
-            description={home.zones.description}
-          />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {zones.map((zone) => (
-              <LocationCard key={zone.slug} zone={zone} />
-            ))}
-          </div>
-          <p className="mt-8">
-            <Link
-              href={routes.zones}
-              className="inline-flex items-center gap-2 text-sm font-medium text-navy"
-            >
-              {home.zones.allLabel}
-              <IconArrow className="h-4 w-4" />
-            </Link>
-          </p>
-        </Container>
-      </Section>
+      <TrustBand
+        certificationsLabel={home.certifications.title}
+        certifications={certifications}
+        zonesLabel={home.zones.title}
+        zones={zones}
+      />
 
       <CTASection
         title={home.cta.title}

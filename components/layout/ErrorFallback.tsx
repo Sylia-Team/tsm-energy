@@ -2,6 +2,7 @@
 
 import { buttonClassName } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { routes } from "@/lib/routes";
 
 type ErrorFallbackProps = {
@@ -11,10 +12,8 @@ type ErrorFallbackProps = {
 export function ErrorFallback({ retry }: ErrorFallbackProps) {
   return (
     <Container className="py-24 text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-        Erreur
-      </p>
-      <h1 className="mt-4 font-display text-3xl lg:text-[2.75rem] text-navy">
+      <Eyebrow centered>Erreur</Eyebrow>
+      <h1 className="mt-6 font-display text-4xl text-navy lg:text-[3.5rem]">
         Une erreur s’est produite
       </h1>
       <p className="mx-auto mt-4 max-w-md text-ink-muted">

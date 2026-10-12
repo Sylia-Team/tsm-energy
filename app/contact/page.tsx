@@ -3,6 +3,7 @@ import { ContactDetails } from "@/components/contact/ContactDetails";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { CTASection } from "@/components/marketing/CTASection";
 import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { getContactContent, getSiteContent } from "@/lib/admin/content-read";
 import { routes } from "@/lib/routes";
 import { pageMetadata } from "@/lib/seo/metadata";
@@ -30,13 +31,11 @@ export default function ContactPage() {
             { label: "Contact" },
           ]}
         />
-        <p className="mt-10 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-          {page.eyebrow}
-        </p>
-        <h1 className="mt-3 max-w-3xl font-display text-4xl text-navy lg:text-[4rem]">
+        <Eyebrow className="mt-14">{page.eyebrow}</Eyebrow>
+        <h1 className="mt-6 max-w-4xl font-display text-5xl text-navy lg:text-[4.5rem]">
           {page.title}
         </h1>
-        <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-ink-muted lg:text-lg">
+        <p className="mt-8 max-w-[60ch] text-base leading-relaxed text-ink-muted lg:text-lg">
           {page.description}
         </p>
         <div className="mt-12">

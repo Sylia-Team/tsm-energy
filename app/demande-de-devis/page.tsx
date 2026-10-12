@@ -4,6 +4,7 @@ import { QuoteWizard } from "@/components/forms/QuoteWizard";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { IconPhone } from "@/components/ui/icons";
 import { getQuoteContent } from "@/lib/content";
 import { getSiteContent } from "@/lib/admin/content-read";
@@ -30,13 +31,11 @@ export default function QuotePage() {
           { label: "Demande de devis" },
         ]}
       />
-      <p className="mt-10 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-        {quote.eyebrow}
-      </p>
-      <h1 className="mt-3 max-w-3xl font-display text-4xl text-navy lg:text-[4rem]">
+      <Eyebrow className="mt-14">{quote.eyebrow}</Eyebrow>
+      <h1 className="mt-6 max-w-4xl font-display text-5xl text-navy lg:text-[4.5rem]">
         {quote.title}
       </h1>
-      <p className="mt-5 max-w-[65ch] text-base leading-relaxed text-ink-muted lg:text-lg">
+      <p className="mt-8 max-w-[60ch] text-base leading-relaxed text-ink-muted lg:text-lg">
         {quote.description}
       </p>
       <p className="mt-4">
