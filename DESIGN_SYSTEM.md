@@ -45,13 +45,13 @@ Ne pas introduire de couleur supplémentaire sans l’ajouter ici.
 
 Deux familles via `next/font/google` (`app/layout.tsx`) :
 
-- **Cormorant Garamond** (variable, normal + italique) : titres, citations, chiffres clés, via l’utilitaire `font-display` (graisse 400, tracking `-0.01em`, interligne `1.08`).
+- **Cormorant Garamond** (variable, normal + italique) : titres, citations, chiffres clés, via l’utilitaire `font-display` (graisse 600, tracking `-0.01em`, interligne `1.08`).
 - **Archivo** : texte courant, navigation, boutons, labels.
 
 | Rôle | Famille / poids | Usage |
 | --- | --- | --- |
-| H1 / H2 / H3 | Cormorant 400 (`font-display`) | Titres |
-| Citations | Cormorant 400 italique | Gérant, avis |
+| H1 / H2 / H3 | Cormorant 600 (`font-display`) | Titres |
+| Citations | Cormorant 600 italique | Gérant, avis |
 | Body | Archivo 400 | Paragraphes, `leading-relaxed` |
 | Sur-titres, nav, boutons | Archivo 500, petites capitales, tracking `0.2–0.32em` | `Eyebrow`, `Navigation`, `buttonClassName`, `textLinkClassName` |
 
