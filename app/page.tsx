@@ -105,13 +105,11 @@ export default function HomePage() {
         services={services}
       />
 
-      <div className="bg-mist">
-        <ManagerQuote
-          manager={entreprise.manager}
-          href={routes.entreprise}
-          linkLabel={home.about.linkLabel}
-        />
-      </div>
+      <ManagerQuote
+        manager={entreprise.manager}
+        href={routes.entreprise}
+        linkLabel={home.about.linkLabel}
+      />
 
       <TrustBand
         certificationsLabel={home.certifications.title}

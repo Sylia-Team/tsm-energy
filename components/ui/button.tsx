@@ -21,6 +21,10 @@ export function buttonClassName(
   return cn(base, buttonVariants[variant], className);
 }
 
+const textLinkBase =
+  "inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] transition-colors";
+
 /** Lien texte secondaire (« Découvrir… → »), en petites capitales. */
-export const textLinkClassName =
-  "inline-flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-navy transition-colors hover:text-brass";
+export const textLinkClassName = `${textLinkBase} text-navy hover:text-brass`;
+
+export const textLinkOnDarkClassName = `${textLinkBase} text-paper hover:text-brass-light`;

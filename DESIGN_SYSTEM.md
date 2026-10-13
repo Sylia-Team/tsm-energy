@@ -14,9 +14,9 @@ Tokens définis dans `app/globals.css` (`@theme`).
 | --- | --- | --- |
 | `--color-ink` | `#2B2723` | Texte principal (brun très sombre) |
 | `--color-ink-muted` | `#6E655C` | Texte secondaire, sur-titres |
-| `--color-paper` | `#F6F2EB` | Fond de page (ivoire) |
-| `--color-paper-elevated` | `#FBF9F5` | Surfaces / cartes |
-| `--color-mist` | `#ECE5D9` | Bandes alternées (sable) |
+| `--color-paper` | `#FAF8F4` | Fond de page (blanc cassé chaud) |
+| `--color-paper-elevated` | `#FFFFFF` | Surfaces / cartes |
+| `--color-mist` | `#ECE5D9` | Bandes alternées (sable), avec parcimonie |
 | `--color-line` | `#DCD2C3` | Bordures, filets |
 | `--color-navy` | `#0B2A4A` | Couleur forte : titres, boutons, footer |
 | `--color-navy-deep` | `#071C33` | Hero (fond sous photo), bloc CTA final |
@@ -115,7 +115,7 @@ Utilisé sur : accueil (à propos), entreprise (histoire, gérant), services (le
 
 ## Accueil
 
-Récit en peu de sections (`components/home/`) : hero plein écran → introduction centrée (`HomeIntro`) → réalisations éditoriales (une grande, deux petites) → entreprise (`MediaSplit`) → index des métiers sans cartes (`ServiceIndex`) → citation du gérant (`ManagerQuote`) → bandeau discret garanties / secteur (`TrustBand`) → CTA final. Pas de chiffres ni de grille de certifications sur l’accueil.
+Récit en peu de sections (`components/home/`) : hero plein écran → introduction centrée (`HomeIntro`) → réalisations éditoriales (une grande, deux petites) → entreprise (`MediaSplit`) → index des métiers sans cartes (`ServiceIndex`) → citation du gérant sur fond bleu nuit (`ManagerQuote`, pour casser la suite de fonds clairs) → bandeau discret garanties / secteur (`TrustBand`) → CTA final. Pas de chiffres ni de grille de certifications sur l’accueil.
 
 ## Cards
 
