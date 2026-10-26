@@ -49,7 +49,7 @@ export function ServicePage({
         ctaLocation={`service_hero_${service.slug}`}
       />
 
-      <Container className="pt-8">
+      <Container className="py-8">
         <Breadcrumb
           currentPath={routes.service(service.slug)}
           items={[
@@ -122,7 +122,7 @@ export function ServicePage({
             title="Qualifications et assurances"
             description="Les mêmes garanties que sur l’ensemble de nos chantiers, selon la nature des ouvrages."
           />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          <div className="mt-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
             {certifications.map((certification) => (
               <CertificationCard
                 key={certification.id}

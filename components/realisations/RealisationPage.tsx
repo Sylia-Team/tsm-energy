@@ -46,7 +46,7 @@ export function RealisationPage({
         ctaLocation={`realisation_hero_${realisation.slug}`}
       />
 
-      <Container className="pt-8">
+      <Container className="py-8">
         <Breadcrumb
           currentPath={routes.realisation(realisation.slug)}
           items={[
@@ -63,7 +63,7 @@ export function RealisationPage({
             {realisation.trades.map((trade) => (
               <li
                 key={trade}
-                className="border border-line bg-paper-elevated px-3 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-navy"
+                className="border border-line px-4 py-2 text-[0.7rem] uppercase tracking-[0.24em] text-ink"
               >
                 {trade}
               </li>
@@ -71,7 +71,7 @@ export function RealisationPage({
           </ul>
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:gap-12">
             <div>
-              <h2 className="font-display text-3xl text-navy lg:text-[2.75rem]">
+              <h2 className="font-display text-4xl text-navy lg:text-[3rem]">
                 Le contexte
               </h2>
               <p className="mt-4 max-w-[65ch] leading-relaxed text-ink-muted">
@@ -79,7 +79,7 @@ export function RealisationPage({
               </p>
             </div>
             <div>
-              <h2 className="font-display text-3xl text-navy lg:text-[2.75rem]">
+              <h2 className="font-display text-4xl text-navy lg:text-[3rem]">
                 La problématique
               </h2>
               <p className="mt-4 max-w-[65ch] leading-relaxed text-ink-muted">
@@ -96,16 +96,16 @@ export function RealisationPage({
             eyebrow="Travaux"
             title="Ce qui a été réalisé"
           />
-          <ol className="mt-12 grid gap-4 md:grid-cols-3 lg:gap-6">
+          <ol className="mt-16 grid gap-12 md:grid-cols-3 lg:gap-x-16">
             {realisation.works.map((work, index) => (
               <li
                 key={work}
-                className="border border-line bg-paper-elevated p-6"
+                className="border-t border-line pt-8"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                <p className="text-[0.7rem] uppercase tracking-[0.3em] text-brass">
                   {String(index + 1).padStart(2, "0")}
                 </p>
-                <p className="mt-3 text-base font-medium leading-relaxed text-navy">
+                <p className="mt-4 font-display text-2xl leading-snug text-navy">
                   {work}
                 </p>
               </li>

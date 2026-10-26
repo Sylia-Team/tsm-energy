@@ -32,14 +32,14 @@ export function QuoteStepSummary({
       <dl className="grid gap-4 border border-line bg-paper-elevated p-6 sm:grid-cols-2">
         {project ? (
           <div>
-            <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            <dt className="text-[0.7rem] uppercase tracking-[0.3em] text-ink-muted">
               Type de projet
             </dt>
             <dd className="mt-2 text-navy">{project}</dd>
           </div>
         ) : null}
         <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+          <dt className="text-[0.7rem] uppercase tracking-[0.3em] text-ink-muted">
             Localisation
           </dt>
           <dd className="mt-2 text-navy">
@@ -47,7 +47,7 @@ export function QuoteStepSummary({
           </dd>
         </div>
         <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+          <dt className="text-[0.7rem] uppercase tracking-[0.3em] text-ink-muted">
             Délai
           </dt>
           <dd className="mt-2 text-navy">
@@ -57,7 +57,7 @@ export function QuoteStepSummary({
           </dd>
         </div>
         <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+          <dt className="text-[0.7rem] uppercase tracking-[0.3em] text-ink-muted">
             Budget
           </dt>
           <dd className="mt-2 text-navy">
@@ -65,7 +65,7 @@ export function QuoteStepSummary({
           </dd>
         </div>
         <div className="sm:col-span-2">
-          <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+          <dt className="text-[0.7rem] uppercase tracking-[0.3em] text-ink-muted">
             Description
           </dt>
           <dd className="mt-2 max-w-[65ch] leading-relaxed text-ink-muted">
@@ -73,7 +73,7 @@ export function QuoteStepSummary({
           </dd>
         </div>
         <div>
-          <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+          <dt className="text-[0.7rem] uppercase tracking-[0.3em] text-ink-muted">
             Contact
           </dt>
           <dd className="mt-2 text-navy">

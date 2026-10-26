@@ -13,12 +13,13 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
   return (
     <ul className="grid gap-4 md:grid-cols-2 lg:gap-6">
       {images.map((image) => (
-        <li key={image.src} className="overflow-hidden rounded-lg">
+        <li key={image.src} className="group overflow-hidden">
           <figure className="relative aspect-[4/3]">
             <CoverImage
               src={image.src}
               alt={image.alt}
               sizes="(min-width: 768px) 50vw, 100vw"
+              className="transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
           </figure>
         </li>

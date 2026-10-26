@@ -8,8 +8,8 @@ const gridClass = "mt-12 grid gap-4 md:grid-cols-3 lg:gap-6";
 
 function RatingBadge({ rating, count }: { rating: number; count: number }) {
   return (
-    <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-line bg-paper-elevated px-4 py-2 text-sm text-ink">
-      <span className="text-accent" aria-hidden="true">
+    <p className="mt-6 inline-flex items-center gap-2 border border-line bg-paper-elevated px-4 py-2 text-sm text-ink">
+      <span className="text-brass" aria-hidden="true">
         ★
       </span>
       <span className="font-semibold">

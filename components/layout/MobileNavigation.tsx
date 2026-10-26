@@ -59,7 +59,7 @@ export function MobileNavigation({ phone, phoneHref }: MobileNavigationProps) {
       {open ? (
         <div
           id={panelId}
-          className="fixed inset-x-0 top-[6.75rem] bottom-0 z-40 overflow-y-auto bg-paper"
+          className="fixed inset-x-0 top-20 bottom-0 z-40 overflow-y-auto bg-paper"
         >
           <nav aria-label="Navigation mobile" className="px-4 py-8 sm:px-6">
             <ul className="flex flex-col gap-1 border-b border-line pb-6">
@@ -67,7 +67,7 @@ export function MobileNavigation({ phone, phoneHref }: MobileNavigationProps) {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block py-3 text-lg font-semibold text-navy"
+                    className="block py-3 font-display text-3xl text-navy"
                     onClick={() => setOpen(false)}
                   >
                     {item.label}

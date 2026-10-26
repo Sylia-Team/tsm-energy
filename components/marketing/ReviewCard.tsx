@@ -4,7 +4,7 @@ function Stars({ rating }: { rating: number }) {
   const rounded = Math.round(rating);
   return (
     <span
-      className="text-accent"
+      className="text-brass"
       aria-label={`Note de ${rating} sur 5`}
       role="img"
     >
@@ -18,13 +18,13 @@ function Stars({ rating }: { rating: number }) {
 
 export function ReviewCard({ review }: { review: GoogleReview }) {
   return (
-    <figure className="flex h-full flex-col border border-line bg-paper-elevated p-6">
+    <figure className="flex h-full flex-col border border-line bg-paper-elevated p-8">
       <Stars rating={review.rating} />
-      <blockquote className="mt-4 flex-1 text-base leading-relaxed text-ink">
+      <blockquote className="mt-5 flex-1 font-display text-xl italic leading-snug text-navy">
         « {review.text} »
       </blockquote>
       <figcaption className="mt-6 border-t border-line pt-4">
-        <p className="font-semibold text-navy">{review.author}</p>
+        <p className="text-[0.7rem] uppercase tracking-[0.3em] text-ink">{review.author}</p>
         {review.relativeTime ? (
           <p className="mt-1 text-sm text-ink-muted">
             {review.relativeTime} · Avis Google

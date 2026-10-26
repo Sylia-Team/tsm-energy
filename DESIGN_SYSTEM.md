@@ -1,10 +1,10 @@
 # DESIGN_SYSTEM.md
 
-Direction artistique : **entreprise générale du bâtiment**, sérieuse, premium, technique, locale, rassurante.
+Direction artistique : **entreprise générale du bâtiment haut de gamme**, posée, éditoriale, locale, rassurante. On vend le résultat (la maison), pas le chantier.
 
-Ce n’est pas un template SaaS. Pas de gros dégradés, pas d’esthétique startup, pas d’animations décoratives.
+Ce n’est pas un template SaaS. Pas d’esthétique startup, pas d’animations d’entrée.
 
-Références visuelles : photographie de chantier, mer, Var, outillage, typographie forte, beaucoup d’espace.
+Références visuelles : photographie d’architecture en lumière naturelle, Méditerranée, matériaux, titres serif fins, beaucoup d’espace, peu d’éléments par écran.
 
 ## Couleurs
 
@@ -12,54 +12,52 @@ Tokens définis dans `app/globals.css` (`@theme`).
 
 | Token | Valeur | Usage |
 | --- | --- | --- |
-| `--color-ink` | `#1F2A33` | Texte principal |
-| `--color-ink-muted` | `#5A6772` | Texte secondaire |
-| `--color-paper` | `#F4F7F9` | Fond de page (gris-bleu clair) |
+| `--color-ink` | `#2B2723` | Texte principal (brun très sombre) |
+| `--color-ink-muted` | `#6E655C` | Texte secondaire, sur-titres |
+| `--color-paper` | `#FAF8F4` | Fond de page (blanc cassé chaud) |
 | `--color-paper-elevated` | `#FFFFFF` | Surfaces / cartes |
-| `--color-mist` | `#E3EAEF` | Bandes alternées, fonds secondaires |
-| `--color-line` | `#CFD8DF` | Bordures |
-| `--color-navy` | `#0B2A4A` | Header top bar, footer, blocs sombres (marine du logo) |
-| `--color-navy-deep` | `#071C33` | Footer inférieur |
-| `--color-accent` | `#0A5A9E` | CTA (bleu du logo) |
-| `--color-accent-hover` | `#084A82` | Hover CTA |
-| `--color-accent-foreground` | `#FFFFFF` | Texte sur accent |
-| `--color-focus` | `#0A5A9E` | Outline `:focus-visible` |
-| `--color-danger` | `#8A2F2A` | Messages d’erreur de formulaire |
-| `--color-success` | `#0E6E6A` | Messages de confirmation (admin, formulaires) |
-| `--color-brand-green` | `#8CC63F` | Vert du logo : filets, puces, accents sur fond sombre uniquement (contraste 2,05 sur blanc : jamais pour du texte sur fond clair) |
-| `--color-brand-teal` | `#0E6E6A` | Vert foncé : liens, badges, icônes sur fond clair |
+| `--color-mist` | `#ECE5D9` | Bandes alternées (sable), avec parcimonie |
+| `--color-line` | `#DCD2C3` | Bordures, filets |
+| `--color-navy` | `#0B2A4A` | Couleur forte : titres, boutons, footer |
+| `--color-navy-deep` | `#071C33` | Hero (fond sous photo), bloc CTA final |
+| `--color-accent` | `#0B2A4A` | Alias de `navy` (CTA, focus admin) |
+| `--color-accent-hover` | `#071C33` | Hover CTA |
+| `--color-accent-foreground` | `#F6F2EB` | Texte sur accent |
+| `--color-focus` | `#0B2A4A` | Outline `:focus-visible` |
+| `--color-danger` | `#8A2F2A` | Erreurs |
+| `--color-success` | `#2F5D3A` | Confirmations (admin, formulaires) |
+| `--color-brass` | `#86663B` | Accent laiton sur fond clair : filets, numéros, villes, hover (AA petit texte sur `paper`) |
+| `--color-brass-light` | `#C9AB7F` | Laiton sur fond sombre (`navy`) : filets, titres de colonnes du footer |
 
-### Usage du vert
+### Usage du laiton
 
-Le vert du logo (`brand-green`) est une **petite touche**, jamais une couleur de texte sur fond clair :
+Le laiton est l’**unique accent**, en petite touche : filet devant les sur-titres (`Eyebrow`), numéros (« 01 »), villes des réalisations, étoiles d’avis, hover des liens, bordure de l’en-tête admin. Ne jamais l’utiliser en aplat.
 
-- trait court devant les sur-titres (`SectionTitle`, `PageHeader`) ;
-- filet sous le H1 du hero ;
-- soulignement des numéros d’étape (`MethodSteps`), puces des prestations (`OfferingList`) ;
-- bordure haute du footer et de l’en-tête admin, contour du portrait du gérant.
+Les couleurs vives du logo (vert, bleu) ne sont **pas** utilisées dans l’interface : le logo est affiché en monochrome (`navy` ou `paper`) via un masque CSS (`.logo-mask`).
 
-Contraste texte `ink` sur `paper` et texte clair sur `navy` / `accent` : viser WCAG AA.
+Contraste texte `ink` sur `paper` et texte clair sur `navy` : WCAG AA.
 
 Ne pas introduire de couleur supplémentaire sans l’ajouter ici.
 
-`cn()` concatène les classes **sans** `tailwind-merge`. Ne pas combiner deux utilitaires `display` non préfixés (`hidden` + `inline-flex`). Préférer une variante responsive (`max-lg:hidden`).
+`cn()` concatène les classes **sans** `tailwind-merge`. Ne pas combiner deux utilitaires de même propriété (`px-5` + `px-8`). Préférer une variante responsive (`max-lg:hidden`).
 
 ## Typographie
 
-Une seule famille pour limiter le CLS et le poids : **Archivo** via `next/font/google`, chargée avec son axe de largeur (`axes: ["wdth"]`).
+Deux familles via `next/font/google` (`app/layout.tsx`) :
 
-Les titres H1 / H2 (et chiffres clés) utilisent l’utilitaire `font-display` (`app/globals.css`) : graisse 800, police élargie (`font-stretch: 112%`), tracking `-0.035em`, interligne `1.05`. C’est la signature typographique du site : ne pas l’appliquer au texte courant.
+- **Cormorant Garamond** (variable, normal + italique) : titres, citations, chiffres clés, via l’utilitaire `font-display` (graisse 600, tracking `-0.01em`, interligne `1.08`).
+- **Archivo** : texte courant, navigation, boutons, labels.
 
-| Rôle | Poids | Tracking | Usage |
-| --- | --- | --- | --- |
-| Display / H1 | 800, élargie 112 % (`font-display`) | `-0.035em` | Titres de page |
-| H2 | 800, élargie 112 % (`font-display`) | `-0.035em` | Titres de section |
-| H3 | 600 | `-0.01em` | Sous-sections |
-| Body | 400 | `0` | Paragraphes |
-| UI / nav | 500 | `0.02em` | Navigation, boutons, labels |
+| Rôle | Famille / poids | Usage |
+| --- | --- | --- |
+| H1 / H2 / H3 | Cormorant 600 (`font-display`) | Titres |
+| Citations | Cormorant 600 italique | Gérant, avis |
+| Body | Archivo 400 | Paragraphes, `leading-relaxed` |
+| Sur-titres, nav, boutons | Archivo 500, petites capitales, tracking `0.2–0.32em` | `Eyebrow`, `Navigation`, `buttonClassName`, `textLinkClassName` |
 
-Corps : `1rem` / `1.65` line-height.
-Mesure des paragraphes : max `65ch`.
+Chiffres en serif (téléphone, statistiques) : ajouter `lining-nums` (les chiffres elzéviriens de Cormorant descendent sous la ligne).
+
+Mesure des paragraphes : max `60–65ch`.
 
 ## Tailles de titres
 
@@ -67,22 +65,24 @@ Mobile-first.
 
 | Niveau | Mobile | Desktop (`lg`) |
 | --- | --- | --- |
-| H1 | `2.25rem` (36px) | `4rem` (64px) |
-| H2 | `1.875rem` (30px) | `2.75rem` (44px) |
-| H3 | `1.25rem` (20px) | `1.5rem` (24px) |
-| Eyebrow | `0.75rem` / uppercase / tracking large | identique |
+| H1 accueil (`Hero size="full"`) | `3rem` | `5.5rem` |
+| H1 pages | `3rem` | `4.5rem` |
+| H2 | `2.25rem` | `3.5rem` |
+| H3 | `1.5rem` | `1.75–1.875rem` |
+| Eyebrow | `0.7rem` / uppercase / tracking `0.32em` | identique |
 
 Un seul **H1** par page.
 
 ## Spacing
 
-Échelle Tailwind. Sections marketing :
+Échelle Tailwind. Beaucoup d’air : c’est un marqueur premium.
 
 | Contexte | Mobile | Desktop |
 | --- | --- | --- |
-| Section verticale | `py-16` (64px) | `py-24` (96px) |
-| Gap interne section | `gap-8` | `gap-12` |
-| Gap grille cartes | `gap-4` | `gap-6` |
+| Section verticale (`Section`) | `py-20` | `py-32` |
+| Sections éditoriales de l’accueil, CTA final | `py-28` | `py-40` |
+| Grilles à filet (sans cadre) | `gap-12` | `gap-10` à `gap-x-16` |
+| Grilles de cartes | `gap-4` | `gap-6` |
 | Padding conteneur | `px-4` | `px-6` / `lg:px-8` |
 
 Ne pas créer d’espacements ad hoc (`mt-[13px]`). Utiliser l’échelle.
@@ -93,25 +93,19 @@ Ne pas créer d’espacements ad hoc (`mt-[13px]`). Utiliser l’échelle.
 
 ## Border radius
 
-Esthétique technique, coins discrets :
-
-| Token | Valeur | Usage |
-| --- | --- | --- |
-| `--radius-sm` | `2px` | Chips, inputs |
-| `--radius-md` | `4px` | Boutons, cartes |
-| `--radius-lg` | `8px` | Médias / grandes photos |
-
-Pas de `rounded-full` sur les CTA principaux (sauf pastilles téléphone mobile).
+Coins droits partout : `--radius-sm`, `--radius-md` et `--radius-lg` valent `0` (y compris dans l’admin). Seule exception : portraits ronds (`rounded-full`).
 
 ## Boutons
 
-Hauteur mini 44px (touch target).
+`components/ui/button.tsx`. Hauteur mini 48px, petites capitales espacées, transitions 300ms.
 
-- **Primary** : fond `accent`, texte `accent-foreground`, hover `accent-hover`.
-- **Secondary** : fond transparent, bordure `navy`, texte `navy`. Sur fond sombre : bordure claire.
-- **Ghost** : texte seul, soulignement au hover.
+- **Primary** : aplat `navy`, texte `paper`.
+- **Secondary** : bordure fine `navy`, texte `navy`, aplat au hover. Utilisé dans le header.
+- **SecondaryOnDark** : bordure claire sur fond sombre (hero, CTA final, footer).
+- **Ghost** : texte seul.
+- **`textLinkClassName`** : lien secondaire « Découvrir… → ».
 
-Un CTA principal visible au-dessus de la ligne de flottaison sur chaque page métier.
+Le téléphone est un **lien texte discret** (hero, CTA final, header ≥ `2xl`), pas un bouton. Icône seule sur mobile.
 
 ## Photo plein cadre (`MediaSplit`)
 
@@ -119,19 +113,24 @@ Un CTA principal visible au-dessus de la ligne de flottaison sur chaque page mé
 
 Utilisé sur : accueil (à propos), entreprise (histoire, gérant), services (le besoin), zones (introduction).
 
+## Accueil
+
+Récit en peu de sections (`components/home/`) : hero plein écran → introduction centrée (`HomeIntro`) → réalisations éditoriales (une grande, deux petites) → entreprise (`MediaSplit`) → index des métiers sans cartes (`ServiceIndex`) → citation du gérant sur fond bleu nuit (`ManagerQuote`, pour casser la suite de fonds clairs) → bandeau discret garanties / secteur (`TrustBand`) → CTA final. Pas de chiffres ni de grille de certifications sur l’accueil.
+
 ## Cards
 
-Fond `paper-elevated`, bordure `line`, pas d’ombre portée lourde.
+Deux registres :
 
-Structure type : média 4/3 → eyebrow → titre → extrait → lien.
+- **Cartes cliquables** (services, réalisations, zones) : fond `paper-elevated`, bordure `line`, padding `p-8`, titre serif. Hover : bordure `navy`, zoom photo léger.
+- **Blocs à filet** (atouts, garanties, étapes, prestations) : pas de cadre, filet `border-t border-line`, numéro ou icône laiton, titre serif.
 
-Hover : bordure qui passe à `navy`, pas de translation agressive.
+Pas d’ombre portée.
 
 ## Formulaires
 
 - Labels toujours visibles (pas de placeholder comme seul label).
 - Message d’erreur sous le champ, lié via `aria-describedby`.
-- Bordure `line`, focus `accent`.
+- Bordure `line`, focus `navy` (`accent`).
 - Erreurs en `danger`, liées via `aria-describedby`.
 - Champs pleine largeur sur mobile.
 
@@ -168,8 +167,9 @@ Règles responsive :
 ## Motion
 
 - Pas d’animation d’entrée au scroll.
-- Transitions de couleur / bordure ≤ 150ms.
-- Respecter `prefers-reduced-motion`.
+- Transitions de couleur / bordure : 300ms.
+- Zoom très léger des photos au survol (`scale-[1.03]`, 700ms) sur les cartes et galeries.
+- Respecter `prefers-reduced-motion` (désactivé globalement dans `globals.css`).
 
 ## Accessibilité
 

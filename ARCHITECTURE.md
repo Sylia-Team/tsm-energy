@@ -48,9 +48,10 @@ Rendu :
 
 ```text
 components/
-  ui/            # Primitives (bouton, conteneur) — pas de données métier
+  ui/            # Primitives (bouton, conteneur, eyebrow) — pas de données métier
   layout/        # Header, Footer, Navigation, MobileNavigation, ErrorFallback
   marketing/     # Hero, PageHeader, SectionTitle, MediaSplit, ManagerQuote, CTASection, cartes
+  home/          # Sections propres à l’accueil : HomeIntro, EditorialRealisations, ServiceIndex, TrustBand
   legal/         # LegalPage (rendu texte simple, sans HTML)
   services/      # ServiceCard, ServicePage, MethodSteps, OfferingList
   realisations/  # RealisationCard, RealisationPage, PhotoGallery
@@ -175,7 +176,7 @@ Espace d'édition du contenu éditorial sans toucher au code.
 Affichage des avis Google **sans widget tiers** (respect CSP `default-src 'self'` + RGPD, aucun script/cookie tiers).
 
 - **Source** : API Google Places v1 (`lib/reviews/google.ts`), fetch **serveur → serveur** avec clé `GOOGLE_PLACES_API_KEY` (jamais exposée au client).
-- **Cache** : ISR `revalidate` 24 h (limite le quota API). L'accueil reste statique quand les avis sont désactivés ; il passe en ISR lorsqu'ils sont activés.
+- **Cache** : ISR `revalidate` 24 h (limite le quota API). La page avis reste statique quand les avis sont désactivés ; elle passe en ISR lorsqu'ils sont activés. L’accueil n’affiche pas les avis.
 - **Rendu** : composant serveur `components/marketing/GoogleReviews.tsx` → cartes texte (`ReviewCard`), note globale + nombre d'avis. **Pas d'avatars externes** (image externe interdite par la CSP).
 - **Configuration** : `content/reviews.ts` (défauts) + overrides admin (`/admin/avis`) : activation, Place ID, note minimale, nombre affiché.
 - **Repli** : si désactivé, non configuré, erreur API ou aucun avis, affichage automatique des avis manuels (`content/testimonials.ts`).

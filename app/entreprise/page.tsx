@@ -50,7 +50,7 @@ export default function EntreprisePage() {
         phoneHref={site.phoneHref}
         ctaLocation="entreprise_hero"
       />
-      <Container className="pt-8">
+      <Container className="py-8">
         <Breadcrumb
           currentPath={routes.entreprise}
           items={[
@@ -74,10 +74,10 @@ export default function EntreprisePage() {
       </MediaSplit>
       <MediaSplit image={page.manager.image} side="right" tone="mist">
         <SectionTitle eyebrow={page.manager.eyebrow} title={page.manager.name} />
-        <p className="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-ink-muted">
+        <p className="mt-4 text-[0.7rem] uppercase tracking-[0.3em] text-ink-muted">
           {page.manager.role}
         </p>
-        <blockquote className="mt-8 border-l-4 border-brand-green pl-5 text-xl font-semibold leading-snug text-navy lg:text-2xl">
+        <blockquote className="mt-10 border-l border-brass pl-6 font-display text-3xl italic leading-snug text-navy lg:text-[2.25rem]">
           « {page.manager.quote} »
         </blockquote>
         <div className="mt-8 space-y-4">
@@ -98,7 +98,7 @@ export default function EntreprisePage() {
             title={home.value.title}
             description={home.value.description}
           />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:gap-6">
+          <div className="mt-16 grid gap-12 md:grid-cols-2 lg:gap-x-16">
             {home.value.items.map((item) => (
               <ValuePropCard key={item.id} item={item} />
             ))}
@@ -123,7 +123,7 @@ export default function EntreprisePage() {
             title={page.certificationsTitle}
             description={page.certificationsDescription}
           />
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          <div className="mt-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
             {certifications.map((certification) => (
               <CertificationCard
                 key={certification.id}

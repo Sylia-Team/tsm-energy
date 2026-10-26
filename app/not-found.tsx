@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { buttonClassName } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
@@ -12,10 +13,8 @@ export const metadata: Metadata = {
 export default function NotFoundPage() {
   return (
     <Container className="py-24 text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-        Erreur 404
-      </p>
-      <h1 className="mt-4 font-display text-3xl lg:text-[2.75rem] text-navy">
+      <Eyebrow centered>Erreur 404</Eyebrow>
+      <h1 className="mt-6 font-display text-4xl text-navy lg:text-[3.5rem]">
         Page introuvable
       </h1>
       <p className="mx-auto mt-4 max-w-md text-ink-muted">

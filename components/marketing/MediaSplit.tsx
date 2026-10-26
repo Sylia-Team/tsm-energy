@@ -44,7 +44,7 @@ export function MediaSplit({
       </div>
       <div
         className={cn(
-          "flex items-center px-4 py-16 sm:px-6 lg:py-24",
+          "flex items-center px-4 py-20 sm:px-6 lg:py-32",
           side === "left"
             ? "lg:pl-16 lg:pr-[max(2rem,calc((100vw-80rem)/2+2rem))]"
             : "lg:pr-16 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]",

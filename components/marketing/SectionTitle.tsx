@@ -1,3 +1,4 @@
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { cn } from "@/lib/utils";
 
 type SectionTitleProps = {
@@ -23,20 +24,14 @@ export function SectionTitle({
       )}
     >
       {eyebrow ? (
-        <p
-          className={cn(
-            "flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em]",
-            align === "center" && "justify-center",
-            inverted ? "text-paper/70" : "text-accent",
-          )}
-        >
-          <span aria-hidden="true" className="h-0.5 w-8 shrink-0 bg-brand-green" />
+        <Eyebrow inverted={inverted} centered={align === "center"}>
           {eyebrow}
-        </p>
+        </Eyebrow>
       ) : null}
       <h2
         className={cn(
-          "mt-3 font-display text-3xl lg:text-[2.75rem]",
+          "font-display text-4xl lg:text-[3.5rem]",
+          eyebrow && "mt-6",
           inverted ? "text-paper" : "text-navy",
         )}
       >
@@ -45,7 +40,7 @@ export function SectionTitle({
       {description ? (
         <p
           className={cn(
-            "mt-4 max-w-[65ch] text-base leading-relaxed lg:text-lg",
+            "mt-6 max-w-[60ch] text-base leading-relaxed lg:text-lg",
             align === "center" && "mx-auto",
             inverted ? "text-paper/75" : "text-ink-muted",
           )}

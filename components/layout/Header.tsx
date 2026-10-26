@@ -13,28 +13,18 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-paper">
-      <div className="bg-navy text-paper">
-        <Container className="flex min-h-10 items-center justify-between gap-4 text-xs tracking-wide">
-          <p className="hidden sm:block text-paper/80">
-            Entreprise générale du bâtiment · {site.address.city} · {site.address.region}
-          </p>
-          <p className="sm:hidden text-paper/80">{site.address.city}</p>
+      <Container className="flex min-h-20 items-center justify-between gap-6">
+        <Logo />
+        <Navigation className="hidden lg:block" />
+        <div className="flex items-center gap-2 lg:gap-6">
           <TrackedLink
             href={site.phoneHref}
             event="phone_click"
-            payload={{ location: "header_topbar" }}
-            className="inline-flex items-center gap-2 font-medium text-paper hover:text-accent-foreground"
+            payload={{ location: "header" }}
+            className="hidden whitespace-nowrap text-sm text-ink-muted transition-colors hover:text-navy 2xl:inline"
           >
-            <IconPhone className="h-3.5 w-3.5" />
-            <span>{site.phone}</span>
+            {site.phone}
           </TrackedLink>
-        </Container>
-      </div>
-
-      <Container className="flex min-h-[4.25rem] items-center justify-between gap-6">
-        <Logo />
-        <Navigation className="hidden lg:block" />
-        <div className="flex items-center gap-2">
           <TrackedLink
             href={site.phoneHref}
             event="phone_click"
@@ -48,7 +38,7 @@ export function Header() {
             href={routes.quote}
             event="cta_click"
             payload={{ location: "header" }}
-            className={buttonClassName("primary", "max-lg:hidden")}
+            className={buttonClassName("secondary", "whitespace-nowrap max-lg:hidden")}
           >
             Demander un devis
           </TrackedLink>
