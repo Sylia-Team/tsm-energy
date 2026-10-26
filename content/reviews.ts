@@ -6,8 +6,8 @@ import type { ReviewsConfig } from "@/types/reviews";
  * Le Place ID et les options se règlent depuis l'administration (`/admin/avis`).
  */
 export const reviewsConfig: ReviewsConfig = {
-  enabled: false,
-  placeId: "", // [INFORMATION À CONFIRMER] — Place ID de la fiche Google TSM
+  enabled: true,
+  placeId: "ChIJ8eINRyAEyRIRozJBK_0AVk0",
   minRating: 4,
   maxItems: 6,
 };
