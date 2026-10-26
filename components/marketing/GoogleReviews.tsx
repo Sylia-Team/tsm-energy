@@ -1,12 +1,14 @@
 import { ReviewCard } from "@/components/marketing/ReviewCard";
 import { TestimonialCard } from "@/components/marketing/TestimonialCard";
-import { getReviewsConfig } from "@/lib/admin/content-read";
-import { fetchGoogleReviews } from "@/lib/reviews/google";
 import { getTestimonials } from "@/lib/content";
+import { getDisplayedGoogleReviews } from "@/lib/reviews/displayed";
+import { cn } from "@/lib/utils";
 
-const gridClass = "mt-12 grid gap-4 md:grid-cols-3 lg:gap-6";
+function gridClass(count: number): string {
+  return cn("mt-12 grid gap-4 md:grid-cols-2 lg:gap-6", count >= 3 && "lg:grid-cols-3");
+}
 
-function RatingBadge({ rating, count }: { rating: number; count: number }) {
+export function RatingBadge({ rating, count }: { rating: number; count: number }) {
   return (
     <p className="mt-6 inline-flex items-center gap-2 border border-line bg-paper-elevated px-4 py-2 text-sm text-ink">
       <span className="text-brass" aria-hidden="true">
@@ -26,19 +28,15 @@ function RatingBadge({ rating, count }: { rating: number; count: number }) {
  * désactivée, non configurée ou indisponible.
  */
 export async function GoogleReviews() {
-  const config = getReviewsConfig();
-  const data = config.enabled
-    ? await fetchGoogleReviews(config.placeId)
-    : null;
+  const data = await getDisplayedGoogleReviews();
 
-  const googleReviews = (data?.reviews ?? [])
-    .filter((review) => review.rating >= config.minRating)
-    .slice(0, Math.max(1, config.maxItems));
-
-  if (googleReviews.length === 0) {
+  if (!data) {
     const testimonials = getTestimonials();
+    if (testimonials.length === 0) {
+      return null;
+    }
     return (
-      <div className={gridClass}>
+      <div className={gridClass(testimonials.length)}>
         {testimonials.map((testimonial) => (
           <TestimonialCard key={testimonial.id} testimonial={testimonial} />
         ))}
@@ -48,11 +46,11 @@ export async function GoogleReviews() {
 
   return (
     <>
-      {data?.rating != null && data.count != null ? (
+      {data.rating != null && data.count != null ? (
         <RatingBadge rating={data.rating} count={data.count} />
       ) : null}
-      <div className={gridClass}>
-        {googleReviews.map((review) => (
+      <div className={gridClass(data.reviews.length)}>
+        {data.reviews.map((review) => (
           <ReviewCard key={review.id} review={review} />
         ))}
       </div>

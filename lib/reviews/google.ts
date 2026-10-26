@@ -54,7 +54,7 @@ export async function fetchGoogleReviews(
 
   try {
     const response = await fetch(
-      `${PLACES_ENDPOINT}/${encodeURIComponent(placeId)}`,
+      `${PLACES_ENDPOINT}/${encodeURIComponent(placeId)}?languageCode=fr`,
       {
         headers: {
           "X-Goog-Api-Key": apiKey,

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { EditorialRealisations } from "@/components/home/EditorialRealisations";
 import { HomeIntro } from "@/components/home/HomeIntro";
+import { HomeReviews } from "@/components/home/HomeReviews";
 import { ServiceIndex } from "@/components/home/ServiceIndex";
 import { TrustBand } from "@/components/home/TrustBand";
 import { CTASection } from "@/components/marketing/CTASection";
@@ -109,6 +110,13 @@ export default function HomePage() {
         manager={entreprise.manager}
         href={routes.entreprise}
         linkLabel={home.about.linkLabel}
+      />
+
+      <HomeReviews
+        eyebrow={home.testimonials.eyebrow}
+        title={home.testimonials.title}
+        description={home.testimonials.description}
+        allLabel={home.testimonials.allLabel}
       />
 
       <TrustBand

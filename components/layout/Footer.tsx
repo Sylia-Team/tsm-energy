@@ -108,6 +108,12 @@ export function Footer() {
             {site.openingHours ? (
               <p className="mt-6 text-sm text-paper/50">{site.openingHours}</p>
             ) : null}
+            <Link
+              href={routes.avis}
+              className="mt-6 inline-block text-sm text-paper underline-offset-8 hover:underline"
+            >
+              Avis clients
+            </Link>
           </div>
         </div>
       </Container>

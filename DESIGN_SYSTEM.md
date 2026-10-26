@@ -115,7 +115,7 @@ Utilisé sur : accueil (à propos), entreprise (histoire, gérant), services (le
 
 ## Accueil
 
-Récit en peu de sections (`components/home/`) : hero plein écran → introduction centrée (`HomeIntro`) → réalisations éditoriales (une grande, deux petites) → entreprise (`MediaSplit`) → index des métiers sans cartes (`ServiceIndex`) → citation du gérant sur fond bleu nuit (`ManagerQuote`, pour casser la suite de fonds clairs) → bandeau discret garanties / secteur (`TrustBand`) → CTA final. Pas de chiffres ni de grille de certifications sur l’accueil.
+Récit en peu de sections (`components/home/`) : hero plein écran → introduction centrée (`HomeIntro`) → réalisations éditoriales (une grande, deux petites) → entreprise (`MediaSplit`) → index des métiers sans cartes (`ServiceIndex`) → citation du gérant sur fond bleu nuit (`ManagerQuote`, pour casser la suite de fonds clairs) → extrait de 3 avis Google avec note (`HomeReviews`, absent s’il n’y a pas de vrais avis) → bandeau discret garanties / secteur (`TrustBand`) → CTA final. Pas de chiffres ni de grille de certifications sur l’accueil. Jamais d’avis fictifs sur l’accueil.
 
 ## Cards
 

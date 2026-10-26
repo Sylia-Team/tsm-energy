@@ -51,7 +51,7 @@ components/
   ui/            # Primitives (bouton, conteneur, eyebrow) — pas de données métier
   layout/        # Header, Footer, Navigation, MobileNavigation, ErrorFallback
   marketing/     # Hero, PageHeader, SectionTitle, MediaSplit, ManagerQuote, CTASection, cartes
-  home/          # Sections propres à l’accueil : HomeIntro, EditorialRealisations, ServiceIndex, TrustBand
+  home/          # Sections propres à l’accueil : HomeIntro, EditorialRealisations, ServiceIndex, HomeReviews (avis Google, masquée sans vrais avis), TrustBand
   legal/         # LegalPage (rendu texte simple, sans HTML)
   services/      # ServiceCard, ServicePage, MethodSteps, OfferingList
   realisations/  # RealisationCard, RealisationPage, PhotoGallery
@@ -179,7 +179,7 @@ Affichage des avis Google **sans widget tiers** (respect CSP `default-src 'self'
 - **Cache** : ISR `revalidate` 24 h (limite le quota API). La page avis reste statique quand les avis sont désactivés ; elle passe en ISR lorsqu'ils sont activés. L’accueil n’affiche pas les avis.
 - **Rendu** : composant serveur `components/marketing/GoogleReviews.tsx` → cartes texte (`ReviewCard`), note globale + nombre d'avis. **Pas d'avatars externes** (image externe interdite par la CSP).
 - **Configuration** : `content/reviews.ts` (défauts) + overrides admin (`/admin/avis`) : activation, Place ID, note minimale, nombre affiché.
-- **Repli** : si désactivé, non configuré, erreur API ou aucun avis, affichage automatique des avis manuels (`content/testimonials.ts`).
+- **Repli** : si désactivé, non configuré, erreur API ou aucun avis, affichage des témoignages manuels réels (`content/testimonials.ts`, vide par défaut), sinon rien. L’accueil (`HomeReviews`) n’affiche que des avis Google.
 - **Chrome** : les pages `/admin` restent imbriquées dans le layout racine (Header/Footer du site) pour ne pas forcer le rendu dynamique global. Séparation propre via route groups possible ultérieurement.
 
 ## Tests

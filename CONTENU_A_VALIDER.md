@@ -1010,23 +1010,9 @@ Autre qualification à ajouter :
 
 # Avis clients
 
-Les trois textes suivants sont **inventés**. Ils ne doivent pas rester en ligne tels quels.
+Les avis affichés sur le site (page d’accueil et page « Avis clients ») viennent directement de la fiche Google de TSM, actualisés une fois par jour. Seuls les avis à 4 étoiles et plus sont affichés.
 
-Vous pouvez les remplacer par de vrais avis (avec l’accord du client), ou tout retirer.
-
-**Martine L. — Sanary-sur-Mer — Rénovation complète**
-
-Nous avions peur de multiplier les artisans. TSM a tout coordonné : maçonnerie, peinture, plomberie. Le chantier a tenu les délais annoncés.
-
-**Jean-Pierre M. — Six-Fours-les-Plages — Isolation**
-
-L’isolation des combles a changé le confort d’été. L’équipe a été claire sur les travaux, sans mauvaise surprise sur le devis.
-
-**Claire D. — Bandol — Extension**
-
-L’extension s’intègre à la maison existante. Un interlocuteur unique, des réponses rapides, et un suivi de chantier sérieux.
-
-Souhaitez-vous une page « Avis clients » à part ? Aujourd’hui le lien existe en bas de site, mais la page n’est pas encore faite.
+Vous pouvez aussi nous transmettre des témoignages écrits de vos clients (avec leur accord) : ils apparaîtront sur les pages des communes concernées.
 
 ---
 
