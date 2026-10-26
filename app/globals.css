@@ -93,6 +93,6 @@
   /* Logo monochrome : le PNG transparent sert de masque, la couleur vient du texte. */
   .logo-mask {
     background-color: currentColor;
-    mask: url("/logo-tsm-v2.png") center / contain no-repeat;
+    mask: url("/logo-tsm-v3.png") center / contain no-repeat;
   }
 }

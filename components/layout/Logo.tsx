@@ -8,11 +8,7 @@ type LogoProps = {
   inverted?: boolean;
 };
 
-/**
- * Logo monochrome (couleur du texte courant) obtenu par masque CSS sur le PNG
- * transparent, + mention « Énergies Services » en texte (TSM seul n'est pas
- * distinctif). Les couleurs vives du logo ne sont pas utilisées dans le site.
- */
+/** Logo monochrome (couleur du texte courant) obtenu par masque CSS sur le PNG transparent. */
 export function Logo({ className, inverted = false }: LogoProps) {
   const site = getSiteContent();
 
@@ -20,22 +16,12 @@ export function Logo({ className, inverted = false }: LogoProps) {
     <Link
       href={routes.home}
       className={cn(
-        "inline-flex items-center gap-3",
+        "inline-flex items-center",
         inverted ? "text-paper" : "text-navy",
         className,
       )}
     >
-      <span aria-hidden="true" className="logo-mask block aspect-[345/218] h-11" />
-      <span
-        aria-hidden="true"
-        className={cn(
-          "flex flex-col border-l pl-3 text-[0.7rem] font-semibold uppercase leading-tight tracking-[0.18em]",
-          inverted ? "border-paper/30" : "border-line",
-        )}
-      >
-        <span>Énergies</span>
-        <span>Services</span>
-      </span>
+      <span aria-hidden="true" className="logo-mask block aspect-[467/300] h-12" />
       <span className="sr-only">{site.name} — Accueil</span>
     </Link>
   );

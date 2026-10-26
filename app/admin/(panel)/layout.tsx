@@ -14,10 +14,10 @@ export default function AdminPanelLayout({
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
           <Link href={routes.admin} className="inline-flex items-center gap-3">
             <Image
-              src="/logo-tsm-v2.png"
+              src="/logo-tsm-v3.png"
               alt=""
-              width={345}
-              height={218}
+              width={467}
+              height={300}
               sizes="56px"
               className="h-9 w-auto brightness-0 invert"
             />
