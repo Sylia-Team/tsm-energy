@@ -39,6 +39,8 @@ export async function saveSiteAction(formData: FormData): Promise<void> {
       ? foundedYearRaw
       : null,
     openingHours: nullable(str(formData, "openingHours")),
+    legalForm: nullable(str(formData, "legalForm")),
+    siren: nullable(str(formData, "siren")),
     siret: nullable(str(formData, "siret")),
     vatNumber: nullable(str(formData, "vatNumber")),
   };

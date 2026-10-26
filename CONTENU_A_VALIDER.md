@@ -26,7 +26,7 @@ TSM
 
 **Nom officiel (factures, mentions légales)**
 
-TSM Énergies Services
+TSM Énergies Services (SARL)
 
 **Phrase d’accroche**
 
@@ -46,7 +46,7 @@ https://www.tsm83.com
 
 **E-mail**
 
-contact@tsm83.com
+buro@tsm83.com
 
 **Adresse**
 
@@ -61,15 +61,15 @@ Var, France
 
 **Horaires**
 
-Du lundi au vendredi, 8h30 – 18h
+Du lundi au vendredi, 8h – 18h
 
-**SIRET** (pour les mentions légales)
+**SIREN / SIRET** (pour les mentions légales)
 
-478 392 601 00027
+477 959 225 / 477 959 225 00046
 
 **Numéro de TVA**
 
-FR19478392601
+FR19477959225
 
 ---
 

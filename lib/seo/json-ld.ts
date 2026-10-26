@@ -14,6 +14,8 @@ export type BreadcrumbTrailItem = {
 
 export type JsonLdNode = Record<string, unknown>;
 
+const LOGO_PATH = "/logo-tsm-v3.png";
+
 export function localBusinessJsonLd(site: SiteConfig): JsonLdNode {
   const origin = siteOrigin(site.url);
   const node: JsonLdNode = {
@@ -24,6 +26,8 @@ export function localBusinessJsonLd(site: SiteConfig): JsonLdNode {
     legalName: site.legalName,
     url: origin,
     description: site.description,
+    logo: absoluteUrl(LOGO_PATH, origin),
+    image: absoluteUrl(LOGO_PATH, origin),
     areaServed: areaServedJsonLd(),
   };
 
@@ -34,7 +38,44 @@ export function localBusinessJsonLd(site: SiteConfig): JsonLdNode {
     }
   }
 
+  if (site.email) {
+    node.email = site.email;
+  }
+
   node.address = postalAddressJsonLd(site);
+
+  if (site.addressStatus === "confirmed" && site.geo) {
+    node.geo = {
+      "@type": "GeoCoordinates",
+      latitude: site.geo.latitude,
+      longitude: site.geo.longitude,
+    };
+  }
+
+  if (site.foundedYearStatus === "confirmed" && site.foundedYear) {
+    node.foundingDate = String(site.foundedYear);
+  }
+
+  if (site.openingHoursSpec.length > 0) {
+    node.openingHoursSpecification = site.openingHoursSpec.map((slot) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: slot.days.map((day) => `https://schema.org/${day}`),
+      opens: slot.opens,
+      closes: slot.closes,
+    }));
+  }
+
+  if (site.vatNumber) {
+    node.vatID = site.vatNumber.replace(/\s/g, "");
+  }
+
+  if (site.siret) {
+    node.identifier = {
+      "@type": "PropertyValue",
+      propertyID: "SIRET",
+      value: site.siret.replace(/\s/g, ""),
+    };
+  }
 
   return node;
 }

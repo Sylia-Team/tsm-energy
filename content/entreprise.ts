@@ -29,7 +29,7 @@ export const entreprise: EntrepriseContent = {
   },
   manager: {
     eyebrow: "Le mot du gérant",
-    name: "[INFORMATION À CONFIRMER]",
+    name: "Cédric Mallet",
     role: "Gérant de TSM Énergies Services",
     quote:
       "[INFORMATION À CONFIRMER] — Citation courte du gérant sur sa façon de travailler.",

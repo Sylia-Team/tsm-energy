@@ -13,15 +13,15 @@ export const legalPages: Record<LegalSlug, LegalPageContent> = {
     updatedAt: "[INFORMATION À CONFIRMER]",
     body: `## Éditeur du site
 
-TSM Énergies Services — [INFORMATION À CONFIRMER : forme juridique] au capital de [INFORMATION À CONFIRMER] €.
+TSM Énergies Services — SARL au capital de 277 000 €.
 
 Siège social : Parc d’activité de la Baou, 95 rue de l’Innovation, 83110 Sanary-sur-Mer.
 
-Téléphone : 04 94 32 36 15. E-mail : [INFORMATION À CONFIRMER].
+Téléphone : 04 94 32 36 15. E-mail : buro@tsm83.com.
 
-RCS [INFORMATION À CONFIRMER : ville] — SIRET [INFORMATION À CONFIRMER]. TVA intracommunautaire : [INFORMATION À CONFIRMER].
+RCS Toulon 477 959 225 — SIRET (siège) 477 959 225 00046. TVA intracommunautaire : FR19477959225.
 
-Directeur de la publication : [INFORMATION À CONFIRMER].
+Directeur de la publication : Cédric Mallet, gérant.
 
 ## Hébergeur
 

@@ -28,16 +28,44 @@ describe("absoluteUrl", () => {
 });
 
 describe("localBusinessJsonLd", () => {
-  it("n’expose pas le téléphone ni la rue tant qu’ils ne sont pas confirmés", () => {
-    const jsonLd = localBusinessJsonLd(getSite());
+  it("n’expose pas le téléphone, la rue ni le GPS tant qu’ils ne sont pas confirmés", () => {
+    const jsonLd = localBusinessJsonLd(
+      withSite({
+        phoneStatus: "needs-confirmation",
+        addressStatus: "needs-confirmation",
+        foundedYearStatus: "needs-confirmation",
+      }),
+    );
     const address = jsonLd.address as Record<string, unknown>;
 
     expect(jsonLd.telephone).toBeUndefined();
-    expect(jsonLd.email).toBeUndefined();
+    expect(jsonLd.geo).toBeUndefined();
+    expect(jsonLd.foundingDate).toBeUndefined();
     expect(jsonLd.aggregateRating).toBeUndefined();
     expect(address.streetAddress).toBeUndefined();
     expect(address.postalCode).toBeUndefined();
     expect(address.addressLocality).toBe("Sanary-sur-Mer");
+  });
+
+  it("décrit l’identité confirmée de l’entreprise", () => {
+    const jsonLd = localBusinessJsonLd(
+      withSite({
+        email: "buro@tsm83.com",
+        addressStatus: "confirmed",
+        geo: { latitude: 43.125239, longitude: 5.816045 },
+        foundedYear: 2004,
+        foundedYearStatus: "confirmed",
+        siret: "477 959 225 00046",
+        vatNumber: "FR19477959225",
+      }),
+    );
+
+    expect(jsonLd.email).toBe("buro@tsm83.com");
+    expect(jsonLd.geo).toMatchObject({ latitude: 43.125239, longitude: 5.816045 });
+    expect(jsonLd.foundingDate).toBe("2004");
+    expect(jsonLd.vatID).toBe("FR19477959225");
+    expect(jsonLd.identifier).toMatchObject({ propertyID: "SIRET", value: "47795922500046" });
+    expect(jsonLd.openingHoursSpecification).toBeDefined();
   });
 
   it("ajoute le téléphone et l’adresse une fois confirmés", () => {

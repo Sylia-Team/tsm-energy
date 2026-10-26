@@ -116,6 +116,12 @@ export default async function AdminSitePage({
               type="number"
               defaultValue={site.foundedYear ?? ""}
             />
+            <TextField
+              name="legalForm"
+              label="Forme juridique"
+              defaultValue={site.legalForm ?? ""}
+            />
+            <TextField name="siren" label="SIREN" defaultValue={site.siren ?? ""} />
             <TextField name="siret" label="SIRET" defaultValue={site.siret ?? ""} />
             <TextField
               name="vatNumber"
