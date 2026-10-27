@@ -1,8 +1,7 @@
-import { ReviewCard } from "@/components/marketing/ReviewCard";
+import { ReviewsCarousel } from "@/components/marketing/ReviewsCarousel";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { getDisplayedGoogleReviews } from "@/lib/reviews/displayed";
-import { cn } from "@/lib/utils";
 
 type HomeReviewsProps = {
   eyebrow: string;
@@ -10,9 +9,9 @@ type HomeReviewsProps = {
   description: string;
 };
 
-/** Extrait des avis Google. Rien n'est affiché sans vrais avis (pas de repli sur les avis manuels). */
+/** Avis Google en carrousel. Rien n'est affiché sans vrais avis (pas de repli sur les avis manuels). */
 export async function HomeReviews({ eyebrow, title, description }: HomeReviewsProps) {
-  const data = await getDisplayedGoogleReviews(3);
+  const data = await getDisplayedGoogleReviews();
 
   if (!data) {
     return null;
@@ -30,16 +29,7 @@ export async function HomeReviews({ eyebrow, title, description }: HomeReviewsPr
             {description}
           </p>
         </div>
-        <div
-          className={cn(
-            "mt-16 grid gap-6 md:grid-cols-2",
-            data.reviews.length >= 3 && "lg:grid-cols-3",
-          )}
-        >
-          {data.reviews.map((review) => (
-            <ReviewCard key={review.id} review={review} />
-          ))}
-        </div>
+        <ReviewsCarousel reviews={data.reviews} className="mt-16" />
       </Container>
     </section>
   );

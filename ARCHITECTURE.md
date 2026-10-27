@@ -5,7 +5,7 @@
 - Pages marketing **statiques** (SSG) par défaut.
 - ISR uniquement pour les contenus amenés à évoluer (réalisations, actualités, avis).
 - Server Actions / Route Handlers **uniquement** pour le devis, le contact et les webhooks futurs.
-- Server Components par défaut. Client Components seulement pour l’interactif (menu mobile, formulaire, consentement cookies).
+- Server Components par défaut. Client Components seulement pour l’interactif (menu mobile, formulaire, consentement cookies, flèches du carrousel d’avis `ReviewsCarousel`).
 - Les composants UI ne lisent **jamais** des données métier hardcodées. Ils reçoivent des props ou consomment `/content` via des fonctions `get*()`.
 - Les URLs métier vivent dans `lib/routes.ts`. Jamais dupliquées en dur dans plusieurs composants.
 - Le site n’est pas une SPA : chaque route reste une page Next.js.

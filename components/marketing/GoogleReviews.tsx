@@ -1,4 +1,4 @@
-import { ReviewCard } from "@/components/marketing/ReviewCard";
+import { ReviewsCarousel } from "@/components/marketing/ReviewsCarousel";
 import { TestimonialCard } from "@/components/marketing/TestimonialCard";
 import { getTestimonials } from "@/lib/content";
 import { getDisplayedGoogleReviews } from "@/lib/reviews/displayed";
@@ -49,11 +49,7 @@ export async function GoogleReviews() {
       {data.rating != null && data.count != null ? (
         <RatingBadge rating={data.rating} count={data.count} />
       ) : null}
-      <div className={gridClass(data.reviews.length)}>
-        {data.reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} />
-        ))}
-      </div>
+      <ReviewsCarousel reviews={data.reviews} className="mt-12" />
     </>
   );
 }
