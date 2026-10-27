@@ -4,11 +4,13 @@ import { Logo } from "@/components/layout/Logo";
 import { buttonClassName } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import {
+  getReviewsConfig,
   getServicesContent,
   getSiteContent,
   getZonesContent,
 } from "@/lib/admin/content-read";
 import { legalNav } from "@/lib/navigation";
+import { googlePlaceUrl } from "@/lib/reviews/google";
 import { routes } from "@/lib/routes";
 import { formatAddressLines } from "@/lib/utils";
 
@@ -19,6 +21,7 @@ export function Footer() {
   const site = getSiteContent();
   const services = getServicesContent();
   const zones = getZonesContent();
+  const googleUrl = googlePlaceUrl(getReviewsConfig().placeId);
   const addressLines = formatAddressLines(site.address);
   const year = new Date().getFullYear();
 
@@ -108,12 +111,17 @@ export function Footer() {
             {site.openingHours ? (
               <p className="mt-6 text-sm text-paper/50">{site.openingHours}</p>
             ) : null}
-            <Link
-              href={routes.avis}
-              className="mt-6 inline-block text-sm text-paper underline-offset-8 hover:underline"
-            >
-              Avis clients
-            </Link>
+            {googleUrl ? (
+              <a
+                href={googleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-block text-sm text-paper underline-offset-8 hover:underline"
+              >
+                Avis clients
+                <span className="sr-only"> sur Google (nouvel onglet)</span>
+              </a>
+            ) : null}
           </div>
         </div>
       </Container>

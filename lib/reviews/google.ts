@@ -8,6 +8,13 @@ import type { GoogleReview, GoogleReviewsData } from "@/types/reviews";
  */
 
 const PLACES_ENDPOINT = "https://places.googleapis.com/v1/places";
+
+/** Lien public vers la fiche Google (Maps / Business Profile) à partir de son Place ID. */
+export function googlePlaceUrl(placeId: string): string | null {
+  return placeId
+    ? `https://www.google.com/maps/place/?q=place_id:${encodeURIComponent(placeId)}`
+    : null;
+}
 const REVALIDATE_SECONDS = 60 * 60 * 24; // 24 h
 
 type RawReview = {

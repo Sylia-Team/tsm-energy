@@ -116,7 +116,6 @@ export default function HomePage() {
         eyebrow={home.testimonials.eyebrow}
         title={home.testimonials.title}
         description={home.testimonials.description}
-        allLabel={home.testimonials.allLabel}
       />
 
       <TrustBand
