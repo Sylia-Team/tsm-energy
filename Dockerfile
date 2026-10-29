@@ -14,7 +14,8 @@ RUN npm ci
 FROM base AS builder
 # Variable publique : intégrée au bundle client au moment du build
 ARG NEXT_PUBLIC_SITE_URL=https://www.tsm83.com
-ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
+    NEXT_OUTPUT=standalone
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build

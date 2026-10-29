@@ -173,7 +173,7 @@ Espace d'édition du contenu éditorial sans toucher au code.
 
 ## Déploiement Docker
 
-- **Build** : `output: "standalone"` (`next.config.ts`) ; `Dockerfile` multi-étapes (Node 22 Alpine), serveur `node server.js` lancé en utilisateur non root sur le port 3000.
+- **Build** : `output: "standalone"` (`next.config.ts`), activé seulement si `NEXT_OUTPUT=standalone` (défini par le `Dockerfile`) car il fait échouer le build Vercel ; `Dockerfile` multi-étapes (Node 22 Alpine), serveur `node server.js` lancé en utilisateur non root sur le port 3000.
 - **Variables** : `NEXT_PUBLIC_SITE_URL` est intégrée au build (`--build-arg`) ; les secrets (`ADMIN_*`, `LEAD_*`, `GOOGLE_PLACES_API_KEY`) sont fournis au lancement (`.env.production`, non versionné) et exclus de l'image (`.dockerignore`).
 - **Persistance** : `/app/data` et `/app/public/uploads` sont des volumes (voir `docker-compose.yml`). Volumes nommés de préférence : au premier montage, ils reprennent le `content-overrides.json` de l'image.
 
