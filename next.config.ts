@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 import { getSecurityHeaders } from "./lib/security/headers";
 
 const nextConfig: NextConfig = {
+  // Sortie autonome réservée à l'image Docker (le Dockerfile définit
+  // NEXT_OUTPUT) : elle fait échouer le build sur Vercel.
+  output: process.env.NEXT_OUTPUT === "standalone" ? "standalone" : undefined,
   reactStrictMode: true,
   poweredByHeader: false,
   turbopack: {

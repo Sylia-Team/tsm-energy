@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://www.tsm83.com}
+    image: tsm-energy:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.production
+    volumes:
+      - tsm-data:/app/data
+      - tsm-uploads:/app/public/uploads
+
+volumes:
+  tsm-data:
+  tsm-uploads:

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { detectImage, readImageSize } from "@/lib/admin/image-size";
-import { isManagedUpload } from "@/lib/admin/media-store";
+import { isManagedUpload, readManagedUpload } from "@/lib/admin/media-store";
 
 function png(width: number, height: number): Uint8Array {
   const bytes = new Uint8Array(24);
@@ -30,9 +30,21 @@ describe("image size", () => {
 
 describe("managed uploads", () => {
   it("n’efface que les fichiers créés par l’admin", () => {
-    expect(isManagedUpload("/uploads/550e8400-e29b-41d4-a716-446655440000.jpg")).toBe(true);
-    expect(isManagedUpload("https://images.unsplash.com/photo.jpg")).toBe(false);
+    expect(
+      isManagedUpload("/uploads/550e8400-e29b-41d4-a716-446655440000.jpg"),
+    ).toBe(true);
+    expect(isManagedUpload("https://images.unsplash.com/photo.jpg")).toBe(
+      false,
+    );
     expect(isManagedUpload("/uploads/../secret.jpg")).toBe(false);
     expect(isManagedUpload("/images/logo.svg")).toBe(false);
+  });
+
+  it("refuse de lire un fichier hors des envois de l’admin", () => {
+    expect(readManagedUpload("../../package.json")).toBeNull();
+    expect(readManagedUpload(".gitkeep")).toBeNull();
+    expect(
+      readManagedUpload("550e8400-e29b-41d4-a716-446655440000.jpg"),
+    ).toBeNull();
   });
 });

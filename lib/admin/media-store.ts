@@ -1,7 +1,11 @@
 import { randomUUID } from "node:crypto";
-import { mkdirSync, unlinkSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { detectImage, readImageSize, type ImageKind } from "@/lib/admin/image-size";
+import {
+  detectImage,
+  readImageSize,
+  type ImageKind,
+} from "@/lib/admin/image-size";
 import type { MediaImage } from "@/types/media";
 
 const MAX_BYTES = 8 * 1024 * 1024;
@@ -9,6 +13,11 @@ const EXTENSIONS: Record<ImageKind, string> = {
   jpeg: "jpg",
   png: "png",
   webp: "webp",
+};
+const CONTENT_TYPES: Record<string, string> = {
+  jpg: "image/jpeg",
+  png: "image/png",
+  webp: "image/webp",
 };
 
 export class MediaUploadError extends Error {
@@ -42,6 +51,33 @@ export function deleteManagedUpload(src: string): void {
     unlinkSync(target);
   } catch {
     // Fichier déjà absent.
+  }
+}
+
+/**
+ * Lit un fichier envoyé depuis l’admin. En production, Next ne sert que les
+ * fichiers de `public/` présents au build : `app/uploads/[file]/route.ts`
+ * sert donc les envois ultérieurs via cette fonction.
+ */
+export function readManagedUpload(
+  fileName: string,
+): { bytes: Uint8Array<ArrayBuffer>; contentType: string } | null {
+  const src = `/uploads/${fileName}`;
+  if (!isManagedUpload(src)) {
+    return null;
+  }
+
+  try {
+    const bytes = new Uint8Array(
+      readFileSync(path.join(uploadsDirectory(), fileName)),
+    );
+    const extension = fileName.slice(fileName.lastIndexOf(".") + 1);
+    return {
+      bytes,
+      contentType: CONTENT_TYPES[extension] ?? "application/octet-stream",
+    };
+  } catch {
+    return null;
   }
 }
 
@@ -115,7 +151,8 @@ export async function resolveGallery(
   current: MediaImage[],
 ): Promise<MediaImage[]> {
   const rawCount = Number(formData.get("gallery.count"));
-  const count = Number.isFinite(rawCount) && rawCount >= 0 ? rawCount : current.length;
+  const count =
+    Number.isFinite(rawCount) && rawCount >= 0 ? rawCount : current.length;
   const next: MediaImage[] = [];
 
   for (let index = 0; index < count; index += 1) {
@@ -128,7 +165,12 @@ export async function resolveGallery(
       continue;
     }
 
-    const resolved = await resolveMediaImage(formData, `gallery.${index}`, item, item);
+    const resolved = await resolveMediaImage(
+      formData,
+      `gallery.${index}`,
+      item,
+      item,
+    );
     if (resolved.src) {
       next.push(resolved);
     }

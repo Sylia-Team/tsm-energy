@@ -1,0 +1,24 @@
+.git
+.next
+node_modules
+npm-debug.log*
+coverage
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets : à fournir au lancement du conteneur, jamais dans l'image
+.env*
+!.env.example
+
+# Outillage local
+.agents
+.cursor
+.claude
+_bmad
+_bmad-output
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Photos envoyées depuis l'admin (volume)
+public/uploads/*
