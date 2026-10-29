@@ -171,6 +171,12 @@ Espace d'édition du contenu éditorial sans toucher au code.
 - **Réalisations** : slugs **libres** → l'admin permet **créer / modifier / supprimer**. L'override stocke la **collection entière** (`Realisation[]`), qui remplace les défauts dès la première modification (seed depuis `content/realisations.ts`). Les nouveaux slugs sont rendus en ISR (`dynamicParams`).
 - **Config site** : `getSiteContent()` (serveur) fusionne défauts + override. Les composants **serveur** (layout, Header, Footer, Logo, pages, metadata, JSON-LD) l'utilisent ; le composant **client** `MobileNavigation` reçoit `phone`/`phoneHref` en **props** depuis `Header` (pas d'accès `fs` côté client). `url` reste non éditable (utilitaires SEO bas niveau). `content/site.ts` et `getSite()` (client-safe) restent les valeurs par défaut.
 
+## Déploiement Docker
+
+- **Build** : `output: "standalone"` (`next.config.ts`) ; `Dockerfile` multi-étapes (Node 22 Alpine), serveur `node server.js` lancé en utilisateur non root sur le port 3000.
+- **Variables** : `NEXT_PUBLIC_SITE_URL` est intégrée au build (`--build-arg`) ; les secrets (`ADMIN_*`, `LEAD_*`, `GOOGLE_PLACES_API_KEY`) sont fournis au lancement (`.env.production`, non versionné) et exclus de l'image (`.dockerignore`).
+- **Persistance** : `/app/data` et `/app/public/uploads` sont des volumes (voir `docker-compose.yml`). Volumes nommés de préférence : au premier montage, ils reprennent le `content-overrides.json` de l'image.
+
 ## Avis Google
 
 Affichage des avis Google **sans widget tiers** (respect CSP `default-src 'self'` + RGPD, aucun script/cookie tiers).

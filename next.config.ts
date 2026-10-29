@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 import { getSecurityHeaders } from "./lib/security/headers";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   reactStrictMode: true,
   poweredByHeader: false,
   turbopack: {
